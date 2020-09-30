@@ -63,6 +63,7 @@ namespace Matrip.Web.Areas.Administrator.Controllers
             return View();
         }
 
+
         [HttpPost]
         public async Task<IActionResult> RemoveGuide(string GuideEmail)
         {
