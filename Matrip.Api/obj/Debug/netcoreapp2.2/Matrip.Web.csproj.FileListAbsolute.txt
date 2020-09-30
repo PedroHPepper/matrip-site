@@ -1,0 +1,41 @@
+C:\Users\Cliente\Desktop\Projetos\Matrip.Api\Matrip.Web\bin\Debug\netcoreapp2.2\appsettings.Development.json
+C:\Users\Cliente\Desktop\Projetos\Matrip.Api\Matrip.Web\bin\Debug\netcoreapp2.2\appsettings.json
+C:\Users\Cliente\Desktop\Projetos\Matrip.Api\Matrip.Web\bin\Debug\netcoreapp2.2\Properties\launchSettings.json
+C:\Users\Cliente\Desktop\Projetos\Matrip.Api\Matrip.Web\bin\Debug\netcoreapp2.2\Matrip.Web.deps.json
+C:\Users\Cliente\Desktop\Projetos\Matrip.Api\Matrip.Web\bin\Debug\netcoreapp2.2\Matrip.Web.runtimeconfig.json
+C:\Users\Cliente\Desktop\Projetos\Matrip.Api\Matrip.Web\bin\Debug\netcoreapp2.2\Matrip.Web.runtimeconfig.dev.json
+C:\Users\Cliente\Desktop\Projetos\Matrip.Api\Matrip.Web\bin\Debug\netcoreapp2.2\Matrip.Web.dll
+C:\Users\Cliente\Desktop\Projetos\Matrip.Api\Matrip.Web\obj\Debug\netcoreapp2.2\Matrip.Web.csprojAssemblyReference.cache
+C:\Users\Cliente\Desktop\Projetos\Matrip.Api\Matrip.Web\obj\Debug\netcoreapp2.2\Matrip.Web.RazorAssemblyInfo.cache
+C:\Users\Cliente\Desktop\Projetos\Matrip.Api\Matrip.Web\obj\Debug\netcoreapp2.2\Matrip.Web.RazorAssemblyInfo.cs
+C:\Users\Cliente\Desktop\Projetos\Matrip.Api\Matrip.Web\obj\Debug\netcoreapp2.2\Matrip.Web.AssemblyInfoInputs.cache
+C:\Users\Cliente\Desktop\Projetos\Matrip.Api\Matrip.Web\obj\Debug\netcoreapp2.2\Matrip.Web.AssemblyInfo.cs
+C:\Users\Cliente\Desktop\Projetos\Matrip.Api\Matrip.Web\obj\Debug\netcoreapp2.2\Matrip.Web.RazorTargetAssemblyInfo.cache
+C:\Users\Cliente\Desktop\Projetos\Matrip.Api\Matrip.Web\bin\Debug\netcoreapp2.2\Matrip.Web.pdb
+C:\Users\Cliente\Desktop\Projetos\Matrip.Api\Matrip.Web\obj\Debug\netcoreapp2.2\Matrip.Web.dll
+C:\Users\Cliente\Desktop\Projetos\Matrip.Api\Matrip.Web\obj\Debug\netcoreapp2.2\Matrip.Web.pdb
+C:\Users\Cliente\OneDrive\Área de Trabalho\Projetos\Matrip.Api\Matrip.Web\bin\Debug\netcoreapp2.2\appsettings.Development.json
+C:\Users\Cliente\OneDrive\Área de Trabalho\Projetos\Matrip.Api\Matrip.Web\bin\Debug\netcoreapp2.2\appsettings.json
+C:\Users\Cliente\OneDrive\Área de Trabalho\Projetos\Matrip.Api\Matrip.Web\bin\Debug\netcoreapp2.2\Properties\launchSettings.json
+C:\Users\Cliente\OneDrive\Área de Trabalho\Projetos\Matrip.Api\Matrip.Web\bin\Debug\netcoreapp2.2\Matrip.Web.deps.json
+C:\Users\Cliente\OneDrive\Área de Trabalho\Projetos\Matrip.Api\Matrip.Web\bin\Debug\netcoreapp2.2\Matrip.Web.runtimeconfig.json
+C:\Users\Cliente\OneDrive\Área de Trabalho\Projetos\Matrip.Api\Matrip.Web\bin\Debug\netcoreapp2.2\Matrip.Web.runtimeconfig.dev.json
+C:\Users\Cliente\OneDrive\Área de Trabalho\Projetos\Matrip.Api\Matrip.Web\bin\Debug\netcoreapp2.2\Matrip.Web.dll
+C:\Users\Cliente\OneDrive\Área de Trabalho\Projetos\Matrip.Api\Matrip.Web\bin\Debug\netcoreapp2.2\Matrip.Web.pdb
+C:\Users\Cliente\OneDrive\Área de Trabalho\Projetos\Matrip.Api\Matrip.Web\obj\Debug\netcoreapp2.2\Matrip.Web.csprojAssemblyReference.cache
+C:\Users\Cliente\OneDrive\Área de Trabalho\Projetos\Matrip.Api\Matrip.Web\obj\Debug\netcoreapp2.2\Matrip.Web.RazorAssemblyInfo.cache
+C:\Users\Cliente\OneDrive\Área de Trabalho\Projetos\Matrip.Api\Matrip.Web\obj\Debug\netcoreapp2.2\Matrip.Web.RazorAssemblyInfo.cs
+C:\Users\Cliente\OneDrive\Área de Trabalho\Projetos\Matrip.Api\Matrip.Web\obj\Debug\netcoreapp2.2\Matrip.Web.AssemblyInfoInputs.cache
+C:\Users\Cliente\OneDrive\Área de Trabalho\Projetos\Matrip.Api\Matrip.Web\obj\Debug\netcoreapp2.2\Matrip.Web.AssemblyInfo.cs
+C:\Users\Cliente\OneDrive\Área de Trabalho\Projetos\Matrip.Api\Matrip.Web\obj\Debug\netcoreapp2.2\Matrip.Web.RazorTargetAssemblyInfo.cache
+C:\Users\Cliente\OneDrive\Área de Trabalho\Projetos\Matrip.Api\Matrip.Web\obj\Debug\netcoreapp2.2\Matrip.Web.dll
+C:\Users\Cliente\OneDrive\Área de Trabalho\Projetos\Matrip.Api\Matrip.Web\obj\Debug\netcoreapp2.2\Matrip.Web.pdb
+C:\Users\Cliente\OneDrive\Área de Trabalho\Projetos\Matrip.Api\Matrip.Web\bin\Debug\netcoreapp2.2\Matrip.Web.Views.dll
+C:\Users\Cliente\OneDrive\Área de Trabalho\Projetos\Matrip.Api\Matrip.Web\bin\Debug\netcoreapp2.2\Matrip.Web.Views.pdb
+C:\Users\Cliente\OneDrive\Área de Trabalho\Projetos\Matrip.Api\Matrip.Web\obj\Debug\netcoreapp2.2\Matrip.Web.TagHelpers.input.cache
+C:\Users\Cliente\OneDrive\Área de Trabalho\Projetos\Matrip.Api\Matrip.Web\obj\Debug\netcoreapp2.2\Matrip.Web.TagHelpers.output.cache
+C:\Users\Cliente\OneDrive\Área de Trabalho\Projetos\Matrip.Api\Matrip.Web\obj\Debug\netcoreapp2.2\Matrip.Web.RazorCoreGenerate.cache
+C:\Users\Cliente\OneDrive\Área de Trabalho\Projetos\Matrip.Api\Matrip.Web\obj\Debug\netcoreapp2.2\Razor\Views\Home\Index.cshtml.g.cs
+C:\Users\Cliente\OneDrive\Área de Trabalho\Projetos\Matrip.Api\Matrip.Web\obj\Debug\netcoreapp2.2\Matrip.Web.RazorTargetAssemblyInfo.cs
+C:\Users\Cliente\OneDrive\Área de Trabalho\Projetos\Matrip.Api\Matrip.Web\obj\Debug\netcoreapp2.2\Matrip.Web.Views.pdb
+C:\Users\Cliente\OneDrive\Área de Trabalho\Projetos\Matrip.Api\Matrip.Web\obj\Debug\netcoreapp2.2\Matrip.Web.csproj.CopyComplete

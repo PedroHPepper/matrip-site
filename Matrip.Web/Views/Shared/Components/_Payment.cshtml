@@ -1,0 +1,273 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
+*@
+
+@{
+    List<string> UFs = new List<string>{"AC", "AL", "AP", "AM", "BA","CE","DF","ES","GO","MA","MT","MS","MG",
+        "PA","PB","PR","PE","PI","RJ","RN","RS","RO","RR","SC","SP","SE","TO"};
+    string choosedUF = ViewBag.DocumentUF;
+
+    ma38InfluencerDiscount influencerDiscount = null;
+    double influencerDiscountPercent = 0;
+    @if (ViewBag.InfluencerDiscount != null)
+    {
+        influencerDiscount = ViewBag.InfluencerDiscount;
+        influencerDiscountPercent = Convert.ToDouble(influencerDiscount.ma38DiscountPercent);
+    }
+    string SubmitAction = ViewBag.SubmitAction;
+
+    ChoosedSubtripSaleDate RecentSaleDate = ViewBag.RecentSaleDate;
+    int totalInstallments = 1;
+}
+
+    <div class="col-md-8 mb-4">
+        @{ await Html.RenderPartialAsync("~/Views/Shared/_Message.cshtml"); }
+        <div id="cardCreditCard" class="card cardCreditCard">
+            <form asp-action="SubmitPayment" asp-controller="@SubmitAction" method="post" class="card-body">
+
+                <div class="row">
+                    <!--Grid column-->
+                    <div class="col-lg-4 col-md-12 mb-4">
+                        <label>CEP</label>
+                        <input name="ma33UserAddress.ma33Zipcode" type="text" class="form-control Zipcode" id="Zipcode" required value="@ViewBag.Zipcode" />
+                        <span></span>
+                    </div>
+                    <!--Grid column-->
+                    <div class="col-lg-4 col-md-6 mb-4">
+                        <label>País</label>
+                        <input name="ma33UserAddress.ma33Country" class="form-control d-block w-100" id="Country" readonly required value="@ViewBag.Country" />
+                        <div class="invalid-feedback">
+                            País é necessário.
+                        </div>
+                    </div>
+                    <!--Grid column-->
+                    <!--Grid column-->
+                    <div class="col-lg-4 col-md-6 mb-4">
+                        <label>Estado</label>
+                        <input name="ma33UserAddress.ma33State" type="text" class="form-control" id="State" placeholder="" readonly required value="@ViewBag.State" />
+                    </div>
+                    <!--Grid column-->
+                </div>
+                <!--address-->
+                <div class="md-form mb-5">
+                    <label>Endereço</label>
+                    <input name="ma33UserAddress.ma33Street" type="text" id="Street" class="form-control" placeholder="Endereço" readonly required value="@ViewBag.Street" />
+                </div>
+                <div class="row">
+                    <div class="col-lg-4 col-md-12 mb-4">
+                        <label>Cidade</label>
+                        <input name="ma33UserAddress.ma33City" type="text" id="City" class="form-control" placeholder="Cidade" readonly required value="@ViewBag.City" />
+                    </div>
+                    <div class="col-lg-4 col-md-6 mb-4">
+                        <label>Bairro</label>
+                        <input name="ma33UserAddress.ma33Neighborhood" type="text" class="form-control d-block w-100" id="Neighborhood" readonly required value="@ViewBag.Neighborhood" />
+                    </div>
+                    <div class="col-lg-4 col-md-6 mb-4">
+                        <label>Número</label>
+                        <input name="ma33UserAddress.ma33StreetNumber" type="text" class="form-control d-block w-100" id="StreetNumber" required value="@ViewBag.StreetNumber" />
+                    </div>
+                </div>
+                <!--Grid row-->
+                <div class="md-form mb-5">
+                    <label for="Complement">Complemento</label>
+                    <input name="ma33UserAddress.ma33Complement" type="text" id="Complement" class="form-control" placeholder="Complemento" value="@ViewBag.Complement" />
+                </div>
+
+                <div class="md-form mb-5">
+                    <label>CPF</label>
+                    <input type="text" value="@ViewBag.CPF" name="ma33UserAddress.ma33CPF" id="CPF" class="form-control CPF" placeholder="CPF" required>
+                    <span></span>
+                    <div class="invalid-feedback">
+                        CPF é obrigatório.
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-lg-4 col-md-12 mb-4" data-validate="Digite seu RG!">
+                        <span class="label-input100">RG</span>
+                        <input id="DocumentNumber" type="text" name="ma33UserAddress.ma33documentNumber" value="@ViewBag.DocumentNumber" class="form-control" placeholder="Digite seu RG" onkeydown="return SomenteNumero(event)" required>
+                        <span class="focus-input100" data-symbol="&#xf332;"></span>
+                    </div>
+
+                    <div class="col-lg-4 col-md-12 mb-4" data-validate="Digite seu RG!">
+                        <span class="label-input100">Órgão Emissor</span>
+                        <input id="DocumentIssuingBody" type="text" name="ma33UserAddress.ma33DocumentIssuingBody" value="@ViewBag.DocumentIssuingBody" class="form-control" placeholder="Digite o Órgão Emissor" required>
+                        <span class="focus-input100" data-symbol="&#xf332;"></span>
+                    </div>
+
+                    <div class="col-lg-4 col-md-12 mb-4" data-validate="Escolha a UF de seu Órgão Emissor!">
+                        <span class="label-input100">UF do Documento</span>
+
+                        <select id="UF" name="ma33UserAddress.ma33DocumentUF" class="form-control" required>
+                            @if (UFs.Contains(choosedUF))
+                            {
+                                UFs.Remove(choosedUF);
+                                <option value="@choosedUF">@choosedUF</option>
+                            }
+                            else
+                            {
+                                <option selected="selected" disabled="disabled" value="">Selecione UF</option>
+                            }
+                            @for (int i = 0; i < UFs.Count(); i++)
+                            {
+                                <option value="@UFs[i]">@UFs[i]</option>
+                            }
+                        </select>
+                        <span class="focus-input100" data-symbol="&#xf332;"></span>
+                    </div>
+                </div>
+
+                
+
+                <!--Grid row-->
+
+                @if (ViewBag.transferencePayment != null)
+            {
+                <div id="Transference" class="mt-5">
+                    <hr />
+                    <h6>Pagamento em Transferência Bancária: Banco do Brasil</h6>
+                    <div class="row">
+                        <div class="col-md-3 mb-3">
+                            <label>Agência:  5821-1</label><p></p>
+                        </div>
+                        <div class="col-md-3 mb-3">
+                            <label>Cc:  313-1</label><p></p>
+                        </div>
+                        <div class="col-md-3 mb-3">
+                            <label>Nome:  Edilson Carlos Silva Lima</label><p></p>
+                        </div>
+                        <div class="m-4">
+                            <p>
+                                Realize a transferência para ir aos passeios. O pagamento será confirmado em 24 horas.<br />
+                                Leve o comprovante de transferência para o passeio, caso este vá ser antes da confirmação.
+                            </p>
+                        </div>
+                        <div>
+                            <label>
+                                Valor:
+                            </label>
+                            @{
+                                double transferencePayment = ViewBag.transferencePayment;
+                            }
+                            <p>@ValueConvert.ConvertToReal(transferencePayment)</p>
+                        </div>
+                        <div class="col-md-3 mb-3">
+                            <label for="state">Parcelas</label>
+                            <select name="Transference.InstallmentsNumber" class="custom-select d-block w-100" id="Installments" required>
+                                @{ 
+                                    //(Date2.Year - Date1.Year) * 12 + Date2.Month - Date1.Month;
+                                    int months = ((RecentSaleDate.ChoosedDate.Year - DateConvert.HrBrasilia().Year)*12)
+                                        + RecentSaleDate.ChoosedDate.Month - DateConvert.HrBrasilia().Month;
+                                    if(months > 0 && months <= 5)
+                                    {
+                                        totalInstallments = months;
+                                    }
+                                    else if(months == 0)
+                                    {
+                                        totalInstallments = 1;
+                                    }
+                                    else
+                                    {
+                                        totalInstallments = 5;
+                                    }
+                                }
+                                @for (int i = 1; i <= totalInstallments; i++)
+                                {
+                                    <option value="@i">@Html.Raw(i+"x")</option>
+                                }
+                            </select>
+                        </div>
+                        <input hidden name="Transference.TransferenceValue" type="text" class="form-control Value" id="TransferenceValue" value="@ViewBag.transferencePayment" readonly required />
+
+                    </div>
+                </div>
+                <input id="PaymentMethodTransference" name="paymentMethods" value="2" hidden readonly />
+            }
+                @if (ViewBag.creditCardPayment != null)
+            {
+                <div id="NewCard">
+                    <hr class="mb-4">
+                    <div class="CardForm">
+                        <h6>Pagamento em Cartão de Crédito</h6>
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label for="cc-name">Nome no cartão</label>
+                                <input name="CreditCard.CardName" type="text" class="form-control" id="cc-name" placeholder="" required>
+                                <small class="text-muted">Nome completo de acordo com o que consta no cartão</small>
+                                <div class="invalid-feedback">
+                                    Nome do cartão é obrigatório
+                                </div>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="cc-number">Numero do carão de crédito</label>
+                                <input name="CreditCard.CardNumber" type="text" class="form-control cardNumber" id="cc-number" minlength="18" maxlength="18" placeholder="" required>
+                                <div class="invalid-feedback">
+                                    Número do cartão é obrigatório
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="row col-md-3 mb-3">
+                                <div class="col-md-6">
+                                    <label for="cc-expiration">Mês</label>
+                                    <input name="CreditCard.ExpirationMonth" type="text" class="expirationMonth form-control" id="cc-expirationMonth" placeholder="" required>
+                                    <div class="invalid-feedback">
+                                        Expiration date required
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="cc-expiration">Ano</label>
+                                    <input name="CreditCard.ExpirationYear" type="text" class="expirationYear form-control" id="cc-expirationYear" placeholder="" required>
+                                    <div class="invalid-feedback">
+                                        Expiration date required
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3 mb-3">
+                                <label for="cc-expiration">CVV</label>
+                                <input name="CreditCard.SecurityNumber" type="text" class="form-control" id="cc-cvv" placeholder="CVV" required>
+                                <div class="invalid-feedback">
+                                    Código de segurança é obrigatório.
+                                </div>
+                            </div>
+                            <div class="col-md-3 mb-3">
+                                <label for="state">Parcelas</label>
+                                <select name="CreditCard.InstallmentsNumber" class="custom-select d-block w-100" id="Installments" required>
+                                    @for (int i = 1; i <= 5; i++)
+                                    {
+                                        <option value="@i">@Html.Raw(i + "x")</option>
+                                    }
+                                </select>
+                            </div>
+                            <div class="col-md-3 mb-3">
+                                <div>
+                                    <label>
+                                        Valor:
+                                    </label>
+                                    @{
+                                        double creditCardPayment = ViewBag.creditCardPayment;
+                                    }
+                                    <p>@ValueConvert.ConvertToReal(creditCardPayment)</p>
+                                </div>
+
+                                <input hidden name="CreditCard.Value" type="text" class="form-control Value" id="CreditCardValue" value="@ViewBag.creditCardPayment" readonly required />
+                                <small class="text-muted">Valor à pagar usando este cartão</small>
+                            </div>
+                        </div>
+                        <hr class="mb-4">
+                    </div>
+                </div>
+                <input id="PaymentMethodCreditCard" name="paymentMethods" value="1" hidden readonly />
+            }
+
+
+                @if (ViewBag.InfluencerDiscount != null)
+            {
+                <input id="InfluencerDiscount" name="influencerDiscountCode" value="@influencerDiscount.ma38DiscountCode" hidden readonly />
+            }
+
+                <button id="SubmitButton" class="btn btn-primary btn-lg btn-block" type="submit" style="background-color:#388cbd">Comprar</button>
+            </form>
+        </div>
+
+    </div>

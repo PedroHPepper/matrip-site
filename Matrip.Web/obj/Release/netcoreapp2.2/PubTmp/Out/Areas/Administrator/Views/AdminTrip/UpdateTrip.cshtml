@@ -1,0 +1,592 @@
+﻿@model Matrip.Domain.Models.TripModel.TripModel
+@{
+    ViewData["Title"] = "UpdateTrip";
+    Layout = "~/Areas/Administrator/Views/Shared/_Layout.cshtml";
+    ma05trip trip = ViewBag.Trip;
+    List<string> Categories = new List<string> { "Aventura", "Shows", "Ecológico", "Cultural", "Diversos" };
+    List<string> UFs = new List<string>{"AC", "AL", "AP", "AM", "BA","CE","DF","ES","GO","MA","MT","MS","MG",
+        "PA","PB","PR","PE","PI","RJ","RN","RS","RO","RR","SC","SP","SE","TO"};
+}
+@section css{
+    <link href="~/css/TripView/AddTripStyle.css" rel="stylesheet" type="text/css" />
+}
+@section script{
+    <script type="text/javascript" src="~/js/Trip/AdminAddTrip/UpdateTrip.js"></script>
+    <script type="text/javascript" src="~/js/VisitorActions.js"></script>
+    <script type="text/javascript" src="~/js/StepForm/StepFormJS.js"></script>
+    <script src="~/js/Requests/AjaxRequest.js" type="text/javascript"></script>
+    <script type="text/javascript">
+        function CleanCityInput() {
+            document.getElementById("CityName").value = "";
+            document.getElementById("CityName").removeAttribute("readonly");
+        }
+        function AutoComplete() {
+            var City = document.getElementById("CityName").value;
+            var UFoptions = document.getElementById("UF");
+            var UF = UFoptions.options[UFoptions.selectedIndex].value;
+            if (City.length > 2 && UF != "") {
+                var url = "@Html.Raw(Url.Action("SearchCities", "Search", new { cityText = "__cityText__", UF = "__UF__" }))";
+                url = url.replace("__cityText__", City).replace("__UF__", UF);
+                RequestAutocomplete(url, "#CityName");
+            }
+        }
+        function PartnerAutoComplete(subtripOrderNumber) {
+            var PartnerName = document.getElementById("PartnerName-"+subtripOrderNumber).value;
+            if (PartnerName.length > 2) {
+                var url = "@Html.Raw(Url.Action("SearchPartners", "Search", new { PartnerText = "__PartnerText__" }))";
+                url = url.replace("__PartnerText__", PartnerName);
+                RequestAutocomplete(url, "#PartnerName-"+subtripOrderNumber);
+            }
+        }
+    </script>
+}
+
+<div class="mt-5">
+    <hr />
+    @{ await Html.RenderPartialAsync("~/Views/Shared/_Message.cshtml"); }
+
+    <form class="mt-5" id="regForm" method="post" asp-action="UpdateTrip" asp-controller="AdminTrip" asp-area="Administrator">
+
+        <h1>Atualizar Passeio</h1>
+
+        <!-- One "tab" for each step in the form: -->
+        <div class="tab">
+            <div class="TripDiv">
+                <h6>Passeio</h6>
+                <input hidden readonly asp-for="ma05trip.ma05idtrip" value="@Model.ma05trip.ma05idtrip" />
+                <input hidden readonly asp-for="ma05trip.FK0509idcity" value="@Model.ma05trip.FK0509idcity" />
+                <div>
+                    <label>Nome do Passeio</label>
+                    <input class="form-control" asp-for="ma05trip.ma05name" value="@Model.ma05trip.ma05name" required />
+                </div>
+                <div>
+                    <label>Descrição do Passeio</label>
+                    <textarea class="form-control" asp-for="ma05trip.ma05description" required>@Model.ma05trip.ma05description</textarea>
+                </div>
+                <div>
+                    <label>Categoria do Passeio</label>
+                    <select class="form-control" asp-for="ma05trip.FK0506idtripcategory" required>
+
+                        <option value="@Model.ma05trip.FK0506idtripcategory">@Categories[Model.ma05trip.FK0506idtripcategory - 1]</option>
+                        @{
+                            string defaultCategorie = Categories[Model.ma05trip.FK0506idtripcategory - 1];
+                        }
+                        @for (int i = 0; i < Categories.Count(); i++)
+                        {
+                            if (Categories[i] != defaultCategorie)
+                            {
+                                int value = i + 1;
+                                <option value="@value">@Categories[i]</option>
+                            }
+                        }
+                    </select>
+                </div>
+                <div>
+                    <label>Descrição Promocional</label>
+                    <input type="text" asp-for="ma05trip.ma05promotiondescription" value="@Model.ma05trip.ma05promotiondescription" />
+                </div>
+
+                <div>
+                    <label>Em Destaque</label>
+                    <select id="featuredtour" asp-for="ma05trip.ma05featuredtour" class="form-control" required>
+                        @if (Model.ma05trip.ma05featuredtour == "1")
+                        {
+                            <option selected="selected" value="@Model.ma05trip.ma05featuredtour">Sim</option>
+                            <option value="0">Não</option>
+                        }
+                        else
+                        {
+                            <option selected="selected" value="@Model.ma05trip.ma05featuredtour">Não</option>
+                            <option value="1">Sim</option>
+                        }
+
+                    </select>
+                </div>
+
+                <label>UF</label><br />
+                <select id="UF" asp-for="tripUF" class="form-control" onchange="CleanCityInput();" required>
+                    <option selected="selected" value="@Model.tripUF">@Model.tripUF</option>
+                    @{
+                        UFs.Remove(Model.tripUF);
+                    }
+                    @for (int i = 0; i < UFs.Count(); i++)
+                    {
+                        <option value="@UFs[i]">@UFs[i]</option>
+                    }
+                </select>
+
+                <div>
+                    <label>Cidade do Passeio</label>
+                    <input id="CityName" type="text" class="form-control" asp-for="tripCityName" value="@Model.tripCityName" onkeydown="AutoComplete();" required />
+                </div>
+
+                <div>
+                    <label>Status do Item</label>
+                    <select class="form-control" asp-for="ma05trip.ma05status">
+                        @if (Model.ma05trip.ma05status == "1")
+                        {
+                            <option value="1">Publicar</option>
+                            <option value="0">Não Publicar</option>
+                        }
+                        else
+                        {
+                            <option value="0">Não Publicar</option>
+                            <option value="1">Publicar</option>
+                        }
+                    </select>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="tab">
+            <div id="discountListDiv" class="">
+                <h6>Faixas Etárias (Crianças, Adultos)</h6>
+                <a class="btn btn-outline-success" onclick="addDiscount('@Model.ma05trip.ma05idtrip');">Adicionar Desconto</a>
+                @{
+                    int AgeDiscountLimitExcludeIndex = 0;
+                    if (Model.ma27AgeDiscountList != null)
+                    {
+                        AgeDiscountLimitExcludeIndex = Model.ma27AgeDiscountList.Count();
+                    }
+                }
+                <a class="btn btn-outline-success" onclick="ExcludeItem('@AgeDiscountLimitExcludeIndex', 'dicountDiv');">Excluir Item</a>
+                @for (int i = 0; i < Model.ma27AgeDiscountList.Count(); i++)
+                {
+                    <div class="dicountDiv">
+                        <h6>Faixa Etária @Html.Raw(i + 1)</h6>
+                        <input hidden readonly asp-for="ma27AgeDiscountList[i].FK2705idTrip" value="@Model.ma27AgeDiscountList[i].FK2705idTrip" />
+                        <input hidden readonly asp-for="ma27AgeDiscountList[i].ma27idAgeDiscount" value="@Model.ma27AgeDiscountList[i].ma27idAgeDiscount" />
+                        <div>
+                            <label>Nome da Faixa Etária (Obrigatório)</label>
+                            <input type="text" class="form-control" asp-for="ma27AgeDiscountList[i].ma27name" value="@Model.ma27AgeDiscountList[i].ma27name" required />
+                        </div>
+                        <div>
+                            <label>Porcentagem de Desconto (Obrigatório)</label>
+                            <input type="number" class="form-control" asp-for="ma27AgeDiscountList[i].ma27DiscountPercent" value="@Model.ma27AgeDiscountList[i].ma27DiscountPercent" min="0" required />
+                        </div>
+                        <div>
+                            <label>Idade Mínima (Padrão 0)</label>
+                            <input type="number" class="form-control" asp-for="ma27AgeDiscountList[i].ma27minage" value="@Model.ma27AgeDiscountList[i].ma27minage" min="0" />
+                        </div>
+                        <div>
+                            <label>Idade Máxima (Opcional)</label>
+                            <input type="number" class="form-control" asp-for="ma27AgeDiscountList[i].ma27maxage" value="@Model.ma27AgeDiscountList[i].ma27maxage" min="0" />
+                        </div>
+                        <div>
+                            <label>Quantidade Mínima de Pessoas (Obrigatório)</label>
+                            <input type="number" class="form-control" asp-for="ma27AgeDiscountList[i].ma27minPeople" value="@Model.ma27AgeDiscountList[i].ma27minPeople" required />
+                        </div>
+                        <div>
+                            <label>Responsável?</label>
+                            <select class="form-control" asp-for="ma27AgeDiscountList[i].ma27guardian" required>
+                                @if (Model.ma27AgeDiscountList[i].ma27guardian)
+                                {
+                                    <option value="true">Sim</option>
+                                    <option value="false">Não</option>
+                                }
+                                else
+                                {
+                                    <option value="false">Não</option>
+                                    <option value="true">Sim</option>
+                                }
+
+                            </select>
+                        </div>
+                        <div>
+                            <label>Status do Item</label>
+                            <select class="form-control" asp-for="ma27AgeDiscountList[i].ma27status">
+                                @if (Model.ma27AgeDiscountList[i].ma27status == "1")
+                                {
+                                    <option value="1">Publicar</option>
+                                    <option value="0">Não Publicar</option>
+                                }
+                                else
+                                {
+                                    <option value="0">Não Publicar</option>
+                                    <option value="1">Publicar</option>
+                                }
+                            </select>
+                        </div>
+                        <hr />
+                    </div>
+                }
+
+            </div>
+        </div>
+
+        <div class="tab">
+            <div id="subtripListDiv" class="">
+                <a class="btn btn-outline-success" onclick="addSubtrip('@Model.ma05trip.ma05idtrip');">Criar Passeio</a>
+                @{
+                    int subtripLimitExcludeIndex = 0;
+                    if (Model.SubtripModelList != null)
+                    {
+                        subtripLimitExcludeIndex = Model.SubtripModelList.Count();
+                    }
+                }
+                <a class="btn btn-outline-success" onclick="ExcludeItem('@subtripLimitExcludeIndex', 'subtripDiv');">Excluir Item</a>
+                @for (int i = 0; i < Model.SubtripModelList.Count(); i++)
+                {
+                    <div class="subtripDiv">
+                        <div class="mb-3">
+                            <h6>Roteiro @Html.Raw(i + 1)</h6>
+                            <input hidden readonly asp-for="SubtripModelList[i].ma14subtrip.FK1405idtrip" value="@Model.SubtripModelList[i].ma14subtrip.FK1405idtrip" />
+                            <input hidden readonly asp-for="SubtripModelList[i].ma14subtrip.FK1425idpartner" value="@Model.SubtripModelList[i].ma14subtrip.FK1425idpartner" />
+                            <input hidden readonly asp-for="SubtripModelList[i].ma14subtrip.ma14idsubtrip" value="@Model.SubtripModelList[i].ma14subtrip.ma14idsubtrip" />
+                            <div>
+                                <label>Nome do Roteiro</label>
+                                <input type="text" class="form-control" asp-for="SubtripModelList[i].ma14subtrip.ma14name" value="@Model.SubtripModelList[i].ma14subtrip.ma14name" required />
+                            </div>
+                            <div class="row">
+                                <div class="col-6">
+                                    <label>Endereço do Roteiro</label>
+                                    <input type="text" class="form-control" asp-for="SubtripModelList[i].ma14subtrip.ma14address" value="@Model.SubtripModelList[i].ma14subtrip.ma14address" required />
+                                </div>
+                                <div class="col-6">
+                                    <label>Bairro do Roteiro</label>
+                                    <input type="text" class="form-control" asp-for="SubtripModelList[i].ma14subtrip.ma14neighborhood" value="@Model.SubtripModelList[i].ma14subtrip.ma14neighborhood" required />
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-6">
+                                    <label>Vaga Por Roteiro</label>
+                                    <input type="number" class="form-control" asp-for="SubtripModelList[i].ma14subtrip.ma14vacancy" value="@Model.SubtripModelList[i].ma14subtrip.ma14vacancy" required />
+                                </div>
+                                <div class="col-6">
+                                    <label>Quantidade Mínima de Pessoas Por Roteiro</label>
+                                    <input type="number" class="form-control" asp-for="SubtripModelList[i].ma14subtrip.ma14minPeopleQuantity" value="@Model.SubtripModelList[i].ma14subtrip.ma14minPeopleQuantity" required />
+                                </div>
+                                <div class="col-6">
+                                    <label>Quantidade de Grupos Por Roteiro</label>
+                                    <input type="number" class="form-control" asp-for="SubtripModelList[i].ma14subtrip.ma14groupnumber" value="@Model.SubtripModelList[i].ma14subtrip.ma14groupnumber" required />
+                                </div>
+                            </div>
+
+
+                            <div>
+                                <label>Descrição do Roteiro</label>
+                                <textarea class="form-control" asp-for="SubtripModelList[i].ma14subtrip.ma14Description" required>@Model.SubtripModelList[i].ma14subtrip.ma14Description</textarea>
+                            </div>
+                            <div>
+                                <label>Aceita Cupom de Desconto?</label>
+                                <select class="form-control" asp-for="SubtripModelList[i].ma14subtrip.ma14InfluencerDiscount" required>
+                                    @if (Model.SubtripModelList[i].ma14subtrip.ma14InfluencerDiscount)
+                                    {
+                                        <option value="true">Sim</option>
+                                        <option value="false">Não</option>
+                                    }
+                                    else
+                                    {
+                                        <option value="false">Não</option>
+                                        <option value="true">Sim</option>
+                                    }
+                                </select>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-4">
+                                    <label>Desconto da Empresa (Opcional)</label>
+                                    <input type="number" class="form-control" asp-for="SubtripModelList[i].ma14subtrip.ma14PartnerDiscountPercent" min="0" value="@Model.SubtripModelList[i].ma14subtrip.ma14PartnerDiscountPercent" required />
+                                </div>
+                                <div class="col-4">
+                                    <label>Início do Desconto da Empresa (Opcional)</label>
+                                    @if (Model.SubtripModelList[i].ma14subtrip.ma14InitialDiscountDate != null)
+                                    {
+                                        <input type="date" class="form-control" asp-for="SubtripModelList[i].ma14subtrip.ma14InitialDiscountDate" value="@Model.SubtripModelList[i].ma14subtrip.ma14InitialDiscountDate.Value.ToString("yyyy-MM-dd")" />
+                                    }
+                                    else
+                                    {
+                                        <input type="date" class="form-control" asp-for="SubtripModelList[i].ma14subtrip.ma14InitialDiscountDate" />
+                                    }
+                                </div>
+                                <div class="col-4">
+                                    <label>Final do Desconto da Empresa (Opcional)</label>
+                                    @if (Model.SubtripModelList[i].ma14subtrip.ma14FinalDiscountDate != null)
+                                    {
+                                        <input type="date" class="form-control" asp-for="SubtripModelList[i].ma14subtrip.ma14FinalDiscountDate" value="@Model.SubtripModelList[i].ma14subtrip.ma14FinalDiscountDate.Value.ToString("yyyy-MM-dd")" />
+                                    }
+                                    else
+                                    {
+                                        <input type="date" class="form-control" asp-for="SubtripModelList[i].ma14subtrip.ma14FinalDiscountDate" />
+                                    }
+                                </div>
+                            </div>
+
+                            <div>
+                                <label>Comissão Da Matrip</label>
+                                <input type="number" class="form-control" asp-for="SubtripModelList[i].ma14subtrip.ma14MatripCommission" min="0" value="@Model.SubtripModelList[i].ma14subtrip.ma14MatripCommission" required />
+                            </div>
+                            <div>
+                                <label>Nome da Empresa Deste Roteiro</label>
+                                <input id="PartnerName-@i" class="form-control" type="text" asp-for="SubtripModelList[i].PartnerName" placeholder="Nome da empresa" onkeydown="PartnerAutoComplete('@i');" value="@Model.SubtripModelList[i].PartnerName" required />
+                            </div>
+                            <div>
+                                <label>Status do Item</label>
+                                <select class="form-control" asp-for="SubtripModelList[i].ma14subtrip.ma14status">
+                                    @if (Model.SubtripModelList[i].ma14subtrip.ma14status == "1")
+                                    {
+                                        <option value="1">Publicar</option>
+                                        <option value="0">Não Publicar</option>
+                                    }
+                                    else
+                                    {
+                                        <option value="0">Não Publicar</option>
+                                        <option value="1">Publicar</option>
+                                    }
+                                </select>
+                            </div>
+                        </div>
+
+
+                        <div class="row card-deck">
+
+                            <div class="col-4">
+                                <div id="serviceListDiv:Subtrip-@i">
+
+
+                                    @if (Model.SubtripModelList[i].ma11serviceList != null)
+                                    {
+                                        int serviceIndex = Model.SubtripModelList[i].ma11serviceList.Count();
+                                        <a class="btn btn-outline-success" onclick="addService('@i', '@Model.SubtripModelList[i].ma14subtrip.ma14idsubtrip');">Criar Serviço</a>
+                                        <a class="btn btn-outline-success" onclick="ExcludeItem('@serviceIndex', 'serviceDiv:Subtrip-@i');">Excluir Item</a>
+                                        for (int j = 0; j < Model.SubtripModelList[i].ma11serviceList.Count(); j++)
+                                        {
+                                            <div class="serviceDiv:Subtrip-@i">
+                                                <h6>Serviço @Html.Raw(j + 1)</h6>
+                                                <input hidden readonly asp-for="SubtripModelList[i].ma11serviceList[j].FK1114idsubtrip" value="@Model.SubtripModelList[i].ma14subtrip.ma14idsubtrip" />
+                                                <input hidden readonly asp-for="SubtripModelList[i].ma11serviceList[j].ma11idservice" value="@Model.SubtripModelList[i].ma11serviceList[j].ma11idservice" />
+                                                <div>
+                                                    <label>Nome do Serviço</label>
+                                                    <input type="text" class="form-control" asp-for="SubtripModelList[i].ma11serviceList[j].ma11name" value="@Model.SubtripModelList[i].ma11serviceList[j].ma11name" required />
+                                                </div>
+                                                <div>
+                                                    <label>Descrição do Serviço</label>
+                                                    <textarea class="form-control" asp-for="SubtripModelList[i].ma11serviceList[j].ma11description" required>@Model.SubtripModelList[i].ma11serviceList[j].ma11description</textarea>
+                                                </div>
+                                                <div>
+                                                    <label>Quantidade Mínima</label>
+                                                    <input type="number" class="form-control" asp-for="SubtripModelList[i].ma11serviceList[j].ma11minQuantity" value="@Model.SubtripModelList[i].ma11serviceList[j].ma11minQuantity" required />
+                                                </div>
+                                                <div>
+                                                    <label>Valor da Unidade</label>
+                                                    <input class="form-control money" asp-for="SubtripModelList[i].ma11serviceList[j].ma11Value" value="@Model.SubtripModelList[i].ma11serviceList[j].ma11Value" required />
+                                                </div>
+                                                <div>
+                                                    <label>Status do Item</label>
+                                                    <select class="form-control" asp-for="SubtripModelList[i].ma11serviceList[j].ma11status">
+                                                        @if (Model.SubtripModelList[i].ma11serviceList[j].ma11status == "1")
+                                                        {
+                                                            <option value="1">Publicar</option>
+                                                            <option value="0">Não Publicar</option>
+                                                        }
+                                                        else
+                                                        {
+                                                            <option value="0">Não Publicar</option>
+                                                            <option value="1">Publicar</option>
+                                                        }
+                                                    </select>
+                                                </div>
+                                                <hr />
+                                            </div>
+                                        }
+                                    }
+                                    else
+                                    {
+                                        <a class="btn btn-outline-success" onclick="addService('@i', '@Model.SubtripModelList[i].ma14subtrip.ma14idsubtrip');">Criar Serviço</a>
+                                        <a class="btn btn-outline-success" onclick="ExcludeItem(0, 'serviceDiv:Subtrip-@i');">Excluir Item</a>
+                                    }
+                                    <hr />
+                                </div>
+                            </div>
+                            <div class="col-4">
+                                <div id="subtripValueListDiv:Subtrip-@i">
+                                    <a class="btn btn-outline-success" onclick="addSubtripValue('@i', '@Model.SubtripModelList[i].ma14subtrip.ma14idsubtrip');">Criar Valor</a>
+                                    @{
+                                        int subtripValueLimitExcludeIndex = 0;
+                                        if (Model.SubtripModelList[i].ma17SubtripValueList != null)
+                                        {
+                                            subtripValueLimitExcludeIndex = Model.SubtripModelList[i].ma17SubtripValueList.Count();
+                                        }
+                                    }
+                                    <a class="btn btn-outline-success" onclick="ExcludeItem('@subtripValueLimitExcludeIndex', 'subtripValueDiv:Subtrip-@i');">Excluir Item</a>
+                                    <hr />
+                                    @for (int j = 0; j < Model.SubtripModelList[i].ma17SubtripValueList.Count(); j++)
+                                    {
+                                        <div class="subtripValueDiv:Subtrip-@i">
+                                            <h6>Valor @Html.Raw(j + 1)</h6>
+                                            <input hidden readonly asp-for="SubtripModelList[i].ma17SubtripValueList[j].FK1714idsubtrip" value="@Model.SubtripModelList[i].ma17SubtripValueList[j].FK1714idsubtrip" />
+                                            <input hidden readonly asp-for="SubtripModelList[i].ma17SubtripValueList[j].ma17idSubtripValue" value="@Model.SubtripModelList[i].ma17SubtripValueList[j].ma17idSubtripValue" />
+                                            <div>
+                                                <label>Valor</label>
+                                                <input class="form-control money" asp-for="SubtripModelList[i].ma17SubtripValueList[j].ma17value" value="@Model.SubtripModelList[i].ma17SubtripValueList[j].ma17value.ToString("N2")" required />
+                                            </div>
+                                            @{
+                                                List<string> valueType = new List<string> { "Individual", "Privativo" };
+                                            }
+                                            <div>
+                                                <label>Nome do Valor</label>
+                                                <input class="form-control" asp-for="SubtripModelList[i].ma17SubtripValueList[j].ma17description" value="@Model.SubtripModelList[i].ma17SubtripValueList[j].ma17description" required />
+                                            </div>
+                                            <div>
+                                                <label>Status do Valor</label>
+                                                <select class="form-control" asp-for="SubtripModelList[i].ma17SubtripValueList[j].ma17type" required>
+                                                    @if (Model.SubtripModelList[i].ma17SubtripValueList[j].ma17type == "0")
+                                                    {
+                                                        <option value="0">Individual</option>
+                                                        <option value="1">Privativo</option>
+                                                    }
+                                                    else
+                                                    {
+                                                        <option value="1">Privativo</option>
+                                                        <option value="0">Individual</option>
+                                                    }
+
+                                                </select>
+                                            </div>
+                                            <div>
+                                                <label>Status do Item</label>
+                                                <select class="form-control" asp-for="SubtripModelList[i].ma17SubtripValueList[j].ma17status">
+                                                    @if (Model.SubtripModelList[i].ma17SubtripValueList[j].ma17status == "1")
+                                                    {
+                                                        <option value="1">Publicar</option>
+                                                        <option value="0">Não Publicar</option>
+                                                    }
+                                                    else
+                                                    {
+                                                        <option value="0">Não Publicar</option>
+                                                        <option value="1">Publicar</option>
+                                                    }
+                                                </select>
+                                            </div>
+                                            <hr />
+                                        </div>
+                                    }
+
+                                </div>
+                            </div>
+                            <div class="col-4">
+                                <div id="subtripScheduleListDiv:Subtrip-@i">
+                                    <a class="btn btn-outline-success" onclick="addSubtripSchedule('@i');">Criar Horário</a>
+                                    @{
+                                        int subtripscheduleLimitExcludeIndex = 0;
+                                        if (Model.SubtripModelList[i].ma16subtripscheduleList != null)
+                                        {
+                                            subtripscheduleLimitExcludeIndex = Model.SubtripModelList[i].ma16subtripscheduleList.Count();
+                                        }
+                                    }
+                                    <a class="btn btn-outline-success" onclick="ExcludeItem('@subtripscheduleLimitExcludeIndex', 'subtripScheduleDiv:Subtrip-@i');">Excluir Item</a>
+                                    <hr />
+                                    @for (int j = 0; j < Model.SubtripModelList[i].ma16subtripscheduleList.Count(); j++)
+                                    {
+                                        <div class="subtripScheduleDiv:Subtrip-@i">
+                                            <input hidden readonly asp-for="SubtripModelList[i].ma16subtripscheduleList[j].FK1614idsubtrip" value="@Model.SubtripModelList[i].ma16subtripscheduleList[j].FK1614idsubtrip" />
+                                            <input hidden readonly asp-for="SubtripModelList[i].ma16subtripscheduleList[j].ma16idsubtripschedule" value="@Model.SubtripModelList[i].ma16subtripscheduleList[j].ma16idsubtripschedule" />
+                                            <h6>Horário 1</h6>
+                                            <div>
+                                                <label>Dias do Horário</label>
+                                                <input class="form-control" type="text" asp-for="SubtripModelList[i].ma16subtripscheduleList[j].ma16days" value="@Model.SubtripModelList[i].ma16subtripscheduleList[j].ma16days" required />
+                                            </div>
+                                            <div>
+                                                <label>Duração do Horário</label>
+                                                <input class="form-control" type="time" asp-for="SubtripModelList[i].ma16subtripscheduleList[j].ma16duration" value="@Model.SubtripModelList[i].ma16subtripscheduleList[j].ma16duration" required />
+                                            </div>
+                                            <div>
+                                                <label>Horário de Entrada</label>
+                                                <input class="form-control" type="time" asp-for="SubtripModelList[i].ma16subtripscheduleList[j].ma16entry" value="@Model.SubtripModelList[i].ma16subtripscheduleList[j].ma16entry" required />
+                                            </div>
+                                            <div>
+                                                <label>Horário de Saída</label>
+                                                <input class="form-control" type="time" asp-for="SubtripModelList[i].ma16subtripscheduleList[j].ma16exit" value="@Model.SubtripModelList[i].ma16subtripscheduleList[j].ma16exit" required />
+                                            </div>
+                                            <div>
+                                                <label>Status do Item</label>
+                                                <select class="form-control" asp-for="SubtripModelList[i].ma16subtripscheduleList[j].ma16status">
+                                                    @if (Model.SubtripModelList[i].ma16subtripscheduleList[j].ma16status == "1")
+                                                    {
+                                                        <option value="1">Publicar</option>
+                                                        <option value="0">Não Publicar</option>
+                                                    }
+                                                    else
+                                                    {
+                                                        <option value="0">Não Publicar</option>
+                                                        <option value="1">Publicar</option>
+                                                    }
+                                                </select>
+                                            </div>
+                                            <hr />
+                                        </div>
+                                    }
+
+                                </div>
+                            </div>
+                            <hr />
+                        </div>
+                    </div>
+                }
+
+
+                <hr />
+            </div>
+
+        </div>
+
+
+
+        <div class="mt-3" style="overflow:auto;">
+            <div style="float:right;">
+                <button class="btn btn-lg btn-success text-uppercase" type="button" id="prevBtn" onclick="nextPrev(-1)">Anterior</button>
+                <button class="btn btn-lg btn-success text-uppercase" type="button" id="nextBtn" onclick="nextPrev(1)">Próximo</button>
+            </div>
+        </div>
+        <!--
+        <button type="submit" class="btn btn-lg btn-success text-uppercase" onclick=""> <i class=""></i> Adicionar </button>
+            -->
+        <!-- Circles which indicates the steps of the form: -->
+        <div style="text-align:center;margin-top:40px;">
+            <span class="step"></span>
+            <span class="step"></span>
+            <span class="step"></span>
+        </div>
+
+    </form>
+
+    @if (Model.ma05trip.ma13tripphoto.Count() > 0)
+    {
+        <div class="m-lg-5">
+            <div class="row">
+                @for (int i = 1; i <= Model.ma05trip.ma13tripphoto.ToList().FirstOrDefault().ma13photoquantity; i++)
+                {
+
+                    <div class="col-lg-4 d-flex align-self-stretch" style="margin-top:50px">
+                        <div class="card" style="width: 21rem;">
+                            <form method="post" asp-area="Administrator" asp-controller="TripPhoto" asp-action="DeleteTripPhoto">
+                                <img class="card-img-top" src="@Url.Content("~/images/tripphotos/"+ Model.ma05trip.ma05idtrip + "-" +  i +".jpg?v="+Model.ma05trip.ma13tripphoto.ToList().FirstOrDefault().ma13versionDate.ToString("ddMMyyyy"))" />
+                                <input hidden readonly type="number" name="tripID" value="@Model.ma05trip.ma05idtrip" />
+                                <input hidden readonly type="text" name="TripName" value="@Model.ma05trip.ma05name" />
+                                <input hidden readonly type="number" name="photoquantity" value="@Model.ma05trip.ma13tripphoto.ToList().FirstOrDefault().ma13photoquantity" />
+                                <input hidden readonly type="number" name="position" value="@i" />
+                                <input hidden readonly type="text" name="filePath" value="@Url.Content("~/images/tripphotos/"+ Model.ma05trip.ma05idtrip + "-" + i +".jpg")" />
+
+                                <div class="card-body flex-column d-flex">
+                                    <button class="btn-success" type="submit">Excluir foto</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    }
+
+
+    <form method="post" enctype="multipart/form-data" asp-area="Administrator" asp-controller="TripPhoto" asp-action="AddTripPhoto">
+        <input hidden readonly type="number" name="tripID" value="@Model.ma05trip.ma05idtrip" />
+        <input hidden readonly type="text" name="TripName" value="@Model.ma05trip.ma05name" />
+        <input class="form-control" type="file" name="file" accept=".jpg" required />
+
+        <button class="btn-success" type="submit">Adicionar Foto</button>
+    </form>
+
+</div>

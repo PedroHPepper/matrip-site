@@ -1,0 +1,106 @@
+@{
+    Layout = "~/Views/Shared/_Layout2.cshtml";
+    ViewData["Title"] = "Contate-nos";
+}
+@section menu{
+    <li><a asp-controller="Home" asp-action="Index">Home</a></li>
+    <li><a asp-controller="Home" asp-action="About">Sobre</a></li>
+    <!--<li><a href="listings.html">Listings</a></li>-->
+    <!--<li><a href="blog.html">Notícias</a></li>-->
+    <li class="active"><a asp-controller="Home" asp-action="Contact">Contato</a></li>
+}
+@section home{
+    <div class="parallax_background parallax-window" data-parallax="scroll" data-image-src="../../images/contact.jpg" data-speed="0.8"></div>
+    <div class="home_container">
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    <div class="home_content">
+                        <div class="home_title">Entre em Contato</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+@section scripts{
+    <!--
+    <script src="~/js/contact.js"></script>-->
+}
+<!-- Contact -->
+
+<div class="contact container_custom">
+    <div class="container">
+        <div class="row">
+            <!-- Contact Content -->
+            <div class="col-xl-6">
+                <div class="contact_content">
+                    <div class="contact_form_container">
+                        <div class="section_title"><h1>Contate-nos</h1></div>
+                        @if (ViewData["MSG_S"] != null)
+                        {
+                            <p class="alert">@ViewData["MSG_S"]</p>
+                        }
+
+                        @if (ViewData["MSG_E"] != null)
+                        {
+                            <p class="alert">@ViewData["MSG_E"]</p>
+                        }
+                        <form asp-action="ContactAction" asp-controller="Home" method="POST" class="contact_form" id="contact_form">
+                            <div class="row">
+                                <div class="col-lg-6 contact_form_col">
+                                    <input id="Name" name="Name" type="text" class="contact_input" placeholder="Nome" required="required">
+                                </div>
+                                <div class="col-lg-6">
+                                    <input id="Email" name="Email" type="email" class="contact_input" placeholder="E-mail" required="required">
+                                </div>
+                            </div>
+                            <div>
+                                <input id="About" name="About" type="text" class="contact_input" placeholder="Assunto">
+                            </div>
+                            <div>
+                                <textarea id="Text" name="Text" class="contact_input contact_textarea" placeholder="Mensagem" required="required"></textarea>
+                            </div>
+                            <button type="submit" class="contact_button trans_200">Enviar mensagem</button>
+                        </form>
+                        <div class="contact_info">
+                            <div class="section_title"><h1>Mais Informações</h1></div>
+                            <div class="contact_info_list">
+                                <ul>
+                                    <li class="d-flex flex-row align-items-start justify-content-start">
+                                        <div class="contact_info_icon"><img src="~/images/info_1.png" alt=""></div>
+                                        <div class="contact_info_content"><span>Endereço: </span>Casarão Tech Renato Archer, Rua da Estrela, 386 - Centro, São Luís - MA, 65010-200</div>
+                                    </li>
+                                    <li class="d-flex flex-row align-items-start justify-content-start">
+                                        <div class="contact_info_icon"><img src="~/images/info_2.png" alt=""></div>
+                                        <div class="contact_info_content"><span>Telefone: </span>(98) 98806-8505</div>
+                                    </li>
+                                    <!--
+                                    <li class="d-flex flex-row align-items-start justify-content-start">
+                                        <div class="contact_info_icon"><img src="images/info_3.png" alt=""></div>
+                                        <div class="contact_info_content"><span>E-mail: </span>restaurant@contact.com</div>
+                                    </li>-->
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Contact Map -->
+            <div class="col-xl-6">
+                <div class="contact_map_container">
+
+                    <!-- Google Map -->
+
+                    <div class="map">
+                        <div id="google_map" class="google_map">
+                            <div class="map_container">
+                                <div id="map"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

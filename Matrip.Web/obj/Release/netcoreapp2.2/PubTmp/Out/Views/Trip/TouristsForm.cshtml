@@ -1,0 +1,97 @@
+﻿@model Matrip.Domain.Models.TripPurchase.TripItem
+@{
+    ViewData["Title"] = "Inserir Turistas";
+    Layout = "~/Views/Shared/_Layout2.cshtml";
+
+    ma05trip trip = ViewBag.Trip;
+    ma09city city = trip.ma09city;
+}
+@section menu{
+    <li><a asp-controller="Home" asp-action="Index">Home</a></li>
+    <li><a asp-controller="Home" asp-action="About">Sobre</a></li>
+    <!--<li><a href="listings.html">Listings</a></li>-->
+    <!--<li><a href="blog.html">Notícias</a></li>-->
+    <li><a asp-controller="Home" asp-action="Contact">Contato</a></li>
+}
+@section home{
+    @if (city.ma35cityphoto.Count() > 0)
+    {
+        <div class="parallax_background parallax-window" data-parallax="scroll" data-image-src="@Url.Content("~/images/cityphotos/headers/"+ city.ma35cityphoto.FirstOrDefault().ma35idcityphoto +"-"+ city.ma35cityphoto.FirstOrDefault().FK3509idcity +"-filter.jpg?v="+city.ma35cityphoto.FirstOrDefault().ma35versionDate.ToString("ddMMyyyy"))" data-speed="0.8"></div>
+    }
+    else
+    {
+        <div class="parallax_background parallax-window" data-parallax="scroll" data-image-src="@Url.Content("~/images/contact.jpg")" data-speed="0.8"></div>
+    }
+    <div class="home_container">
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    <div class="home_content">
+                        <div class="home_title">Formulário de Turistas</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+@section scripts{
+    <!--
+    <script src="~/js/contact.js"></script>-->
+    <script>
+        function submitButton(num) {
+            document.getElementById("ContinueOrCart").value = num;
+        }
+    </script>
+}
+
+
+<div class="m-5">
+    <h1>Insira os dados dos turistas</h1>
+    <form method="post" asp-action="SubmitTourists" asp-controller="Trip" class="contact_form myForm" id="contact_form">
+        @foreach (TouristDiscountByAgeModel touristDiscountByAge in Model.TouristDiscountByAgeList)
+        {
+            @if (touristDiscountByAge.TouristQuantity > 0)
+            {
+                <h6>Insira o nome das(os) @touristDiscountByAge.AgeDiscountName</h6>
+                @for (int i = 1; i <= touristDiscountByAge.TouristQuantity; i++)
+                {
+                    <div class="form-group row">
+                        <input hidden name="AgeDiscountID" type="text" value="@touristDiscountByAge.AgeDiscountID" readonly />
+                        <div class="col-sm-5">
+                            <label>Nome:</label>
+                            <input class="form-control" name="TouristName" type="text" placeholder="Nome Completo" required />
+                        </div>
+                        <div class="col-sm-7">
+                            <label>RG ou Passaporte:</label>
+                            <input class="form-control" name="RGOrPassport" type="text" placeholder="RG ou Passaporte" required />
+                        </div>
+                        <div class="col-sm-7">
+                            <label>Idade:</label>
+                            @if (touristDiscountByAge.maxAge != 0)
+                            {
+                                <input class="form-control" name="Age" type="number" placeholder="Idade" min="@touristDiscountByAge.minAge" max="@touristDiscountByAge.maxAge" required />
+                            }
+                            else
+                            {
+                                <input class="form-control" name="Age" type="number" placeholder="Idade" min="@touristDiscountByAge.minAge" required />
+                            }
+                        </div>
+                    </div>
+                    <hr />
+                }
+            }
+        }
+        <input id="ContinueOrCart" name="ContinueOrCart" hidden readonly />
+        <div class="p-t-8 p-b-31">
+            <div style="float: left">
+                <button class="btn-success submit-btn btn" onclick="return submitButton(1)">Adicionar ao Carrinho</button>
+            </div>
+            <div style="float: right">
+                <button class="btn-success submit-btn btn" onclick="return submitButton(2)">Comprar Somente Esse Passeio</button>
+            </div>
+            <div style="clear: both"></div>
+        </div>
+
+
+    </form>
+</div>

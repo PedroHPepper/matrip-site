@@ -1,0 +1,178 @@
+@{
+    Layout = "~/Views/Shared/_Layout2.cshtml";
+    ViewData["Title"] = "Sobre Nós";
+}
+@section menu{
+    <li><a asp-controller="Home" asp-action="Index">Home</a></li>
+    <li class="active"><a asp-controller="Home" asp-action="About">Sobre</a></li>
+    <!--<li><a href="listings.html">Listings</a></li>-->
+    <!--<li><a href="blog.html">Notícias</a></li>-->
+    <li><a asp-controller="Home" asp-action="Contact">Contato</a></li>
+}
+@section home{
+    <div class="parallax_background parallax-window" data-parallax="scroll" data-image-src="../../images/contact.jpg" data-speed="0.8"></div>
+    <div class="home_container">
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    <div class="home_content">
+                        <div class="home_title">Nosso Time</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+@section scripts{
+    <!--
+        <script src="~/js/contact.js"></script>-->
+}
+@section CSS{
+    <link rel="stylesheet" type="text/css" href="~/css/About.css">
+}
+
+
+<!-- Contact -->
+<div class="contact container_custom">
+    <section class="our-Team-area bg-white section_padding_100_50 clearfix" id="time">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 text-center">
+                    <!-- Heading Text  -->
+                    <div class="section-heading">
+
+                        <div class="line-shape"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="row alinharDiv">
+
+                <div class="col-12 col-md-6 col-lg-3">
+                    <div class="single-team-member">
+                        <div class="member-image">
+                            <img src="~/images/team/edilson.jpg" alt="">
+                            <div class="team-hover-effects">
+                                <div class="team-social-icon">
+                                    <a href="https://www.facebook.com/edilson3lima" target="_blank"><i class="fa fa-facebook" aria-hidden="true"></i></a>
+                                    <a href="https://www.linkedin.com/in/edilson-lima-ba563b29" target="_blank"> <i class="fa fa-linkedin" aria-hidden="true"></i></a>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="member-text">
+                            <h4>Edilson Lima</h4>
+                            <p>CEO-Fundador</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-12 col-md-6 col-lg-3">
+                    <div class="single-team-member">
+                        <div class="member-image">
+                            <img src="~/images/team/kastney.jpg" alt="">
+                            <div class="team-hover-effects">
+                                <div class="team-social-icon">
+                                    <a href="https://www.facebook.com/profile.php?id=100009729968098" target="_blank"><i class="fa fa-facebook" aria-hidden="true"></i></a>
+                                    <a href="https://www.artstation.com/kastneyfrazo" target="_blank"><i class="fa fa-artstation" aria-hidden="true"></i></a>
+                                    <a href="https://www.behance.net/KastneyFrazao" target="_blank"> <i class="fa fa-behance" aria-hidden="true"></i></a>
+                                    <a href="https://www.linkedin.com/in/kastney-fraz%C3%A3o-2a8556174/" target="_blank"> <i class="fa fa-linkedin" aria-hidden="true"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="member-text">
+                            <h4>Kastney Frazão</h4>
+                            <p>Desenvolvimento/Designer</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-12 col-md-6 col-lg-3">
+                    <div class="single-team-member">
+                        <div class="member-image">
+                            <img src="~/images/team/demetrius.jpg" alt="">
+                            <div class="team-hover-effects">
+                                <div class="team-social-icon">
+                                    <a href="https://www.facebook.com/Wellerson.Demetrius" target="_blank"><i class="fa fa-facebook" aria-hidden="true"></i></a>
+                                    <a href="https://www.instagram.com/demetrius_coutinho/" target="_blank"> <i class="fa fa-instagram" aria-hidden="true"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="member-text">
+                            <h4>Demetrius Coutinho</h4>
+                            <p>Desenvolvimento</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div> <!--Fim row -->
+
+
+            <div class="row alinharDiv">
+                <div class="col-12 col-md-6 col-lg-3">
+                    <div class="single-team-member">
+                        <div class="member-image">
+                            <img src="~/images/team/Pedro.jpg" alt="">
+                            <div class="team-hover-effects">
+                                <div class="team-social-icon">
+                                    <a href="https://www.facebook.com/pedroroyalpimenta" target="_blank"><i class="fa fa-facebook" aria-hidden="true"></i></a>
+                                    <a href="https://www.instagram.com/pedroroyalpimenta/" target="_blank"> <i class="fa fa-instagram" aria-hidden="true"></i></a>
+                                    <a href="https://www.linkedin.com/in/pedro-pimenta-295127b7" target="_blank"> <i class="fa fa-linkedin" aria-hidden="true"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="member-text">
+                            <h4>Pedro Pimenta</h4>
+                            <p>Desenvolvimento</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-12 col-md-6 col-lg-3">
+                    <div class="single-team-member">
+                        <div class="member-image">
+                            <img src="~/images/team/luan.jpg" alt="">
+                            <div class="team-hover-effects">
+                                <div class="team-social-icon">
+                                    <a href="https://www.facebook.com/luan.ferro.982" target="_blank"><i class="fa fa-facebook" aria-hidden="true"></i></a>
+                                    <a href="https://www.instagram.com/ferroluan/" target="_blank"> <i class="fa fa-instagram" aria-hidden="true"></i></a>
+                                    <a href="https://www.linkedin.com/in/luan-ferro-186771172" target="_blank"> <i class="fa fa-linkedin" aria-hidden="true"></i></a>
+                                    <a href="https://www.twitter.com/luanferroo" target="_blank"> <i class="fa fa-twitter" aria-hidden="true"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="member-text">
+                            <h4>Luan Ferro</h4>
+                            <p>Desenvolvimento</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-12 col-md-6 col-lg-3">
+                    <div class="single-team-member">
+                        <div class="member-image">
+                            <img src="~/images/team/sebastiao.jpg" alt="">
+                            <div class="team-hover-effects">
+                                <div class="team-social-icon">
+                                    <a href="https://www.facebook.com/sebastiaosts" target="_blank"><i class="fa fa-facebook" aria-hidden="true"></i></a>
+                                    <a href="https://www.instagram.com/underlinesebastian/" target="_blank"> <i class="fa fa-instagram" aria-hidden="true"></i></a>
+                                    <a href="https://www.linkedin.com/in/sebastiaost/" target="_blank"> <i class="fa fa-linkedin" aria-hidden="true"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="member-text">
+                            <h4>Sebastião Santos</h4>
+                            <p>Marketing/Design</p>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div> <!-- Fim Row -->
+
+        </div>
+    </section>
+
+</div>
+
+
+

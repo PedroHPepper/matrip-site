@@ -1,0 +1,85 @@
+@charset "utf-8";
+/* CSS Document */
+
+/******************************
+
+[Table of Contents]
+
+3. Header
+4. Menu
+5. Home
+6. Contact
+7. Footer
+
+******************************/
+
+
+
+
+/*********************************
+5. Home
+*********************************/
+
+.home
+{
+	height: 433px;
+	overflow: hidden;
+}
+.home_container
+{
+	position: absolute;
+	bottom: 0px;
+	left: 0;
+	width: 100%;
+	z-index: 1;
+}
+.home_content
+{
+	padding-bottom: 117px;
+	text-align: center;
+}
+.home_title
+{
+	font-size: 48px;
+	font-weight: 500;
+	color: #FFFFFF;
+}
+
+
+/*********************************
+6. Footer
+*********************************/
+
+.footer
+{
+	background: #FFFFFF;
+}
+.footer_container
+{
+	height: 79px;
+	padding-left: 52px;
+	padding-right: 49px;
+}
+.copyright
+{
+	font-size: 12px;
+	font-weight: 400;
+	color: #b0b0b0;
+}
+.footer_nav ul li:not(:last-of-type)
+{
+	margin-right: 51px;
+}
+.footer_nav ul li a
+{
+	font-size: 14px;
+	font-weight: 400;
+	color: #b0b0b0;
+}
+.footer_nav ul li a:hover,
+.footer_nav ul li.active a
+{
+	color: #ffb400;
+}
+
+

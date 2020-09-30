@@ -1,0 +1,172 @@
+C:\Users\Cliente\OneDrive\Área de Trabalho\Projetos\Matrip\Matrip.Web\bin\Release\netcoreapp2.2\appsettings.Development.json
+C:\Users\Cliente\OneDrive\Área de Trabalho\Projetos\Matrip\Matrip.Web\bin\Release\netcoreapp2.2\appsettings.json
+C:\Users\Cliente\OneDrive\Área de Trabalho\Projetos\Matrip\Matrip.Web\bin\Release\netcoreapp2.2\libman.json
+C:\Users\Cliente\OneDrive\Área de Trabalho\Projetos\Matrip\Matrip.Web\bin\Release\netcoreapp2.2\package-lock.json
+C:\Users\Cliente\OneDrive\Área de Trabalho\Projetos\Matrip\Matrip.Web\bin\Release\netcoreapp2.2\package.json
+C:\Users\Cliente\OneDrive\Área de Trabalho\Projetos\Matrip\Matrip.Web\bin\Release\netcoreapp2.2\Properties\launchSettings.json
+C:\Users\Cliente\OneDrive\Área de Trabalho\Projetos\Matrip\Matrip.Web\bin\Release\netcoreapp2.2\Matrip.Web.deps.json
+C:\Users\Cliente\OneDrive\Área de Trabalho\Projetos\Matrip\Matrip.Web\bin\Release\netcoreapp2.2\Matrip.Web.runtimeconfig.json
+C:\Users\Cliente\OneDrive\Área de Trabalho\Projetos\Matrip\Matrip.Web\bin\Release\netcoreapp2.2\Matrip.Web.runtimeconfig.dev.json
+C:\Users\Cliente\OneDrive\Área de Trabalho\Projetos\Matrip\Matrip.Web\bin\Release\netcoreapp2.2\Matrip.Web.dll
+C:\Users\Cliente\OneDrive\Área de Trabalho\Projetos\Matrip\Matrip.Web\bin\Release\netcoreapp2.2\Matrip.Web.pdb
+C:\Users\Cliente\OneDrive\Área de Trabalho\Projetos\Matrip\Matrip.Web\bin\Release\netcoreapp2.2\Matrip.Web.Views.dll
+C:\Users\Cliente\OneDrive\Área de Trabalho\Projetos\Matrip\Matrip.Web\bin\Release\netcoreapp2.2\Matrip.Web.Views.pdb
+C:\Users\Cliente\OneDrive\Área de Trabalho\Projetos\Matrip\Matrip.Web\bin\Release\netcoreapp2.2\PagarMeCore.dll
+C:\Users\Cliente\OneDrive\Área de Trabalho\Projetos\Matrip\Matrip.Web\bin\Release\netcoreapp2.2\PagarMeCore.pdb
+C:\Users\Cliente\OneDrive\Área de Trabalho\Projetos\Matrip\Matrip.Web\obj\Release\netcoreapp2.2\Matrip.Web.csprojAssemblyReference.cache
+C:\Users\Cliente\OneDrive\Área de Trabalho\Projetos\Matrip\Matrip.Web\obj\Release\netcoreapp2.2\Matrip.Web.Libraries.Lang.Message.resources
+C:\Users\Cliente\OneDrive\Área de Trabalho\Projetos\Matrip\Matrip.Web\obj\Release\netcoreapp2.2\Matrip.Web.csproj.GenerateResource.cache
+C:\Users\Cliente\OneDrive\Área de Trabalho\Projetos\Matrip\Matrip.Web\obj\Release\netcoreapp2.2\Matrip.Web.RazorAssemblyInfo.cache
+C:\Users\Cliente\OneDrive\Área de Trabalho\Projetos\Matrip\Matrip.Web\obj\Release\netcoreapp2.2\Matrip.Web.RazorAssemblyInfo.cs
+C:\Users\Cliente\OneDrive\Área de Trabalho\Projetos\Matrip\Matrip.Web\obj\Release\netcoreapp2.2\Matrip.Web.AssemblyInfoInputs.cache
+C:\Users\Cliente\OneDrive\Área de Trabalho\Projetos\Matrip\Matrip.Web\obj\Release\netcoreapp2.2\Matrip.Web.AssemblyInfo.cs
+C:\Users\Cliente\OneDrive\Área de Trabalho\Projetos\Matrip\Matrip.Web\obj\Release\netcoreapp2.2\Matrip.Web.TagHelpers.input.cache
+C:\Users\Cliente\OneDrive\Área de Trabalho\Projetos\Matrip\Matrip.Web\obj\Release\netcoreapp2.2\Matrip.Web.TagHelpers.output.cache
+C:\Users\Cliente\OneDrive\Área de Trabalho\Projetos\Matrip\Matrip.Web\obj\Release\netcoreapp2.2\Matrip.Web.RazorCoreGenerate.cache
+C:\Users\Cliente\OneDrive\Área de Trabalho\Projetos\Matrip\Matrip.Web\obj\Release\netcoreapp2.2\Razor\Areas\Administrator\Views\AdminTrip\AddTripView.cshtml.g.cs
+C:\Users\Cliente\OneDrive\Área de Trabalho\Projetos\Matrip\Matrip.Web\obj\Release\netcoreapp2.2\Razor\Areas\Administrator\Views\AdminTrip\SearchTrip.cshtml.g.cs
+C:\Users\Cliente\OneDrive\Área de Trabalho\Projetos\Matrip\Matrip.Web\obj\Release\netcoreapp2.2\Razor\Areas\Administrator\Views\AdminTrip\UpdateTrip.cshtml.g.cs
+C:\Users\Cliente\OneDrive\Área de Trabalho\Projetos\Matrip\Matrip.Web\obj\Release\netcoreapp2.2\Razor\Areas\Administrator\Views\ControlPanel\Index.cshtml.g.cs
+C:\Users\Cliente\OneDrive\Área de Trabalho\Projetos\Matrip\Matrip.Web\obj\Release\netcoreapp2.2\Razor\Areas\Administrator\Views\Shared\_Layout.cshtml.g.cs
+C:\Users\Cliente\OneDrive\Área de Trabalho\Projetos\Matrip\Matrip.Web\obj\Release\netcoreapp2.2\Razor\Areas\Administrator\Views\_ViewImports.cshtml.g.cs
+C:\Users\Cliente\OneDrive\Área de Trabalho\Projetos\Matrip\Matrip.Web\obj\Release\netcoreapp2.2\Razor\Areas\Guide\Views\ControlPanel\GuideTrips.cshtml.g.cs
+C:\Users\Cliente\OneDrive\Área de Trabalho\Projetos\Matrip\Matrip.Web\obj\Release\netcoreapp2.2\Razor\Areas\Guide\Views\ControlPanel\Index.cshtml.g.cs
+C:\Users\Cliente\OneDrive\Área de Trabalho\Projetos\Matrip\Matrip.Web\obj\Release\netcoreapp2.2\Razor\Areas\Guide\Views\Shared\_Layout.cshtml.g.cs
+C:\Users\Cliente\OneDrive\Área de Trabalho\Projetos\Matrip\Matrip.Web\obj\Release\netcoreapp2.2\Razor\Areas\Guide\Views\Trip\Index.cshtml.g.cs
+C:\Users\Cliente\OneDrive\Área de Trabalho\Projetos\Matrip\Matrip.Web\obj\Release\netcoreapp2.2\Razor\Areas\Guide\Views\Trip\RegisterTrip.cshtml.g.cs
+C:\Users\Cliente\OneDrive\Área de Trabalho\Projetos\Matrip\Matrip.Web\obj\Release\netcoreapp2.2\Razor\Areas\Guide\Views\Trip\ViewServices.cshtml.g.cs
+C:\Users\Cliente\OneDrive\Área de Trabalho\Projetos\Matrip\Matrip.Web\obj\Release\netcoreapp2.2\Razor\Areas\Guide\Views\Trip\ViewTrip.cshtml.g.cs
+C:\Users\Cliente\OneDrive\Área de Trabalho\Projetos\Matrip\Matrip.Web\obj\Release\netcoreapp2.2\Razor\Areas\Guide\Views\Trip\ViewTripList.cshtml.g.cs
+C:\Users\Cliente\OneDrive\Área de Trabalho\Projetos\Matrip\Matrip.Web\obj\Release\netcoreapp2.2\Razor\Areas\Guide\Views\_ViewImports.cshtml.g.cs
+C:\Users\Cliente\OneDrive\Área de Trabalho\Projetos\Matrip\Matrip.Web\obj\Release\netcoreapp2.2\Razor\Views\Account\ForgotPassword.cshtml.g.cs
+C:\Users\Cliente\OneDrive\Área de Trabalho\Projetos\Matrip\Matrip.Web\obj\Release\netcoreapp2.2\Razor\Views\Account\Login.cshtml.g.cs
+C:\Users\Cliente\OneDrive\Área de Trabalho\Projetos\Matrip\Matrip.Web\obj\Release\netcoreapp2.2\Razor\Views\Account\LoginRegister.cshtml.g.cs
+C:\Users\Cliente\OneDrive\Área de Trabalho\Projetos\Matrip\Matrip.Web\obj\Release\netcoreapp2.2\Razor\Views\Account\MessageView.cshtml.g.cs
+C:\Users\Cliente\OneDrive\Área de Trabalho\Projetos\Matrip\Matrip.Web\obj\Release\netcoreapp2.2\Razor\Views\Account\Register.cshtml.g.cs
+C:\Users\Cliente\OneDrive\Área de Trabalho\Projetos\Matrip\Matrip.Web\obj\Release\netcoreapp2.2\Razor\Views\Account\ResetPassword.cshtml.g.cs
+C:\Users\Cliente\OneDrive\Área de Trabalho\Projetos\Matrip\Matrip.Web\obj\Release\netcoreapp2.2\Razor\Views\Home\About.cshtml.g.cs
+C:\Users\Cliente\OneDrive\Área de Trabalho\Projetos\Matrip\Matrip.Web\obj\Release\netcoreapp2.2\Razor\Views\Home\Contact.cshtml.g.cs
+C:\Users\Cliente\OneDrive\Área de Trabalho\Projetos\Matrip\Matrip.Web\obj\Release\netcoreapp2.2\Razor\Views\Home\Index.cshtml.g.cs
+C:\Users\Cliente\OneDrive\Área de Trabalho\Projetos\Matrip\Matrip.Web\obj\Release\netcoreapp2.2\Razor\Views\Home\Privacy.cshtml.g.cs
+C:\Users\Cliente\OneDrive\Área de Trabalho\Projetos\Matrip\Matrip.Web\obj\Release\netcoreapp2.2\Razor\Views\Home\UserConfiguration.cshtml.g.cs
+C:\Users\Cliente\OneDrive\Área de Trabalho\Projetos\Matrip\Matrip.Web\obj\Release\netcoreapp2.2\Razor\Views\ItemPurchase\ChooseDateTime.cshtml.g.cs
+C:\Users\Cliente\OneDrive\Área de Trabalho\Projetos\Matrip\Matrip.Web\obj\Release\netcoreapp2.2\Razor\Views\ItemPurchase\CreditCardAndTransferenceView.cshtml.g.cs
+C:\Users\Cliente\OneDrive\Área de Trabalho\Projetos\Matrip\Matrip.Web\obj\Release\netcoreapp2.2\Razor\Views\ItemPurchase\PaymentFormView.cshtml.g.cs
+C:\Users\Cliente\OneDrive\Área de Trabalho\Projetos\Matrip\Matrip.Web\obj\Release\netcoreapp2.2\Razor\Views\ItemPurchase\TransferenceView.cshtml.g.cs
+C:\Users\Cliente\OneDrive\Área de Trabalho\Projetos\Matrip\Matrip.Web\obj\Release\netcoreapp2.2\Razor\Views\Purchase\CreditCardAndTransferenceView.cshtml.g.cs
+C:\Users\Cliente\OneDrive\Área de Trabalho\Projetos\Matrip\Matrip.Web\obj\Release\netcoreapp2.2\Razor\Views\Purchase\SaleListView.cshtml.g.cs
+C:\Users\Cliente\OneDrive\Área de Trabalho\Projetos\Matrip\Matrip.Web\obj\Release\netcoreapp2.2\Razor\Views\Purchase\SaleView.cshtml.g.cs
+C:\Users\Cliente\OneDrive\Área de Trabalho\Projetos\Matrip\Matrip.Web\obj\Release\netcoreapp2.2\Razor\Views\Purchase\TransferenceView.cshtml.g.cs
+C:\Users\Cliente\OneDrive\Área de Trabalho\Projetos\Matrip\Matrip.Web\obj\Release\netcoreapp2.2\Razor\Views\Shared\Error.cshtml.g.cs
+C:\Users\Cliente\OneDrive\Área de Trabalho\Projetos\Matrip\Matrip.Web\obj\Release\netcoreapp2.2\Razor\Views\Shared\_CookieConsentPartial.cshtml.g.cs
+C:\Users\Cliente\OneDrive\Área de Trabalho\Projetos\Matrip\Matrip.Web\obj\Release\netcoreapp2.2\Razor\Views\Shared\_Footer.cshtml.g.cs
+C:\Users\Cliente\OneDrive\Área de Trabalho\Projetos\Matrip\Matrip.Web\obj\Release\netcoreapp2.2\Razor\Views\Shared\_Layout.cshtml.g.cs
+C:\Users\Cliente\OneDrive\Área de Trabalho\Projetos\Matrip\Matrip.Web\obj\Release\netcoreapp2.2\Razor\Views\Shared\_Layout2.cshtml.g.cs
+C:\Users\Cliente\OneDrive\Área de Trabalho\Projetos\Matrip\Matrip.Web\obj\Release\netcoreapp2.2\Razor\Views\Shared\_LayoutLoginRegister.cshtml.g.cs
+C:\Users\Cliente\OneDrive\Área de Trabalho\Projetos\Matrip\Matrip.Web\obj\Release\netcoreapp2.2\Razor\Views\Shared\_ValidationScriptsPartial.cshtml.g.cs
+C:\Users\Cliente\OneDrive\Área de Trabalho\Projetos\Matrip\Matrip.Web\obj\Release\netcoreapp2.2\Razor\Views\ShoppingCart\ChooseDateTime.cshtml.g.cs
+C:\Users\Cliente\OneDrive\Área de Trabalho\Projetos\Matrip\Matrip.Web\obj\Release\netcoreapp2.2\Razor\Views\ShoppingCart\Index.cshtml.g.cs
+C:\Users\Cliente\OneDrive\Área de Trabalho\Projetos\Matrip\Matrip.Web\obj\Release\netcoreapp2.2\Razor\Views\ShoppingCart\PaymentFormView.cshtml.g.cs
+C:\Users\Cliente\OneDrive\Área de Trabalho\Projetos\Matrip\Matrip.Web\obj\Release\netcoreapp2.2\Razor\Views\Trip\TouristsForm.cshtml.g.cs
+C:\Users\Cliente\OneDrive\Área de Trabalho\Projetos\Matrip\Matrip.Web\obj\Release\netcoreapp2.2\Razor\Views\Trip\ViewTrip.cshtml.g.cs
+C:\Users\Cliente\OneDrive\Área de Trabalho\Projetos\Matrip\Matrip.Web\obj\Release\netcoreapp2.2\Razor\Views\Trip\ViewTripList.cshtml.g.cs
+C:\Users\Cliente\OneDrive\Área de Trabalho\Projetos\Matrip\Matrip.Web\obj\Release\netcoreapp2.2\Razor\Views\_ViewImports.cshtml.g.cs
+C:\Users\Cliente\OneDrive\Área de Trabalho\Projetos\Matrip\Matrip.Web\obj\Release\netcoreapp2.2\Razor\Views\_ViewStart.cshtml.g.cs
+C:\Users\Cliente\OneDrive\Área de Trabalho\Projetos\Matrip\Matrip.Web\obj\Release\netcoreapp2.2\Matrip.Web.RazorTargetAssemblyInfo.cache
+C:\Users\Cliente\OneDrive\Área de Trabalho\Projetos\Matrip\Matrip.Web\obj\Release\netcoreapp2.2\Matrip.Web.RazorTargetAssemblyInfo.cs
+C:\Users\Cliente\OneDrive\Área de Trabalho\Projetos\Matrip\Matrip.Web\obj\Release\netcoreapp2.2\Matrip.Web.Views.pdb
+C:\Users\Cliente\OneDrive\Área de Trabalho\Projetos\Matrip\Matrip.Web\obj\Release\netcoreapp2.2\Matrip.Web.csproj.CopyComplete
+C:\Users\Cliente\OneDrive\Área de Trabalho\Projetos\Matrip\Matrip.Web\obj\Release\netcoreapp2.2\Matrip.Web.dll
+C:\Users\Cliente\OneDrive\Área de Trabalho\Projetos\Matrip\Matrip.Web\obj\Release\netcoreapp2.2\Matrip.Web.pdb
+C:\Users\Cliente\OneDrive\Área de Trabalho\Projetos\Projeto Matrip\Matrip\Matrip.Web\bin\Release\netcoreapp2.2\appsettings.Development.json
+C:\Users\Cliente\OneDrive\Área de Trabalho\Projetos\Projeto Matrip\Matrip\Matrip.Web\bin\Release\netcoreapp2.2\appsettings.json
+C:\Users\Cliente\OneDrive\Área de Trabalho\Projetos\Projeto Matrip\Matrip\Matrip.Web\bin\Release\netcoreapp2.2\libman.json
+C:\Users\Cliente\OneDrive\Área de Trabalho\Projetos\Projeto Matrip\Matrip\Matrip.Web\bin\Release\netcoreapp2.2\package-lock.json
+C:\Users\Cliente\OneDrive\Área de Trabalho\Projetos\Projeto Matrip\Matrip\Matrip.Web\bin\Release\netcoreapp2.2\package.json
+C:\Users\Cliente\OneDrive\Área de Trabalho\Projetos\Projeto Matrip\Matrip\Matrip.Web\bin\Release\netcoreapp2.2\Properties\launchSettings.json
+C:\Users\Cliente\OneDrive\Área de Trabalho\Projetos\Projeto Matrip\Matrip\Matrip.Web\bin\Release\netcoreapp2.2\Matrip.Web.deps.json
+C:\Users\Cliente\OneDrive\Área de Trabalho\Projetos\Projeto Matrip\Matrip\Matrip.Web\bin\Release\netcoreapp2.2\Matrip.Web.runtimeconfig.json
+C:\Users\Cliente\OneDrive\Área de Trabalho\Projetos\Projeto Matrip\Matrip\Matrip.Web\bin\Release\netcoreapp2.2\Matrip.Web.runtimeconfig.dev.json
+C:\Users\Cliente\OneDrive\Área de Trabalho\Projetos\Projeto Matrip\Matrip\Matrip.Web\bin\Release\netcoreapp2.2\Matrip.Web.dll
+C:\Users\Cliente\OneDrive\Área de Trabalho\Projetos\Projeto Matrip\Matrip\Matrip.Web\bin\Release\netcoreapp2.2\Matrip.Web.pdb
+C:\Users\Cliente\OneDrive\Área de Trabalho\Projetos\Projeto Matrip\Matrip\Matrip.Web\bin\Release\netcoreapp2.2\Matrip.Web.Views.dll
+C:\Users\Cliente\OneDrive\Área de Trabalho\Projetos\Projeto Matrip\Matrip\Matrip.Web\bin\Release\netcoreapp2.2\Matrip.Web.Views.pdb
+C:\Users\Cliente\OneDrive\Área de Trabalho\Projetos\Projeto Matrip\Matrip\Matrip.Web\bin\Release\netcoreapp2.2\PagarMeCore.dll
+C:\Users\Cliente\OneDrive\Área de Trabalho\Projetos\Projeto Matrip\Matrip\Matrip.Web\bin\Release\netcoreapp2.2\PagarMeCore.pdb
+C:\Users\Cliente\OneDrive\Área de Trabalho\Projetos\Projeto Matrip\Matrip\Matrip.Web\obj\Release\netcoreapp2.2\Matrip.Web.csprojAssemblyReference.cache
+C:\Users\Cliente\OneDrive\Área de Trabalho\Projetos\Projeto Matrip\Matrip\Matrip.Web\obj\Release\netcoreapp2.2\Matrip.Web.RazorAssemblyInfo.cache
+C:\Users\Cliente\OneDrive\Área de Trabalho\Projetos\Projeto Matrip\Matrip\Matrip.Web\obj\Release\netcoreapp2.2\Matrip.Web.RazorAssemblyInfo.cs
+C:\Users\Cliente\OneDrive\Área de Trabalho\Projetos\Projeto Matrip\Matrip\Matrip.Web\obj\Release\netcoreapp2.2\Matrip.Web.AssemblyInfoInputs.cache
+C:\Users\Cliente\OneDrive\Área de Trabalho\Projetos\Projeto Matrip\Matrip\Matrip.Web\obj\Release\netcoreapp2.2\Matrip.Web.AssemblyInfo.cs
+C:\Users\Cliente\OneDrive\Área de Trabalho\Projetos\Projeto Matrip\Matrip\Matrip.Web\obj\Release\netcoreapp2.2\Matrip.Web.TagHelpers.input.cache
+C:\Users\Cliente\OneDrive\Área de Trabalho\Projetos\Projeto Matrip\Matrip\Matrip.Web\obj\Release\netcoreapp2.2\Matrip.Web.TagHelpers.output.cache
+C:\Users\Cliente\OneDrive\Área de Trabalho\Projetos\Projeto Matrip\Matrip\Matrip.Web\obj\Release\netcoreapp2.2\Matrip.Web.RazorCoreGenerate.cache
+C:\Users\Cliente\OneDrive\Área de Trabalho\Projetos\Projeto Matrip\Matrip\Matrip.Web\obj\Release\netcoreapp2.2\Razor\Areas\Administrator\Views\AdminTrip\AddTripView.cshtml.g.cs
+C:\Users\Cliente\OneDrive\Área de Trabalho\Projetos\Projeto Matrip\Matrip\Matrip.Web\obj\Release\netcoreapp2.2\Razor\Areas\Administrator\Views\AdminTrip\SearchTrip.cshtml.g.cs
+C:\Users\Cliente\OneDrive\Área de Trabalho\Projetos\Projeto Matrip\Matrip\Matrip.Web\obj\Release\netcoreapp2.2\Razor\Areas\Administrator\Views\AdminTrip\UpdateTrip.cshtml.g.cs
+C:\Users\Cliente\OneDrive\Área de Trabalho\Projetos\Projeto Matrip\Matrip\Matrip.Web\obj\Release\netcoreapp2.2\Razor\Areas\Administrator\Views\ControlPanel\Index.cshtml.g.cs
+C:\Users\Cliente\OneDrive\Área de Trabalho\Projetos\Projeto Matrip\Matrip\Matrip.Web\obj\Release\netcoreapp2.2\Razor\Areas\Administrator\Views\Shared\_Layout.cshtml.g.cs
+C:\Users\Cliente\OneDrive\Área de Trabalho\Projetos\Projeto Matrip\Matrip\Matrip.Web\obj\Release\netcoreapp2.2\Razor\Areas\Administrator\Views\_ViewImports.cshtml.g.cs
+C:\Users\Cliente\OneDrive\Área de Trabalho\Projetos\Projeto Matrip\Matrip\Matrip.Web\obj\Release\netcoreapp2.2\Razor\Areas\Guide\Views\Shared\_Layout.cshtml.g.cs
+C:\Users\Cliente\OneDrive\Área de Trabalho\Projetos\Projeto Matrip\Matrip\Matrip.Web\obj\Release\netcoreapp2.2\Razor\Areas\Guide\Views\Trip\Index.cshtml.g.cs
+C:\Users\Cliente\OneDrive\Área de Trabalho\Projetos\Projeto Matrip\Matrip\Matrip.Web\obj\Release\netcoreapp2.2\Razor\Areas\Guide\Views\Trip\RegisterTrip.cshtml.g.cs
+C:\Users\Cliente\OneDrive\Área de Trabalho\Projetos\Projeto Matrip\Matrip\Matrip.Web\obj\Release\netcoreapp2.2\Razor\Areas\Guide\Views\Trip\ViewServices.cshtml.g.cs
+C:\Users\Cliente\OneDrive\Área de Trabalho\Projetos\Projeto Matrip\Matrip\Matrip.Web\obj\Release\netcoreapp2.2\Razor\Areas\Guide\Views\Trip\ViewTrip.cshtml.g.cs
+C:\Users\Cliente\OneDrive\Área de Trabalho\Projetos\Projeto Matrip\Matrip\Matrip.Web\obj\Release\netcoreapp2.2\Razor\Areas\Guide\Views\Trip\ViewTripList.cshtml.g.cs
+C:\Users\Cliente\OneDrive\Área de Trabalho\Projetos\Projeto Matrip\Matrip\Matrip.Web\obj\Release\netcoreapp2.2\Razor\Areas\Guide\Views\_ViewImports.cshtml.g.cs
+C:\Users\Cliente\OneDrive\Área de Trabalho\Projetos\Projeto Matrip\Matrip\Matrip.Web\obj\Release\netcoreapp2.2\Razor\Views\Account\ForgotPassword.cshtml.g.cs
+C:\Users\Cliente\OneDrive\Área de Trabalho\Projetos\Projeto Matrip\Matrip\Matrip.Web\obj\Release\netcoreapp2.2\Razor\Views\Account\Login.cshtml.g.cs
+C:\Users\Cliente\OneDrive\Área de Trabalho\Projetos\Projeto Matrip\Matrip\Matrip.Web\obj\Release\netcoreapp2.2\Razor\Views\Account\MessageView.cshtml.g.cs
+C:\Users\Cliente\OneDrive\Área de Trabalho\Projetos\Projeto Matrip\Matrip\Matrip.Web\obj\Release\netcoreapp2.2\Razor\Views\Account\Register.cshtml.g.cs
+C:\Users\Cliente\OneDrive\Área de Trabalho\Projetos\Projeto Matrip\Matrip\Matrip.Web\obj\Release\netcoreapp2.2\Razor\Views\Account\ResetPassword.cshtml.g.cs
+C:\Users\Cliente\OneDrive\Área de Trabalho\Projetos\Projeto Matrip\Matrip\Matrip.Web\obj\Release\netcoreapp2.2\Razor\Views\Home\About.cshtml.g.cs
+C:\Users\Cliente\OneDrive\Área de Trabalho\Projetos\Projeto Matrip\Matrip\Matrip.Web\obj\Release\netcoreapp2.2\Razor\Views\Home\Contact.cshtml.g.cs
+C:\Users\Cliente\OneDrive\Área de Trabalho\Projetos\Projeto Matrip\Matrip\Matrip.Web\obj\Release\netcoreapp2.2\Razor\Views\Home\Index.cshtml.g.cs
+C:\Users\Cliente\OneDrive\Área de Trabalho\Projetos\Projeto Matrip\Matrip\Matrip.Web\obj\Release\netcoreapp2.2\Razor\Views\Home\Privacy.cshtml.g.cs
+C:\Users\Cliente\OneDrive\Área de Trabalho\Projetos\Projeto Matrip\Matrip\Matrip.Web\obj\Release\netcoreapp2.2\Razor\Views\Home\UserConfiguration.cshtml.g.cs
+C:\Users\Cliente\OneDrive\Área de Trabalho\Projetos\Projeto Matrip\Matrip\Matrip.Web\obj\Release\netcoreapp2.2\Razor\Views\ItemPurchase\ChooseDateTime.cshtml.g.cs
+C:\Users\Cliente\OneDrive\Área de Trabalho\Projetos\Projeto Matrip\Matrip\Matrip.Web\obj\Release\netcoreapp2.2\Razor\Views\ItemPurchase\PaymentFormView.cshtml.g.cs
+C:\Users\Cliente\OneDrive\Área de Trabalho\Projetos\Projeto Matrip\Matrip\Matrip.Web\obj\Release\netcoreapp2.2\Razor\Views\Purchase\SaleListView.cshtml.g.cs
+C:\Users\Cliente\OneDrive\Área de Trabalho\Projetos\Projeto Matrip\Matrip\Matrip.Web\obj\Release\netcoreapp2.2\Razor\Views\Purchase\SaleView.cshtml.g.cs
+C:\Users\Cliente\OneDrive\Área de Trabalho\Projetos\Projeto Matrip\Matrip\Matrip.Web\obj\Release\netcoreapp2.2\Razor\Views\Shared\Error.cshtml.g.cs
+C:\Users\Cliente\OneDrive\Área de Trabalho\Projetos\Projeto Matrip\Matrip\Matrip.Web\obj\Release\netcoreapp2.2\Razor\Views\Shared\_CookieConsentPartial.cshtml.g.cs
+C:\Users\Cliente\OneDrive\Área de Trabalho\Projetos\Projeto Matrip\Matrip\Matrip.Web\obj\Release\netcoreapp2.2\Razor\Views\Shared\_Footer.cshtml.g.cs
+C:\Users\Cliente\OneDrive\Área de Trabalho\Projetos\Projeto Matrip\Matrip\Matrip.Web\obj\Release\netcoreapp2.2\Razor\Views\Shared\_Layout.cshtml.g.cs
+C:\Users\Cliente\OneDrive\Área de Trabalho\Projetos\Projeto Matrip\Matrip\Matrip.Web\obj\Release\netcoreapp2.2\Razor\Views\Shared\_Layout2.cshtml.g.cs
+C:\Users\Cliente\OneDrive\Área de Trabalho\Projetos\Projeto Matrip\Matrip\Matrip.Web\obj\Release\netcoreapp2.2\Razor\Views\Shared\_LayoutLoginRegister.cshtml.g.cs
+C:\Users\Cliente\OneDrive\Área de Trabalho\Projetos\Projeto Matrip\Matrip\Matrip.Web\obj\Release\netcoreapp2.2\Razor\Views\Shared\_ValidationScriptsPartial.cshtml.g.cs
+C:\Users\Cliente\OneDrive\Área de Trabalho\Projetos\Projeto Matrip\Matrip\Matrip.Web\obj\Release\netcoreapp2.2\Razor\Views\ShoppingCart\ChooseDateTime.cshtml.g.cs
+C:\Users\Cliente\OneDrive\Área de Trabalho\Projetos\Projeto Matrip\Matrip\Matrip.Web\obj\Release\netcoreapp2.2\Razor\Views\ShoppingCart\Index.cshtml.g.cs
+C:\Users\Cliente\OneDrive\Área de Trabalho\Projetos\Projeto Matrip\Matrip\Matrip.Web\obj\Release\netcoreapp2.2\Razor\Views\ShoppingCart\PaymentFormView.cshtml.g.cs
+C:\Users\Cliente\OneDrive\Área de Trabalho\Projetos\Projeto Matrip\Matrip\Matrip.Web\obj\Release\netcoreapp2.2\Razor\Views\Trip\TouristsForm.cshtml.g.cs
+C:\Users\Cliente\OneDrive\Área de Trabalho\Projetos\Projeto Matrip\Matrip\Matrip.Web\obj\Release\netcoreapp2.2\Razor\Views\Trip\ViewTrip.cshtml.g.cs
+C:\Users\Cliente\OneDrive\Área de Trabalho\Projetos\Projeto Matrip\Matrip\Matrip.Web\obj\Release\netcoreapp2.2\Razor\Views\Trip\ViewTripList.cshtml.g.cs
+C:\Users\Cliente\OneDrive\Área de Trabalho\Projetos\Projeto Matrip\Matrip\Matrip.Web\obj\Release\netcoreapp2.2\Razor\Views\_ViewImports.cshtml.g.cs
+C:\Users\Cliente\OneDrive\Área de Trabalho\Projetos\Projeto Matrip\Matrip\Matrip.Web\obj\Release\netcoreapp2.2\Razor\Views\_ViewStart.cshtml.g.cs
+C:\Users\Cliente\OneDrive\Área de Trabalho\Projetos\Projeto Matrip\Matrip\Matrip.Web\obj\Release\netcoreapp2.2\Matrip.Web.RazorTargetAssemblyInfo.cache
+C:\Users\Cliente\OneDrive\Área de Trabalho\Projetos\Projeto Matrip\Matrip\Matrip.Web\obj\Release\netcoreapp2.2\Matrip.Web.RazorTargetAssemblyInfo.cs
+C:\Users\Cliente\OneDrive\Área de Trabalho\Projetos\Projeto Matrip\Matrip\Matrip.Web\obj\Release\netcoreapp2.2\Matrip.Web.Views.pdb
+C:\Users\Cliente\OneDrive\Área de Trabalho\Projetos\Projeto Matrip\Matrip\Matrip.Web\obj\Release\netcoreapp2.2\Matrip.Web.csproj.CopyComplete
+C:\Users\Cliente\OneDrive\Área de Trabalho\Projetos\Projeto Matrip\Matrip\Matrip.Web\obj\Release\netcoreapp2.2\Matrip.Web.dll
+C:\Users\Cliente\OneDrive\Área de Trabalho\Projetos\Projeto Matrip\Matrip\Matrip.Web\obj\Release\netcoreapp2.2\Matrip.Web.pdb
+C:\Users\Cliente\OneDrive\Área de Trabalho\Projetos\Projeto Matrip\Matrip\Matrip.Web\obj\Release\netcoreapp2.2\Razor\Views\ItemPurchase\Index.cshtml.g.cs
+C:\Users\Cliente\OneDrive\Área de Trabalho\Projetos\Projeto Matrip\Matrip\Matrip.Web\bin\Release\netcoreapp2.2\Matrip.Domain.dll
+C:\Users\Cliente\OneDrive\Área de Trabalho\Projetos\Projeto Matrip\Matrip\Matrip.Web\bin\Release\netcoreapp2.2\Matrip.Domain.pdb
+C:\Users\Cliente\OneDrive\Área de Trabalho\Projetos\Projeto Matrip\Matrip\Matrip.Web\obj\Release\netcoreapp2.2\Razor\Areas\Administrator\Views\AdminSalesReport\AdminSearchPartner.cshtml.g.cs
+C:\Users\Cliente\OneDrive\Área de Trabalho\Projetos\Projeto Matrip\Matrip\Matrip.Web\obj\Release\netcoreapp2.2\Razor\Areas\Administrator\Views\AdminSalesReport\Index.cshtml.g.cs
+C:\Users\Cliente\OneDrive\Área de Trabalho\Projetos\Projeto Matrip\Matrip\Matrip.Web\obj\Release\netcoreapp2.2\Razor\Areas\Guide\Views\SalesReport\Index.cshtml.g.cs
+C:\Users\Cliente\OneDrive\Área de Trabalho\Projetos\Projeto Matrip\Matrip\Matrip.Web\obj\Release\netcoreapp2.2\Razor\Areas\Guide\Views\SalesReport\SearchPartner.cshtml.g.cs
+C:\Users\Cliente\OneDrive\Área de Trabalho\Projetos\Projeto Matrip\Matrip\Matrip.Web\obj\Release\netcoreapp2.2\Razor\Views\Purchase\ContractView.cshtml.g.cs
+C:\Users\Cliente\OneDrive\Área de Trabalho\Projetos\Projeto Matrip\Matrip\Matrip.Web\obj\Release\netcoreapp2.2\Razor\Areas\Guide\Views\GuideControlPanel\GuideTrips.cshtml.g.cs
+C:\Users\Cliente\OneDrive\Área de Trabalho\Projetos\Projeto Matrip\Matrip\Matrip.Web\obj\Release\netcoreapp2.2\Razor\Areas\Guide\Views\GuideControlPanel\Index.cshtml.g.cs
+C:\Users\Cliente\OneDrive\Área de Trabalho\Projetos\Projeto Matrip\Matrip\Matrip.Web\obj\Release\netcoreapp2.2\Razor\Views\Shared\_Message.cshtml.g.cs
+C:\Users\Cliente\OneDrive\Área de Trabalho\Projetos\Projeto Matrip\Matrip\Matrip.Web\obj\Release\netcoreapp2.2\Razor\Views\Shared\Components\_Payment.cshtml.g.cs
+C:\Users\Cliente\OneDrive\Área de Trabalho\Projetos\Projeto Matrip\Matrip\Matrip.Web\obj\Release\netcoreapp2.2\Razor\Areas\Administrator\Views\AdminPartner\AddPartner.cshtml.g.cs
+C:\Users\Cliente\OneDrive\Área de Trabalho\Projetos\Projeto Matrip\Matrip\Matrip.Web\obj\Release\netcoreapp2.2\Razor\Areas\Guide\Views\GuidePartner\AddPartner.cshtml.g.cs
+C:\Users\Cliente\OneDrive\Área de Trabalho\Projetos\Projeto Matrip\Matrip\Matrip.Web\obj\Release\netcoreapp2.2\Razor\Views\Purchase\Index.cshtml.g.cs
+C:\Users\Cliente\OneDrive\Área de Trabalho\Projetos\Projeto Matrip\Matrip\Matrip.Web\obj\Release\netcoreapp2.2\Razor\Areas\Administrator\Views\AdminCity\Index.cshtml.g.cs
+C:\Users\Cliente\OneDrive\Área de Trabalho\Projetos\Projeto Matrip\Matrip\Matrip.Web\obj\Release\netcoreapp2.2\Razor\Areas\Administrator\Views\AdminCity\SearchCity.cshtml.g.cs
+C:\Users\Cliente\OneDrive\Área de Trabalho\Projetos\Projeto Matrip\Matrip\Matrip.Web\obj\Release\netcoreapp2.2\Razor\Areas\Administrator\Views\AdminGuide\AddGuide.cshtml.g.cs
+C:\Users\Cliente\OneDrive\Área de Trabalho\Projetos\Projeto Matrip\Matrip\Matrip.Web\obj\Release\netcoreapp2.2\Razor\Areas\Administrator\Views\AdminPartner\GetPartners.cshtml.g.cs
+C:\Users\Cliente\OneDrive\Área de Trabalho\Projetos\Projeto Matrip\Matrip\Matrip.Web\obj\Release\netcoreapp2.2\Razor\Areas\Administrator\Views\AdminPartner\UpdatePartner.cshtml.g.cs
+C:\Users\Cliente\OneDrive\Área de Trabalho\Projetos\Projeto Matrip\Matrip\Matrip.Web\obj\Release\netcoreapp2.2\Razor\Views\Feedback\Index.cshtml.g.cs

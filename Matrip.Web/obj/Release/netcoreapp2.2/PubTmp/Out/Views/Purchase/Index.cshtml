@@ -1,0 +1,137 @@
+﻿@model Matrip.Domain.Models.Payment.PaymentViewModel
+@{
+    var Date = DateConvert.HrBrasilia();
+    Layout = "~/Views/Shared/_Layout2.cshtml";
+    ViewData["Title"] = "Finalizar Compra";
+    double totalValue = 0;
+
+    ma38InfluencerDiscount influencerDiscount = null;
+    double influencerDiscountPercent = 0;
+    @if (ViewBag.InfluencerDiscount != null)
+    {
+        influencerDiscount = ViewBag.InfluencerDiscount;
+        influencerDiscountPercent = Convert.ToDouble(influencerDiscount.ma38DiscountPercent);
+    }
+     List<ma18tripitemshoppingcart> tripitemshoppingcartList = ViewBag.tripItemShoppingCart;
+}
+@section menu{
+    <li><a asp-controller="Home" asp-action="Index">Home</a></li>
+    <li><a asp-controller="Home" asp-action="About">Sobre</a></li>
+    <!--<li><a href="listings.html">Listings</a></li>-->
+    <!--<li><a href="blog.html">Notícias</a></li>-->
+    <li><a asp-controller="Home" asp-action="Contact">Contato</a></li>
+}
+@section home{
+    <div class="parallax_background parallax-window" data-parallax="scroll" data-image-src="../../images/contact.jpg" data-speed="0.8"></div>
+    <div class="home_container">
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    <div class="home_content">
+                        <div class="home_title">Pagamento</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+@section scripts{
+    <!--
+    <script src="~/js/contact.js"></script>-->
+    <script src="~/js/onlyNum.js" type="text/javascript"></script>
+    <script src="~/js/mascara.js" type="text/javascript"></script>
+    <script src="~/js/VisitorActions.js" type="text/javascript"></script>
+    <script type="text/javascript">
+        jQuery(".cardNumber").mask('0000 0000 0000 0000', { reverse: true });
+        jQuery(".expirationMonth").mask('00', { reverse: true });
+        jQuery(".expirationYear").mask('00', { reverse: true });
+        jQuery("#cc-cvv").mask('000', { reverse: true });
+
+        function CaltulateInstallments() {
+            var installments = document.getElementById("Installments").value;
+            var totalValue = parseFloat(document.getElementById("totalValueInput").value);
+            if (installments > 1) {
+                document.getElementById("totalValueCart").innerHTML = "R$ " + (totalValue + (totalValue * (0 / 100)));
+                document.getElementById("Value").value = totalValue + (totalValue * (0 / 100));
+            } else {
+                document.getElementById("totalValueCart").innerHTML = "R$ " + totalValue.toFixed(2);
+                document.getElementById("Value").value = totalValue;
+            }
+        }
+
+    </script>
+}
+<div class="contact container_custom">
+    <div class="container">
+        <div class="row m-4">
+            <!--Renderizador dos dados do cliente e dados do passeio-->
+            @{ await Html.RenderPartialAsync("~/Views/Shared/Components/_Payment.cshtml"); }
+            <div class="col-md-4 mb-4">
+
+                <!-- Heading -->
+                <h4 class="d-flex justify-content-between align-items-center mb-3">
+                    <span class="text-muted">Seu Carrinho</span>
+                    <span class="badge badge-secondary badge-pill">@tripitemshoppingcartList.Count()</span>
+                </h4>
+
+                <!-- Cart -->
+                <ul class="list-group mb-3 z-depth-1">
+                    @foreach (ma18tripitemshoppingcart tripitemshoppingcart in tripitemshoppingcartList)
+                    {
+                        double tripValue = 0;
+                        @foreach (ma19SubTripItemShoppingCart subTripItemShoppingCart in tripitemshoppingcart.ma19SubTripItemShoppingCart)
+                        {
+                            @foreach (ma20ServiceItemShoppingCart serviceItemShoppingCart in subTripItemShoppingCart.ma20ServiceItemShoppingCart)
+                            {
+                                tripValue += serviceItemShoppingCart.ma20ServiceQuantity * serviceItemShoppingCart.ma11service.ma11Value;
+                            }
+                            double value = subTripItemShoppingCart.ma17SubtripValue.ma17value;
+                            double totalDiscount = 0;
+                            if (subTripItemShoppingCart.ma14subtrip.ma14InfluencerDiscount)
+                            {
+                                totalDiscount += influencerDiscountPercent;
+                            }
+                            if (subTripItemShoppingCart.ma14subtrip.ma14PartnerDiscountPercent > 0 && Date >= subTripItemShoppingCart.ma14subtrip.ma14InitialDiscountDate && Date <= subTripItemShoppingCart.ma14subtrip.ma14FinalDiscountDate)
+                            {
+                                totalDiscount += Convert.ToDouble(subTripItemShoppingCart.ma14subtrip.ma14PartnerDiscountPercent);
+                            }
+                            value = value - (value * (totalDiscount / 100));
+                            @if (subTripItemShoppingCart.ma17SubtripValue.ma17type == "0")
+                            {
+                                foreach (ma29TouristShoppingCart ma29TouristShoppingCart in tripitemshoppingcart.ma29TouristShoppingCart)
+                                {
+                                    tripValue += value - (value * (Convert.ToDouble(ma29TouristShoppingCart.ma27AgeDiscount.ma27DiscountPercent) / 100));
+                                }
+                            }
+                            else
+                            {
+                                tripValue += value;
+                            }
+                        }
+                        <li class="list-group-item d-flex justify-content-between lh-condensed">
+                            <div>
+                                <h6 class="my-0"></h6>
+                                <small class="text-muted">@tripitemshoppingcart.ma05trip.ma05name</small>
+                            </div>
+                            @if (influencerDiscount != null && tripitemshoppingcart.ma19SubTripItemShoppingCart.FirstOrDefault().ma14subtrip.ma14InfluencerDiscount)
+                            {
+                                <span class="text-muted">@ValueConvert.ConvertToReal(tripValue) (@influencerDiscount.ma38DiscountPercent% de Desconto do Cupom no Passeio)</span>
+                            }
+                            else
+                            {
+                                <span class="text-muted">@ValueConvert.ConvertToReal(tripValue) </span>
+                            }
+                        </li>
+                        totalValue += tripValue;
+                    }
+                    <li class="list-group-item d-flex justify-content-between">
+                        <span>Total (R$)</span>
+                        <strong id="totalValueCart">@ValueConvert.ConvertToReal(totalValue)</strong>
+                    </li>
+                </ul>
+            </div>
+            <input id="totalValueInput" hidden readonly value="@totalValue" />
+        </div>
+    </div>
+</div>
+

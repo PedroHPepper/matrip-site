@@ -1,0 +1,341 @@
+﻿@model Matrip.Domain.Models.TripModel.TripModel
+@{
+    ViewData["Title"] = "Adicionar Roteiro";
+    Layout = "~/Areas/Administrator/Views/Shared/_Layout.cshtml";
+    List<string> UFs = new List<string>{"AC", "AL", "AP", "AM", "BA","CE","DF","ES","GO","MA","MT","MS","MG",
+        "PA","PB","PR","PE","PI","RJ","RN","RS","RO","RR","SC","SP","SE","TO"};
+}
+@section css{
+    <link href="~/css/TripView/AddTripStyle.css" rel="stylesheet" type="text/css" />
+}
+@section script{
+    <script type="text/javascript" src="~/js/Trip/AdminAddTrip/UpdateTrip.js"></script>
+    <script type="text/javascript" src="~/js/VisitorActions.js"></script>
+    <script type="text/javascript" src="~/js/StepForm/StepFormJS.js"></script>
+    <script src="~/js/Requests/AjaxRequest.js" type="text/javascript"></script>
+    <script type="text/javascript">
+        function CleanCityInput() {
+            document.getElementById("CityName").value = "";
+            document.getElementById("CityName").removeAttribute("readonly");
+        }
+        function AutoComplete() {
+            var City = document.getElementById("CityName").value;
+            var UFoptions = document.getElementById("UF");
+            var UF = UFoptions.options[UFoptions.selectedIndex].value;
+
+
+            if (City.length > 2 && UF != "") {
+                var url = "@Html.Raw(Url.Action("SearchCities", "Search", new { cityText = "__cityText__", UF = "__UF__" }))";
+                url = url.replace("__cityText__", City).replace("__UF__", UF);
+                RequestAutocomplete(url, "#CityName");
+            }
+        }
+        function PartnerAutoComplete(subtripOrderNumber) {
+            var PartnerName = document.getElementById("PartnerName-"+subtripOrderNumber).value;
+
+            
+            if (PartnerName.length > 2) {
+                var url = "@Html.Raw(Url.Action("SearchPartners", "Search", new { PartnerText = "__PartnerText__" }))";
+                url = url.replace("__PartnerText__", PartnerName);
+                jQuery.ajax({
+                    url: url,
+                    type: "get",
+                    success: function (data) {
+                        jQuery("#PartnerName-"+subtripOrderNumber).autocomplete({
+                            source: data
+                        });
+                    }
+                });
+            }
+        }
+    </script>
+}
+
+@{ await Html.RenderPartialAsync("~/Views/Shared/_Message.cshtml"); }
+
+<form class="mt-5" id="regForm" method="post" asp-action="AddTrip" asp-controller="AdminTrip" asp-area="Administrator">
+
+    <h1>Adicionar Roteiro</h1>
+
+    <!-- One "tab" for each step in the form: -->
+    <div class="tab">
+        <div class="TripDiv">
+            <h6>Passeio</h6>
+            <div>
+                <label>Nome do Passeio</label>
+                <input class="form-control" asp-for="ma05trip.ma05name" required />
+            </div>
+            <div>
+                <label>Descrição do Passeio</label>
+                <textarea class="form-control" asp-for="ma05trip.ma05description" required></textarea>
+            </div>
+            <div>
+                <label>Categoria do Passeio</label>
+                <select class="form-control" asp-for="ma05trip.FK0506idtripcategory" required>
+                    <option value="1">Aventura</option>
+                    <option value="2">Shows</option>
+                    <option value="3">Ecológico</option>
+                    <option value="4">Cultural</option>
+                    <option value="5">Diversos</option>
+                </select>
+            </div>
+
+            <label>UF</label><br />
+            <select id="UF" asp-for="tripUF" class="form-control" onchange="CleanCityInput();" required>
+                <option selected="selected" disabled="disabled" value="">Selecione UF</option>
+                @for (int i = 0; i < UFs.Count(); i++)
+                {
+                    <option value="@UFs[i]">@UFs[i]</option>
+                }
+            </select>
+
+            <div>
+                <label>Cidade da Empresa</label>
+                <input readonly id="CityName" type="text" class="form-control" asp-for="tripCityName" onkeydown="AutoComplete();" required />
+            </div>
+            <select class="form-control" asp-for="ma05trip.ma05status">
+                <option value="1">Publicar</option>
+                <option value="0">Não Publicar</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="tab">
+        <div id="discountListDiv" class="">
+            <h6>Faixas Etárias (Crianças, Adultos)</h6>
+            <a class="btn btn-outline-success" onclick="addDiscount();">Adicionar Desconto</a>
+            <a class="btn btn-outline-success" onclick="ExcludeItem(1, 'dicountDiv');">Excluir Item</a>
+            <div class="dicountDiv">
+                <h6>Faixa Etária 1</h6>
+                <div>
+                    <label>Nome da Faixa Etária (Obrigatório)</label>
+                    <input type="text" class="form-control" asp-for="ma27AgeDiscountList[0].ma27name" required />
+                </div>
+                <div>
+                    <label>Porcentagem de Desconto (Obrigatório)</label>
+                    <input type="number" class="form-control" asp-for="ma27AgeDiscountList[0].ma27DiscountPercent" required />
+                </div>
+                <div>
+                    <label>Idade Mínima (Padrão 0)</label>
+                    <input type="number" class="form-control" asp-for="ma27AgeDiscountList[0].ma27minage" value="0" min="0" />
+                </div>
+                <div>
+                    <label>Idade Máxima (Opcional)</label>
+                    <input type="number" class="form-control" asp-for="ma27AgeDiscountList[0].ma27maxage" />
+                </div>
+                <div>
+                    <label>Quantidade Mínima de Pessoas (Obrigatório)</label>
+                    <input type="number" class="form-control" asp-for="ma27AgeDiscountList[0].ma27minPeople" required />
+                </div>
+                <div>
+                    <label>Responsável?</label>
+                    <select class="form-control" asp-for="ma27AgeDiscountList[0].ma27guardian" required>
+                        <option value="false">Não</option>
+                        <option value="true">Sim</option>
+                    </select>
+                </div>
+                <div>
+                    <label>Status do Item</label>
+                    <select class="form-control" asp-for="ma27AgeDiscountList[0].ma27status">
+                            <option value="1">Publicar</option>
+                            <option value="0">Não Publicar</option>
+                    </select>
+                </div>
+                <hr />
+            </div>
+        </div>
+    </div>
+
+    <div class="tab">
+        <div id="subtripListDiv" class="">
+            <a class="btn btn-outline-success" onclick="addSubtrip();">Criar Passeio</a>
+            <a class="btn btn-outline-success" onclick="ExcludeItem(1, 'subtripDiv');">Excluir Item</a>
+            <div class="subtripDiv">
+                <div class="mb-3">
+                    <h6>Roteiro 1</h6>
+                    <div>
+                        <label>Nome do Roteiro</label>
+                        <input type="text" class="form-control" asp-for="SubtripModelList[0].ma14subtrip.ma14name" required />
+                    </div>
+                    <div class="row">
+                        <div class="col-6">
+                            <label>Endereço do Roteiro</label>
+                            <input type="text" class="form-control" asp-for="SubtripModelList[0].ma14subtrip.ma14address" required />
+                        </div>
+                        <div class="col-6">
+                            <label>Bairro do Roteiro</label>
+                            <input type="text" class="form-control" asp-for="SubtripModelList[0].ma14subtrip.ma14neighborhood" required />
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-6">
+                            <label>Vaga Por Roteiro</label>
+                            <input type="number" class="form-control" asp-for="SubtripModelList[0].ma14subtrip.ma14vacancy" required />
+                        </div>
+                        <div class="col-6">
+                            <label>Quantidade Mínima de Pessoas Por Roteiro</label>
+                            <input type="number" class="form-control" asp-for="SubtripModelList[0].ma14subtrip.ma14minPeopleQuantity" required />
+                        </div>
+                        <div class="col-6">
+                            <label>Quantidade de Grupos Por Roteiro</label>
+                            <input type="number" class="form-control" asp-for="SubtripModelList[0].ma14subtrip.ma14groupnumber" required />
+                        </div>
+                    </div>
+
+
+                    <div>
+                        <label>Descrição do Roteiro</label>
+                        <textarea class="form-control" asp-for="SubtripModelList[0].ma14subtrip.ma14Description" required></textarea>
+                    </div>
+                    <div>
+                        <label>Aceita Cupom de Desconto?</label>
+                        <select class="form-control" asp-for="SubtripModelList[0].ma14subtrip.ma14InfluencerDiscount" required>
+                            <option value="false">Não</option>
+                            <option value="true">Sim</option>
+                        </select>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-4">
+                            <label>Desconto da Empresa (Opcional)</label>
+                            <input type="number" class="form-control" asp-for="SubtripModelList[0].ma14subtrip.ma14PartnerDiscountPercent" min="0" value="0" required />
+                        </div>
+                        <div class="col-4">
+                            <label>Início do Desconto da Empresa (Opcional)</label>
+                            <input type="date" class="form-control" asp-for="SubtripModelList[0].ma14subtrip.ma14InitialDiscountDate" />
+                        </div>
+                        <div class="col-4">
+                            <label>Final do Desconto da Empresa (Opcional)</label>
+                            <input type="date" class="form-control" asp-for="SubtripModelList[0].ma14subtrip.ma14FinalDiscountDate" />
+                        </div>
+                    </div>
+
+                    <div>
+                        <label>Comissão Da Matrip</label>
+                        <input type="number" class="form-control" asp-for="SubtripModelList[0].ma14subtrip.ma14MatripCommission" min="0" value="0" required />
+                    </div>
+                    <div>
+                        <label>Nome da Empresa Deste Roteiro</label>
+                        <input id="PartnerName-0" class="form-control" type="text" asp-for="SubtripModelList[0].PartnerName" placeholder="Nome da empresa" onkeydown="PartnerAutoComplete(0);" required />
+                    </div>
+                    <div>
+                        <label>Status do Item</label>
+                        <select class="form-control" asp-for="SubtripModelList[0].ma14subtrip.ma14status">
+                            <option value="1">Publicar</option>
+                            <option value="0">Não Publicar</option>
+                        </select>
+                    </div>
+                </div>
+
+
+                <div class="row card-deck">
+
+                    <div class="col-4">
+                        <div id="serviceListDiv:Subtrip-0">
+                            <a class="btn btn-outline-success" onclick="addService(0);">Criar Serviço</a>
+                            <a class="btn btn-outline-success" onclick="ExcludeItem(0, 'serviceDiv:Subtrip-0');">Excluir Item</a>
+                            <hr />
+                        </div>
+                    </div>
+                    <div class="col-4">
+                        <div id="subtripValueListDiv:Subtrip-0">
+                            <a class="btn btn-outline-success" onclick="addSubtripValue(0);">Criar Valor</a>
+                            <a class="btn btn-outline-success" onclick="ExcludeItem(1, 'subtripValueDiv:Subtrip-0');">Excluir Item</a>
+                            <hr />
+                            <div class="subtripValueDiv:Subtrip-0">
+                                <h6>Valor 1</h6>
+                                <div>
+                                    <label>Valor</label>
+                                    <input class="form-control money" asp-for="SubtripModelList[0].ma17SubtripValueList[0].ma17value" required />
+                                </div>
+                                <div>
+                                    <label>Nome do Valor</label>
+                                    <select class="form-control" asp-for="SubtripModelList[0].ma17SubtripValueList[0].ma17description" required>
+                                        <option value="Individual">Individual</option>
+                                        <option value="Privativo">Privativo</option>
+                                        <option value="Pacote">Pacote</option>
+                                    </select>
+                                    <!--<input class="form-control" asp-for="SubtripModelList[0].ma17SubtripValueList[0].ma17description" required />-->
+                                </div>
+                                <div>
+                                    <label>Status do Valor</label>
+                                    <select class="form-control" asp-for="SubtripModelList[0].ma17SubtripValueList[0].ma17type" required>
+                                        <option value="0">Individual</option>
+                                        <option value="1">Privativo</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label>Status do Item</label>
+                                    <select class="form-control" asp-for="SubtripModelList[0].ma17SubtripValueList[0].ma17status">
+                                        <option value="1">Publicar</option>
+                                        <option value="0">Não Publicar</option>
+                                    </select>
+                                </div>
+                                <hr />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-4">
+                        <div id="subtripScheduleListDiv:Subtrip-0">
+                            <a class="btn btn-outline-success" onclick="addSubtripSchedule(0);">Criar Horário</a>
+                            <a class="btn btn-outline-success" onclick="ExcludeItem(1, 'subtripScheduleDiv:Subtrip-0');">Excluir Item</a>
+                            <hr />
+                            <div class="subtripScheduleDiv:Subtrip-0">
+                                <h6>Horário 1</h6>
+                                <div>
+                                    <label>Dias do Horário</label>
+                                    <input class="form-control" type="text" asp-for="SubtripModelList[0].ma16subtripscheduleList[0].ma16days" required />
+                                </div>
+                                <div>
+                                    <label>Duração do Horário</label>
+                                    <input class="form-control" type="time" asp-for="SubtripModelList[0].ma16subtripscheduleList[0].ma16duration" required />
+                                </div>
+                                <div>
+                                    <label>Horário de Entrada</label>
+                                    <input class="form-control" type="time" asp-for="SubtripModelList[0].ma16subtripscheduleList[0].ma16entry" required />
+                                </div>
+                                <div>
+                                    <label>Horário de Saída</label>
+                                    <input class="form-control" type="time" asp-for="SubtripModelList[0].ma16subtripscheduleList[0].ma16exit" required />
+                                </div>
+                                <div>
+                                    <label>Status do Item</label>
+                                    <select class="form-control" asp-for="SubtripModelList[0].ma16subtripscheduleList[0].ma16status">
+                                            <option value="1">Publicar</option>
+                                            <option value="0">Não Publicar</option>
+                                    </select>
+                                </div>
+                                <hr />
+                            </div>
+                        </div>
+                    </div>
+                    <hr />
+                </div>
+            </div>
+            
+            <hr />
+        </div>
+
+    </div>
+
+
+
+    <div class="mt-3" style="overflow:auto;">
+        <div style="float:right;">
+            <button class="btn btn-lg btn-success text-uppercase" type="button" id="prevBtn" onclick="nextPrev(-1)">Anterior</button>
+            <button class="btn btn-lg btn-success text-uppercase" type="button" id="nextBtn" onclick="nextPrev(1)">Próximo</button>
+        </div>
+    </div>
+    <!--
+    <button type="submit" class="btn btn-lg btn-success text-uppercase" onclick=""> <i class=""></i> Adicionar </button>
+        -->
+    <!-- Circles which indicates the steps of the form: -->
+    <div style="text-align:center;margin-top:40px;">
+        <span class="step"></span>
+        <span class="step"></span>
+        <span class="step"></span>
+    </div>
+
+</form>
+

@@ -1,0 +1,168 @@
+﻿@model X.PagedList.IPagedList<Matrip.Domain.Models.Entities.ma05trip>
+@inject Matrip.Web.Libraries.Login.UserLogin _userLogin
+@{
+    ViewData["Title"] = "Passeios";
+    Layout = "~/Views/Shared/_Layout2.cshtml";
+    ma09city city = ViewBag.City;
+
+    int descriptionLimit = 120;
+    string TripID = "";
+    bool diurno = false;
+    bool noturno = false;
+}
+@section menu{
+    <li><a asp-controller="Home" asp-action="Index">Home</a></li>
+    <li><a asp-controller="Home" asp-action="About">Sobre</a></li>
+    <!--<li><a href="listings.html">Listings</a></li>-->
+    <!--<li><a href="blog.html">Notícias</a></li>-->
+    <li><a asp-controller="Home" asp-action="Contact">Contato</a></li>
+}
+@section home{
+    @if (city.ma35cityphoto.Count() >0)
+    {
+        <div class="parallax_background parallax-window" data-parallax="scroll" data-image-src="@Url.Content("~/images/cityphotos/headers/"+ city.ma35cityphoto.FirstOrDefault().ma35idcityphoto +"-"+ city.ma35cityphoto.FirstOrDefault().FK3509idcity +"-filter.jpg?v="+city.ma35cityphoto.FirstOrDefault().ma35versionDate.ToString("ddMMyyyy"))" data-speed="0.8"></div>
+    }
+    else
+    {
+        <div class="parallax_background parallax-window" data-parallax="scroll" data-image-src="@Url.Content("")" data-speed="0.8"></div>
+    }
+
+    <div class="home_container">
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    <div class="home_content">
+                        <div class="home_title">
+                            @ViewBag.City.ma09name - @ViewBag.UF
+                            @if (ViewBag.CategoryName != null)
+                            {
+                                <br />
+                                @ViewBag.CategoryName
+                            }
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+@section scripts{
+    <!--
+    <script src="~/js/contact.js"></script>-->
+}
+
+<div class="contact container_custom">
+    <div class="m-5" style="text-align:justify;">
+        
+    </div>
+    <div class="m-lg-5">
+        <div class="align-content-lg-stretch" style="margin-left:100px;margin-right:100px">
+        <p  style="font-size:16px;text-align:justify;">@city.ma09Description</p>
+        @if (Model.Count > 0)
+        {
+            <div class="row" >
+                
+               
+                @for (int i = 0; i < Model.Count(); i++)
+                {
+                    @if (Model[i].ma05status == "1")
+                    {
+                        <div class="col-lg-4 d-flex align-self-stretch" style="margin-top:50px">
+                            <div class="card" style="width: 21rem;">
+                                @if (Model[i].ma13tripphoto.FirstOrDefault() != null)
+                                {
+                                    @if (Model[i].ma13tripphoto.FirstOrDefault().ma13photoquantity > 0)
+                                    {
+                                        TripID = Model[i].ma13tripphoto.FirstOrDefault().FK1305idtrip.ToString();
+                                        <img class="card-img-top" src="@Url.Content("~/images/tripphotos/"+ TripID + "-"+ 1 +".jpg")" alt="Card image cap">
+                                    }
+                                    else
+                                    {
+                                        <img class="card-img-top" src="@Url.Content("~/images/tripphotos/PASSEIO-SEM-FOTO.jpg")" alt="Card image cap">
+                                    }
+                                }
+                                else
+                                {
+                                    <img class="card-img-top" src="@Url.Content("~/images/tripphotos/PASSEIO-SEM-FOTO.jpg")" alt="Card image cap">
+                                }
+
+                                <div class="card-body flex-column d-flex">
+                                    <h5 class="card-title">@Model[i].ma05name</h5>
+                                    @if (Model[i].ma05description.Length > descriptionLimit)
+                                    {
+                                        <p class="card-text">@Model[i].ma05description.Substring(0, descriptionLimit) ...</p>
+                                    }
+                                    else
+                                    {
+                                        <p class="card-text">@Model[i].ma05description</p>
+                                    }
+                                    <br />
+                                    <label>Cidade: @Model[i].ma09city.ma09name - @Model[i].ma09city.ma08uf.ma08UFInitials</label>
+                                    @{
+                                        diurno = false;
+                                        noturno = false;
+                                    }
+                                    <label>
+                                        @foreach (ma14subtrip subtrip in Model[i].ma14subtrip)
+                                        {
+                                            foreach (ma16subtripschedule subtripschedule in subtrip.ma16subtripschedule)
+                                            {
+                                                if (subtripschedule.ma16entry < new TimeSpan(12, 00, 00))
+                                                {
+                                                    diurno = true;
+                                                }
+                                                if (subtripschedule.ma16entry >= new TimeSpan(12, 00, 00))
+                                                {
+                                                    noturno = true;
+                                                }
+                                            }
+                                        }
+                                        Horários:
+                                        @if (diurno && noturno)
+                                        {
+                                            @Html.Raw("Diurno/Noturno");
+                                        }
+                                        else if (diurno)
+                                        {
+                                            @Html.Raw("Diurno");
+                                        }
+                                        else if (noturno)
+                                        {
+                                            @Html.Raw("Noturno");
+                                        }
+                                    </label>
+
+                                    <a asp-action="ViewTrip" asp-route-id="@Model[i].ma05idtrip" class="btn btn-success text-center mt-auto" style="color: #ffffff; background-color:#1c7530">Visualizar Passeio</a>
+
+
+                                </div>
+                            </div>
+                        </div>
+                    }
+                }
+                
+
+            </div>
+            <div id='Paging' class="text-center" style="text-align:center; color:forestgreen">
+                @if (ViewBag.CategoryName != null)
+                {
+                    @Html.PagedListPager((IPagedList)Model, Page => Url.Action("GetTripListByCategory", "Trip", new { Page, CategoryName = ViewBag.CategoryName, UF = ViewBag.UF, CityName = city.ma09name }))
+                }
+                else
+                {
+                    @Html.PagedListPager((IPagedList)Model, Page => Url.Action("GetTripList", "Trip", new { Page, UF = ViewBag.UF, CityName = city.ma09name }))
+                }
+            </div>
+        }
+        else
+        {
+            <span class="mt-5 mb-5" style="color:blue">Nenhum passeio ainda cadastrado para esta categoria e/ou cidade!</span>
+        }
+    </div>
+    </div>
+    
+</div>
+
+
+

@@ -1,0 +1,366 @@
+﻿@model Matrip.Domain.Models.HomeModels.HomeIndexModel
+@{
+    ViewData["Title"] = "MATRIP";
+    int descriptionLimit = 120;
+}
+@section scripts{
+    <script type="text/javascript" src="~/js/Requests/AjaxRequest.js"></script>
+    <script type="text/javascript">
+        function AutoComplete() {
+            var City = document.getElementById("cities").value;
+
+            if (City.length >= 1) {
+                var url = "@Html.Raw(Url.Action("SearchCitiesWithUF", "Search", new { cityText = "__cityText__" }))";
+                url = url.replace("__cityText__", City);
+                RequestAutocomplete(url, "#cities");
+            }
+
+        }
+    </script>
+}
+<!-- Home -->
+<div class="home">
+
+    <!-- Home Slider -->
+    <div class="home_slider_container">
+        <div class="owl-carousel owl-theme home_slider">
+            @for (int i = 1; i <= 4; i++)
+            {
+                <!-- Slide -->
+                <div class="slide">
+                    <div class="background_image" style="background-image:url(@Url.Content("~/images/home/slider/slide"+ "-" + i +".jpg"))"></div>
+                    <div class="home_container">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-xl-8 offset-xl-2">
+                                    <div class="home_content text-center">
+                                        <div class="home_title"><h1>Seu Guia de<br />Experiências Turísticas</h1></div>
+                                        <div class="search_form_container">
+                                            <!--<form action="#" class="search_form" id="search_form">
+                                                <div class="d-flex flex-sm-row flex-column align-items-sm-start align-items-center justify-content-sm-between">
+                                                    <input type="text" class="search_input" placeholder="Procure a localização aqui" required="required">
+                                                    <button class="search_button">Pesquisar</button>
+                                                </div>
+                                            </form>-->
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+
+        <!-- Home Slider Dots -->
+
+        <div class="home_slider_dots">
+            <ul id="home_slider_custom_dots" class="home_slider_custom_dots">
+
+                <li class="home_slider_custom_dot active" style="text-align:justify">01. Lençóis Maranhenses</li>
+                <li class="home_slider_custom_dot active" style="text-align:justify">02. Paulino Neves</li>
+                <li class="home_slider_custom_dot active" style="text-align:justify">03. São Luís</li>
+                <li class="home_slider_custom_dot active" style="text-align:justify">04. Carolina</li>
+            </ul>
+        </div>
+
+    </div>
+</div>
+
+<!-- Categories -->
+
+
+
+<div class="categories">
+    <div class="container categories_container">
+        <div class="d-flex flex-md-row flex-column align-items-start justify-content-start">
+            <td>
+                <input select id="cities" class="form-control" style="text-align-last:center; color:black; font-size:20px; font-family: 'Poppins', sans-serif;" onkeydown="AutoComplete();" placeholder="Pesquise por localidades" />
+                @if (Model != null)
+                {
+                    /*
+                    <select id="cities" class="form-control" style="text-align-last:center; color:black; font-size:20px; font-family: 'Poppins', sans-serif;">
+                        @foreach (ma09city ma09city in Model.ma09cityList)
+                        {
+                            <option class="text-center" value="@ma09city.ma09name">@ma09city.ma08uf.ma08UFInitials - @ma09city.ma09name</option>
+                        }
+                    </select>
+                    */
+                }
+            </td>
+        </div>
+        <div class="row">
+            <div class="col">
+                <div class=" d-flex flex-md-row flex-column align-items-start justify-content-start">
+
+                    <!-- Category -->
+                    <div class="category text-center" onclick="redirectWithCategoryName('Aventura');">
+                        <a style="cursor: pointer">
+                            <div class="d-flex flex-md-column flex-row align-items-md-center align-items-md-start align-items-center justify-content-start">
+                                <div class="cat_icon"><img src="~/images/categorias/MATrip-icone-aventura.png" class="svg"></div>
+                                <div class="cat_title">Aventura</div>
+                            </div>
+                        </a>
+                    </div>
+
+                    <!-- Category -->
+                    <div class="category text-center" onclick="redirectWithCategoryName('Shows');">
+                        <a style="cursor: pointer">
+                            <div class="d-flex flex-md-column flex-row align-items-md-center align-items-md-start align-items-center justify-content-start">
+                                <div class="cat_icon"><img src="~/images/categorias/MATrip-icone-shows.png" class="svg"></div>
+                                <div class="cat_title">Shows</div>
+                            </div>
+                        </a>
+                    </div>
+
+                    <!-- Category -->
+                    <div class="category text-center" onclick="redirectWithCategoryName('Ecológico');">
+                        <a style="cursor: pointer">
+                            <div class="d-flex flex-md-column flex-row align-items-md-center align-items-md-start align-items-center justify-content-start">
+                                <div class="cat_icon"><img src="~/images/categorias/MATrip-icone-ecologico.png" class="svg"></div>
+                                <div class="cat_title">Ecológico</div>
+                            </div>
+                        </a>
+                    </div>
+
+                    <!-- Category -->
+                    <div class="category text-center" onclick="redirectWithCategoryName('Cultural');">
+                        <a style="cursor: pointer">
+                            <div class="d-flex flex-md-column flex-row align-items-md-center align-items-md-start align-items-center justify-content-start">
+                                <div class="cat_icon"><img src="~/images/categorias//MATrip-icone-cultural.png" class="svg"></div>
+                                <div class="cat_title">Cultural</div>
+                            </div>
+                        </a>
+                    </div>
+
+                    <!-- Category -->
+                    <div class="category text-center" onclick="redirectWithCategoryName('Diversos');">
+                        <a style="cursor: pointer">
+                            <div class="d-flex flex-md-column flex-row align-items-md-center align-items-md-start align-items-center justify-content-start">
+                                <div class="cat_icon"><img src="~/images/categorias/MATrip-icone-diversos.png" class="svg"></div>
+                                <div class="cat_title">Diversos</div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<!-- Locations -->
+
+<div class="locations container_custom">
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <div class="section_title text-center"><h1>Explore Localidades</h1></div>
+                <div class="locations_container d-flex flex-row align-items-start justify-content-between flex-wrap">
+
+                    <!-- Location -->
+                    <div class="location">
+                        <img src="~/images/cityphotos/praia-slz.jpg" alt="">
+                        <div class="location_title text-center"><div><a href="@Url.Action("GetTripList","Trip", new { UF = "MA", CityName = "São Luís", Page = 1})">São Luís<div>+</div></a></div></div>
+                    </div>
+
+                    <!-- Location -->
+                    <div class="location">
+                        <img src="~/images/cityphotos/alcantara.jpg" alt="">
+                        <div class="location_title text-center"><div><a href="@Url.Action("GetTripList","Trip", new { UF = "MA", CityName = "Alcântara", Page = 1})">Alcântara<div>+</div></a></div></div>
+                    </div>
+
+                    <!-- Location -->
+                    <div class="location">
+                        <img src="~/images/cityphotos/lencois-ma.jpg" alt="">
+                        <div class="location_title text-center"><div><a href="@Url.Action("GetTripList","Trip", new { UF = "MA", CityName = "Barreirinhas", Page = 1})">Barreirinhas<div>+</div></a></div></div>
+                    </div>
+
+                    <!-- Location -->
+                    <div class="location">
+                        <img src="~/images/cityphotos/raposa.jpg" alt="">
+                        <div class="location_title text-center"><div><a href="@Url.Action("GetTripList","Trip", new { UF = "MA", CityName = "Raposa", Page = 1})">Raposa<div>+</div></a></div></div>
+                    </div>
+
+                    <!-- Location -->
+                    <div class="location">
+                        <img src="~/images/cityphotos/CAROLINA.jpg" alt="">
+                        <div class="location_title text-center"><div><a href="@Url.Action("GetTripList","Trip", new { UF = "MA", CityName = "Carolina", Page = 1})">Carolina<div>+</div></a></div></div>
+                    </div>
+
+                    <!-- Location -->
+                    <div class="location">
+                        <img src="~/images/cityphotos/LENCÓS-MA.jpg" alt="">
+                        <div class="location_title text-center"><div><a href="@Url.Action("GetTripList","Trip", new { UF = "MA", CityName = "Santo Amaro do Maranhão", Page = 1})">Santo Amaro<div>+</div></a></div></div>
+                    </div>
+
+                    <!-- Location -->
+                    <div class="location">
+                        <img src="~/images/cityphotos/paulino-neves.jpg" alt="">
+                        <div class="location_title text-center"><div><a href="@Url.Action("GetTripList","Trip", new { UF = "MA", CityName = "Paulino Neves", Page = 1})">Paulino Neves<div>+</div></a></div></div>
+                    </div>
+
+                    <!-- Location -->
+                    <div class="location">
+                        <img src="~/images/cityphotos/TUTOIA.jpg" alt="">
+                        <div class="location_title text-center"><div><a href="@Url.Action("GetTripList","Trip", new { UF = "MA", CityName = "Tutóia", Page = 1})">Tutóia<div>+</div></a></div></div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- How it works -->
+
+<div class="how container_custom">
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <div class="section_title text-center"><h1>Passeios Em <span>Destaque</span>.</h1></div>
+                <div class="icon_box_container d-flex flex-row  justify-content-between flex-wrap">
+                    @{
+                        int index = 0;
+                    }
+                    @if (Model.ma05tripList != null)
+                    {
+                        @for (int i = 0; i < Model.ma05tripList.Count(); i++)
+                        {
+                            index++;
+                            <!-- Icon Box -->
+                            <div class="icon_box d-flex flex-column align-items-center justify-content-start text-center">
+                                <div class="icon_box_num">@Html.Raw("0" + index + ".")</div>
+                                @if (Model.ma05tripList[i].ma13tripphoto.Count() > 0)
+                                {
+                                    @if (Model.ma05tripList[i].ma13tripphoto.ToList().FirstOrDefault().ma13photoquantity > 0)
+                                    {
+                                        <div class="icon_box_icon"><img src="@Url.Content("~/images/tripphotos/"+ Model.ma05tripList[i].ma05idtrip + "-" + "1.jpg")"></div>
+                                    }
+                                    else
+                                    {
+                                        <div class="icon_box_icon"><img src="@Url.Content("~/images/tripphotos/PASSEIO-SEM-FOTO.jpg")"></div>
+                                    }
+                                }
+                                else
+                                {
+                                    <div class="icon_box_icon"><img src="@Url.Content("~/images/tripphotos/PASSEIO-SEM-FOTO.jpg")"></div>
+                                }
+                                <div class="icon_box_title"><a asp-action="ViewTrip" asp-controller="Trip" asp-route-id="@Model.ma05tripList[i].ma05idtrip" style="color:black">@Model.ma05tripList[i].ma05name</a></div>
+                                <div class="icon_box_text">
+                                    @if (Model.ma05tripList[i].ma05description.Length > descriptionLimit)
+                                    {
+                                        <p>@Model.ma05tripList[i].ma05description.Substring(0, descriptionLimit) ...</p>
+                                    }
+                                    else
+                                    {
+                                        <p>@Model.ma05tripList[i].ma05description</p>
+                                    }
+                                </div>
+                            </div>
+
+                            if (index == 3)
+                            {
+                                break;
+                            }
+
+                        }
+                    }
+
+                    <!-- Icon Box
+                    <div class="icon_box d-flex flex-column align-items-center justify-content-start text-center">
+                        <div class="icon_box_num">01.</div>
+                        <div class="icon_box_icon"><img src="~/images/icon_6.svg" alt="https://www.flaticon.com/authors/monkik"></div>
+                        <div class="icon_box_title">Escolha uma Categoria</div>
+                        <div class="icon_box_text">
+                            <p>Escolha uma categoria e filtre para que mostremos os melhores locais com os serviços que se adequem ao seu gosto.</p>
+                        </div>
+                    </div>-->
+                    <!-- Icon Box
+                    <div class="icon_box d-flex flex-column align-items-center justify-content-start text-center">
+                        <div class="icon_box_num">02.</div>
+                        <div class="icon_box_icon"><img src="~/images/icon_7.svg" alt="https://www.flaticon.com/authors/monkik"></div>
+                        <div class="icon_box_title">Localize um Ponto Turístico</div>
+                        <div class="icon_box_text">
+                            <p>Escolha no mapa um ponto turístico ou local de sua escolha no mapa</p>
+                        </div>
+                    </div>-->
+                    <!-- Icon Box
+                    <div class="icon_box d-flex flex-column align-items-center justify-content-start text-center">
+                        <div class="icon_box_num">03.</div>
+                        <div class="icon_box_icon"><img src="~/images/icon_8.svg" alt="https://www.flaticon.com/authors/monkik"></div>
+                        <div class="icon_box_title">Escolha o seu Serviço</div>
+                        <div class="icon_box_text">
+                            <p>Após selecionar o local, escolha seus serviços!</p>
+                        </div>
+                    </div>-->
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- CTA -->
+
+<div class="cta container_custom">
+    <div class="parallax_background" data-image-src="@Url.Content("~/images/home/footer/footer3.jpg")"></div>
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <div class="cta_content">
+                    <div class="cta_title"><h1>Encontre os melhores pontos turísticos em qualquer região.</h1></div>
+                    <div class="cta_text">
+                        <p>Procurando um aplicativo que te ajuda a organizar seus passeios de turismo? Selecione o seu ponto turístico e procure o passeio disponível que mais te agrade!</p>
+                        <p>Barreirinhas - Maranhão</p>
+                    </div>
+                    <!--<div class="button cta_button"><a href="listings.html">Procure aqui</a></div>-->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Clients -->
+
+<div class="clients">
+    <div class="container">
+        <div class="row">
+            <div class="col">
+
+                <!-- Clients Slider -->
+                <div class="clients_slider_container">
+                    <div class="owl-carousel owl-theme clients_slider">
+
+                        <!-- Slide -->
+                        <div class="slide">
+                            <div class="client_image mt-2"><a href="#"><img src="~/images/parceiros/inova.png" alt=""></a></div>
+                        </div>
+
+                        <!-- Slide -->
+                        <div class="slide">
+                            <div class="client_image mt-2"><a href="#"><img src="~/images/parceiros/NC-Chapada.jpeg" alt=""></a></div>
+                        </div>
+
+                        <!-- Slide -->
+                        <div class="slide">
+                            <div class="client_image mt-2"><a href="#"><img src="~/images/parceiros/Igarapé.jpeg" alt=""></a></div>
+                        </div>
+
+                        <!-- Slide -->
+                        <div class="slide">
+                            <div class="client_image"><a href="#"><img src="~/images/parceiros/Coopdunas.jpeg" alt=""></a></div>
+                        </div>
+
+                        <!-- Slide -->
+                        <div class="slide">
+                            <div class="client_image mt-2"><a href="#"><img src="~/images/parceiros/Lobotur.jpeg" alt=""></a></div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

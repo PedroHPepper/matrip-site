@@ -1,0 +1,162 @@
+﻿
+@{
+    ViewData["Title"] = "Escolha de Pagamento";
+    Layout = "~/Views/Shared/_Layout2.cshtml";
+
+    ma38InfluencerDiscount influencerDiscount = null;
+    double influencerDiscountPercent = 0;
+    if (ViewBag.InfluencerDiscount != null)
+    {
+        influencerDiscount = ViewBag.InfluencerDiscount;
+        influencerDiscountPercent = Convert.ToDouble(influencerDiscount.ma38DiscountPercent);
+    }
+    ma05trip trip = ViewBag.Trip;
+    ma09city city = trip.ma09city;
+}
+@section menu{
+    <li><a asp-controller="Home" asp-action="Index">Home</a></li>
+    <li><a asp-controller="Home" asp-action="About">Sobre</a></li>
+    <!--<li><a href="listings.html">Listings</a></li>-->
+    <!--<li><a href="blog.html">Notícias</a></li>-->
+    <li><a asp-controller="Home" asp-action="Contact">Contato</a></li>
+}
+@section home{
+    @if (city.ma35cityphoto.Count() > 0)
+    {
+        <div class="parallax_background parallax-window" data-parallax="scroll" data-image-src="@Url.Content("~/images/cityphotos/headers/"+ city.ma35cityphoto.FirstOrDefault().ma35idcityphoto +"-"+ city.ma35cityphoto.FirstOrDefault().FK3509idcity +"-filter.jpg?v="+city.ma35cityphoto.FirstOrDefault().ma35versionDate.ToString("ddMMyyyy"))" data-speed="0.8"></div>
+    }
+    else
+    {
+        <div class="parallax_background parallax-window" data-parallax="scroll" data-image-src="@Url.Content("~/images/contact.jpg")" data-speed="0.8"></div>
+    }
+    <div class="home_container">
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    <div class="home_content">
+                        <div class="home_title">Pagamento</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+@section scripts{
+    <script type="text/javascript" src="~/js/Payment/PaymentForm.js"></script>
+    <script type="text/javascript" src="~/js/VisitorActions.js"></script>
+    <script type="text/javascript">
+        function submitButton() {
+            var totalValue = parseFloat(document.getElementById("totalValueInput").value.replace(",", "."));
+            var totalAPagar = 0;
+
+            var creditCardPayment = document.getElementById("creditCardPayment").value;
+            var transferencePayment = document.getElementById("transferencePayment").value;
+            if (creditCardPayment) {
+                totalAPagar += parseFloat(creditCardPayment.replace(",", "."));
+            } else {
+                creditCardPayment = "0";
+            }
+            if (transferencePayment) {
+                totalAPagar += parseFloat(transferencePayment.replace(",", "."));
+            } else {
+                transferencePayment = "0";
+            }
+
+            if (totalAPagar == totalValue) {
+                var url = '@Html.Raw(Url.Action("Index", "ItemPurchase", new { creditCardPayment = "__creditCardPayment__", transferencePayment = "__transferencePayment__" }))';
+                var inputDiscountCode = document.getElementById("inputDiscountCode");
+                if (inputDiscountCode != null)
+                {
+                    url = '@Html.Raw(Url.Action("Index", "ItemPurchase", new { creditCardPayment = "__creditCardPayment__", transferencePayment = "__transferencePayment__", discountCode = "__discountCode__" }))';
+                    window.location.href = url.replace("__creditCardPayment__", parseFloat(creditCardPayment.replace(",", ".")))
+                        .replace("__transferencePayment__", parseFloat(transferencePayment.replace(",", ".")))
+                        .replace("__discountCode__", inputDiscountCode.value);
+                }
+                else
+                {
+                    window.location.href = url.replace("__creditCardPayment__", parseFloat(creditCardPayment.replace(",", ".")))
+                                                .replace("__transferencePayment__", parseFloat(transferencePayment.replace(",", ".")));
+                }
+            }
+            else
+            {
+                alert("Os valores devem estar ser equivalentes à R$" + totalValue.toLocaleString('pt-br', { minimumFractionDigits: 2 }));
+            }
+        }
+    </script>
+}
+
+<div class="contact container_custom">
+    <div class="container">
+        @if (ViewBag.InfluencerDiscount == null)
+        {
+            <div id="discountDiv">
+                @if (ViewData["E_MSG"] != null)
+                {
+                    <p>@ViewData["E_MSG"]</p>
+                }
+                <form asp-action="PaymentForm" asp-controller="ItemPurchase" method="get">
+                    <a href="#" onclick="showDiscountInput(); event.preventDefault();">Insira o Cupom de desconto ></a>
+                    <div id="divDiscountInput" style="display:none">
+                        <input id="discountInput" name="discountCode" type="text" required />
+                        <button type="submit">Inserir Código</button>
+                    </div>
+
+                </form>
+            </div>
+        }
+        <div class="row m-4">
+            <div class="col-md-8 mb-4">
+                <h6>Escolha a forma de pagamento e o valor que deseja pagar nelas</h6>
+                <div id="cardCreditCard" class="card cardCreditCard">
+
+                    <div class="row-cols-2">
+                        <div>
+                            <label>Valor à Pagar em Cartão de crédito</label><br />
+                            R$: <input id="creditCardPayment" class="form-control money" type="text"  />
+                        </div>
+                        <div>
+                            <label>Valor à Pagar em Transferência Bancária</label><br />
+                            R$: <input id="transferencePayment" class="form-control money" type="text"  />
+                        </div>
+                        @if (influencerDiscount != null)
+                        {
+                            <input id="inputDiscountCode" hidden value="@influencerDiscount.ma38DiscountCode" />
+                        }
+                    </div>
+                    <a style="cursor:pointer;color:white" class="btn btn-lg btn-success" onclick="submitButton();"> <i class=""></i> Comprar </a>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+
+                <!-- Heading -->
+                <h4 class="d-flex justify-content-between align-items-center mb-3">
+                    <span class="text-muted">Passeio</span>
+                </h4>
+
+                <!-- Cart -->
+                <ul class="list-group mb-3 z-depth-1">
+                    <li class="list-group-item d-flex justify-content-between lh-condensed">
+                        <div>
+                            <h6 class="my-0"></h6>
+                            <small class="text-muted">@ViewBag.Trip.ma05name</small>
+                        </div>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between">
+                        <span>Total (R$)</span>
+                        @if (ViewBag.DiscountMessage != null)
+                        {
+                            <strong id="totalValueCart">@ValueConvert.ConvertToReal(ViewBag.totalValue) @ViewBag.DiscountMessage</strong>
+                        }
+                        else
+                        {
+                            <strong id="totalValueCart">@ValueConvert.ConvertToReal(ViewBag.totalValue)</strong>
+                        }
+                    </li>
+                </ul>
+            </div>
+            <input id="totalValueInput" hidden readonly value="@ViewBag.totalValue" />
+        </div>
+    </div>
+</div>
+

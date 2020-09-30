@@ -1,0 +1,213 @@
+﻿@model Matrip.Domain.Models.GuideModels.SaleReport
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Areas/Administrator/Views/Shared/_Layout.cshtml";
+    DateTime initialDate = ViewBag.initialDate;
+    DateTime finalDate = ViewBag.finalDate;
+}
+@section script{ 
+    <script type="text/javascript" src="~/js/VisitorActions.js"></script>
+}
+<div class="mt-5">
+    @{ await Html.RenderPartialAsync("~/Views/Shared/_Message.cshtml"); }
+    @if (Model.ma22subtripsaleList != null && Model.ma22subtripsaleList.Count() > 0)
+    {
+        foreach (ma25partner partner in Model.ma25partnerList)
+        {
+            <div class="row">
+                <div class="col-md-12">
+                    <h1>Relatório de vendas @partner.ma25name</h1>
+                    <table class="table table-bordered">
+                        <tr>
+                            <td><strong>Nº da Venda</strong></td>
+                            <td><strong>Status</strong></td>
+                            <td><strong>Nome do Turista</strong></td>
+                            <td><strong>Passeio</strong></td>
+                            <td><strong>Valor do Passeio</strong></td>
+                            <td><strong>Tipo de Pagamento</strong></td>
+                            <td><strong>Desconto Padrão do Passeio</strong></td>
+                            <td><strong>Cupom de Desconto do Passeio</strong></td>
+                            <td><strong>Serviços Adicionais</strong></td>
+                            <td><strong>Comissão Matrip</strong></td>
+                            <td><strong>Subtotal</strong></td>
+                            <td><strong>Total</strong></td>
+                            <td><strong>Baixa</strong></td>
+
+                        </tr>
+                        @{
+                            double subtotal = 0;
+                            double totalSubtripComission = 0;
+                            double total = 0;
+                        }
+
+                        @foreach (ma22subtripsale ma22subtripsale in Model.ma22subtripsaleList.Where(e => e.ma14subtrip.FK1425idpartner == partner.ma25idpartner).ToList())
+                        {
+
+                            double totalSubtripValue = ma22subtripsale.ma22saleValue;
+                            <tr>
+                                <td>@ma22subtripsale.ma21saleTrip.ma32sale.ma32idSale</td>
+                                @if (ma22subtripsale.ma21saleTrip.ma32sale.ma32situation == 1)
+                                {
+                                    <td>
+                                        Pago
+                                        <a href="@Url.Action("CancelSale","AdminSalesReport",
+                                                new { PartnerName = ViewBag.PartnerName,
+                                                        initialDate = initialDate.ToString("yyyy-MM-dd"),
+                                                    finalDate = finalDate.ToString("yyyy-MM-dd"),
+                                                        SaleID = ma22subtripsale.ma21saleTrip.ma32sale.ma32idSale,
+                                                    DateType = ViewBag.DateType })" onclick="return confirm('Tem certeza de que gostaria de cancelar a venda?')">Cancelar Pagamento</a>
+                                    </td>
+
+                                }
+                                else if (ma22subtripsale.ma21saleTrip.ma32sale.ma32situation == 2)
+                                {
+                                    <td>Cancelado</td>
+                                }
+                                else
+                                {
+                                    <td>
+                                        Aguardando Transferência
+                                        <a href="@Url.Action("CancelSale","AdminSalesReport",
+                                                new { PartnerName = ViewBag.PartnerName,
+                                                        initialDate = initialDate.ToString("yyyy-MM-dd"),
+                                                    finalDate = finalDate.ToString("yyyy-MM-dd"),
+                                                        SaleID = ma22subtripsale.ma21saleTrip.ma32sale.ma32idSale,
+                                                    DateType = ViewBag.DateType })" onclick="return confirm('Tem certeza de que gostaria de cancelar a venda?')">Cancelar Pagamento</a>
+                                    </td>
+                                }
+                                <td>@ma22subtripsale.ma21saleTrip.ma32sale.ma01user.ma01FullName</td>
+                                <td>@ma22subtripsale.ma14subtrip.ma14name</td>
+                                <td>@ValueConvert.ConvertToReal(ma22subtripsale.ma22originalSubtripValue)</td>
+                                <td>
+                                    @for (int j = 0; j < ma22subtripsale.ma21saleTrip.ma32sale.ma24payment.ToList().Count(); j++)
+                                    {
+                                        @if (j > 0)
+                                        {
+                                            @Html.Raw(" / ")
+                                        }
+                                        @if (ma22subtripsale.ma21saleTrip.ma32sale.ma24payment.ToList()[j].ma24CreditCard)
+                                        {
+                                            @Html.Raw("Cartão de Crédito - ID " + ma22subtripsale.ma21saleTrip.ma32sale.ma24payment.ToList()[j].ma24TransactionID + " - " +
+                                            ValueConvert.ConvertToReal(ma22subtripsale.ma21saleTrip.ma32sale.ma24payment.ToList()[j].ma24paymentValue))
+                                            @if (ma22subtripsale.ma21saleTrip.ma32sale.ma24payment.ToList()[j].ma24paymentStatus == 2)
+                                            {
+                                                <p>(Cancelado)</p>
+                                            }
+                                        }
+                                        else
+                                        {
+
+                                            @if (ma22subtripsale.ma21saleTrip.ma32sale.ma24payment.ToList()[j].ma24paymentStatus == 1)
+                                            {
+                                                <p>@Html.Raw("Transferência") - @ValueConvert.ConvertToReal(ma22subtripsale.ma21saleTrip.ma32sale.ma24payment.ToList()[j].ma24paymentValue) (Pago)</p>
+                                                <a href="@Url.Action("DisapproveTransferenceStatus","AdminSalesReport", new { PartnerName = ViewBag.PartnerName,
+                                                        initialDate = initialDate.ToString("yyyy-MM-dd"), finalDate = finalDate.ToString("yyyy-MM-dd"),
+                                                        SaleID = ma22subtripsale.ma21saleTrip.ma32sale.ma32idSale, DateType = ViewBag.DateType })">
+                                                    Desaprovar Transferência
+                                                </a>
+                                            }
+                                            else if (ma22subtripsale.ma21saleTrip.ma32sale.ma24payment.ToList()[j].ma24paymentStatus == 3)
+                                            {
+
+                                                <p>@Html.Raw("Transferência") - @ValueConvert.ConvertToReal(ma22subtripsale.ma21saleTrip.ma32sale.ma24payment.ToList()[j].ma24paymentValue) (Aguardando Transferência)</p>
+                                                <a href="@Url.Action("TerminateTransferenceStatus","AdminSalesReport", new { PartnerName = ViewBag.PartnerName,
+                                                        initialDate = initialDate.ToString("yyyy-MM-dd"), finalDate = finalDate.ToString("yyyy-MM-dd"),
+                                                        SaleID = ma22subtripsale.ma21saleTrip.ma32sale.ma32idSale, DateType = ViewBag.DateType })">
+                                                    Aprovar Transferência
+                                                </a>
+                                            }
+                                            else
+                                            {
+                                                <p>@Html.Raw("Transferência") - @ValueConvert.ConvertToReal(ma22subtripsale.ma21saleTrip.ma32sale.ma24payment.ToList()[j].ma24paymentValue) (Cancelado)</p>
+                                            }
+
+                                        }
+                                    }
+                                </td>
+                                <td>@ma22subtripsale.ma22subtripPartnerlDiscount%</td>
+                                <td>@ma22subtripsale.ma22subtripInfluencerDiscount%</td>
+                                <td>
+                                    @foreach (ma23servicesale servicesale in ma22subtripsale.ma23servicesale)
+                                    {
+                                        <p>@Html.Raw(servicesale.ma11service.ma11name + " (" + ValueConvert.ConvertToReal(servicesale.ma23UnitValue) + ")" + " x " + servicesale.ma23ServiceQuantity)</p>
+                                        totalSubtripValue += servicesale.ma23TotalValue;
+                                    }
+                                </td>
+                                @{
+
+                                    double totalSubtripWithComissionDiscount = totalSubtripValue - (totalSubtripValue * (Convert.ToDouble(ma22subtripsale.ma14subtrip.ma14MatripCommission / 100)));
+
+                                    if (ma22subtripsale.ma21saleTrip.ma32sale.ma32situation != 2)
+                                    {
+                                        subtotal += totalSubtripValue;
+                                        totalSubtripComission += (totalSubtripValue - totalSubtripWithComissionDiscount);
+                                        total += totalSubtripWithComissionDiscount;
+                                    }
+
+                                }
+                                <td>@ma22subtripsale.ma14subtrip.ma14MatripCommission%</td>
+                                <td>@ValueConvert.ConvertToReal(totalSubtripValue)</td>
+                                <td>@ValueConvert.ConvertToReal(totalSubtripWithComissionDiscount)</td>
+                                @if (ma22subtripsale.ma21saleTrip.ma32sale.ma32terminate == "0")
+                                {
+
+                                    <td>
+                                        <a href="@Url.Action("TerminateSale","AdminSalesReport", new { PartnerName = ViewBag.PartnerName,
+                                                initialDate = initialDate.ToString("yyyy-MM-dd"),
+                                                finalDate = finalDate.ToString("yyyy-MM-dd"),
+                                                SaleID = ma22subtripsale.ma21saleTrip.ma32sale.ma32idSale,
+                                                DateType = ViewBag.DateType })">Dar Baixa</a>
+                                    </td>
+                                }
+                                else
+                                {
+                                    <td>
+                                        Pago / <a href="@Url.Action("UnterminateSale","AdminSalesReport", new { PartnerName = ViewBag.PartnerName,
+                                                        initialDate = initialDate.ToString("yyyy-MM-dd"),
+                                                        finalDate = finalDate.ToString("yyyy-MM-dd"),
+                                                        CancelSaleID = ma22subtripsale.ma21saleTrip.ma32sale.ma32idSale,
+                                                        DateType = ViewBag.DateType })">Cancelar Baixa</a>
+                                    </td>
+                                }
+
+                            </tr>
+
+
+                        }
+
+                    </table>
+
+
+
+                    <table class="table table-bordered">
+                        <tr>
+                            <td>Subtotal</td>
+                            <td>Comissão Matrip</td>
+                            <td>Total</td>
+                        </tr>
+                        <tr>
+                            <td>@ValueConvert.ConvertToReal(subtotal)</td>
+                            <td>@ValueConvert.ConvertToReal(totalSubtripComission)</td>
+                            <td>@ValueConvert.ConvertToReal(total)</td>
+                        </tr>
+                    </table>
+                </div>
+
+            </div>
+        }
+
+        <br />
+        <br />
+        <div class="mb-5">
+            <button class="btn btn-outline-primary btn-lg btn-imprimir">Imprimir</button>
+        </div>
+    }
+    else
+    {
+        <label>Nenhum registro de Venda nesse período</label>
+    }
+
+
+
+</div>
+

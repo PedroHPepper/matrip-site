@@ -1,0 +1,56 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Areas/Administrator/Views/Shared/_Layout.cshtml";
+    ma09city city = ViewBag.City;
+}
+    <div class="mt-5">
+
+        <h3>Editar Cidade</h3>
+
+        @{ await Html.RenderPartialAsync("~/Views/Shared/_Message.cshtml"); }
+        @if (city.ma35cityphoto.Count() > 0)
+        {
+            <div>
+                <img width="1000" src="@Url.Content("~/images/cityphotos/headers/"+ city.ma35cityphoto.FirstOrDefault().ma35idcityphoto +"-"+ city.ma35cityphoto.FirstOrDefault().FK3509idcity +"-filter.jpg?v="+city.ma35cityphoto.FirstOrDefault().ma35versionDate.ToString("ddMMyyyy"))" />
+            </div>
+        }
+        else
+        {
+            <img src="@Url.Content("")" />
+        }
+        <form method="post" enctype="multipart/form-data" asp-area="Administrator" asp-controller="AdminCity" asp-action="UpdateCityPhoto">
+            <input hidden readonly type="number" name="cityID" value="@city.ma09idcity" />
+            @if (city.ma35cityphoto.Count() > 0)
+            {
+                <input hidden readonly type="number" name="photoID" value="@city.ma35cityphoto.FirstOrDefault().ma35idcityphoto" />
+            }
+            <input hidden readonly type="text" name="UF" value="@city.ma08uf.ma08UFInitials" />
+            <input hidden readonly type="text" name="CityName" value="@city.ma09name" />
+            <input class="form-control" type="file" name="file" accept=".jpg" required />
+
+            <button class="btn-success" type="submit">Atualizar Foto</button>
+        </form>
+
+        <div style="width:400px" class="mb-5 mt-5">
+            <form asp-action="UpdateCity" asp-controller="AdminCity" asp-area="Administrator" method="post">
+                <input hidden readonly name="UF" value="@city.ma08uf.ma08UFInitials" />
+                <div class="mt-3">
+                    <input class="form-control" readonly name="CityName" value="@city.ma09name" />
+                </div>
+
+                <div class="mt-3">
+                    <label>Descrição da Cidade</label>
+                    <textarea style="height:150px" class="form-control" name="CityDescription">@city.ma09Description</textarea>
+                </div>
+
+
+                <div class="mt-3">
+                    <button class="btn btn-outline-primary btn-lg" type="submit">Atualizar Descrição</button>
+                </div>
+
+            </form>
+        </div>
+    </div>
+
+

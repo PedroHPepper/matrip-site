@@ -1,0 +1,45 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
+    <AspNetCoreHostingModel>OutOfProcess</AspNetCoreHostingModel>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Controllers\ValuesController.cs" />
+    <Compile Remove="Migrations\20200204174404_banco4.cs" />
+    <Compile Remove="Migrations\20200204174404_banco4.Designer.cs" />
+    <Compile Remove="Migrations\20200204175234_banco5.cs" />
+    <Compile Remove="Migrations\20200204175234_banco5.Designer.cs" />
+    <Compile Remove="Migrations\20200204221812_bb.cs" />
+    <Compile Remove="Migrations\20200204221812_bb.Designer.cs" />
+    <Compile Remove="Migrations\20200205110424_b1.cs" />
+    <Compile Remove="Migrations\20200205110424_b1.Designer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.App" />
+    <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.2.0" PrivateAssets="All" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="2.2.0">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.Extensions.Identity.Core" Version="2.2.0" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.2.4" />
+    <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="2.2.0" />
+    <PackageReference Include="X.PagedList.Mvc.Core" Version="7.9.1" />
+    <PackageReference Include="Z.EntityFramework.Plus.EFCore" Version="2.0.53" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Areas\Administrator\Controllers\" />
+    <Folder Include="Libraries\Filter\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Matrip.Domain\Matrip.Domain.csproj" />
+  </ItemGroup>
+
+  <ProjectExtensions><VisualStudio><UserProperties appsettings_1json__JsonSchema="" appsettings_1development_1json__JsonSchema="" /></VisualStudio></ProjectExtensions>
+
+</Project>

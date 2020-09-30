@@ -1,0 +1,187 @@
+﻿@using System;
+@model List<Matrip.Domain.Models.TripPurchase.ChoosedSubtripSaleDate>
+@inject Matrip.Web.Libraries.Login.UserLogin _userLogin
+@{
+    ViewData["Title"] = "Escolha de Datas";
+    Layout = "~/Views/Shared/_Layout2.cshtml";
+    
+
+    int i = 0;
+
+    List<ma14subtrip> ma14subtripList = ViewBag.Trip.ma14subtrip;
+    TripItem tripItem = ViewBag.TripItem;
+    ma05trip trip = ViewBag.Trip;
+
+    ma09city city = trip.ma09city;
+
+}
+@section menu{
+    <li><a asp-controller="Home" asp-action="Index">Home</a></li>
+    <li><a asp-controller="Home" asp-action="About">Sobre</a></li>
+    <!--<li><a href="listings.html">Listings</a></li>-->
+    <!--<li><a href="blog.html">Notícias</a></li>-->
+    <li><a asp-controller="Home" asp-action="Contact">Contato</a></li>
+}
+@section home{
+    @if (city.ma35cityphoto.Count() > 0)
+    {
+        <div class="parallax_background parallax-window" data-parallax="scroll" data-image-src="@Url.Content("~/images/cityphotos/headers/"+ city.ma35cityphoto.FirstOrDefault().ma35idcityphoto +"-"+ city.ma35cityphoto.FirstOrDefault().FK3509idcity +"-filter.jpg?v="+city.ma35cityphoto.FirstOrDefault().ma35versionDate.ToString("ddMMyyyy"))" data-speed="0.8"></div>
+    }
+    else
+    {
+        <div class="parallax_background parallax-window" data-parallax="scroll" data-image-src="@Url.Content("~/images/contact.jpg")" data-speed="0.8"></div>
+    }
+    <div class="home_container">
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    <div class="home_content">
+                        <div class="home_title">Escolha as Datas dos Passeios</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+@section scripts{
+    <!--
+    <script src="~/js/contact.js"></script>-->
+    <script type="text/javascript">
+        function removeDateValue(subtripItemID) {
+            var dateInput = document.getElementById("Date:" + subtripItemID);
+            dateInput.value = "";
+        }
+        function verifyDate(subtripItemID, ValueID) {
+            document.getElementById("btn").style.pointerEvents="none";
+            document.getElementById("btn").style.cursor="default";
+            var select = document.getElementById("Select:" + subtripItemID);
+            var selectedDateInput = document.getElementById("Date:" + subtripItemID).value;
+            var dateItems = selectedDateInput.split("-");
+            var selectedDate = new Date(parseInt(dateItems[0]), parseInt(dateItems[1]) - 1, parseInt(dateItems[2]));
+
+            var items = select.options[select.selectedIndex].getAttribute('id').split('/');
+            var dates = items[0];
+            var scheduleID = items[1];
+            subtripItemID = items[2];
+            var availableWeekDays = dates.split(";");
+
+            var isWeekDayAvailable = false;
+            var isAvailable = false;
+            for (var i = 0; i < availableWeekDays.length; i++) {
+                if (parseInt(availableWeekDays[i]) == selectedDate.getDay()) {
+                    isWeekDayAvailable = true;
+
+                    jQuery.ajax({
+                        type: "GET",
+                        url: "@Url.Action("GetUnavailableDates","ItemPurchase")",
+                        data: { scheduleID: scheduleID, Date: selectedDateInput, ValueID: ValueID, peopleQuantity: @ViewBag.PeopleQuantity },
+                        contentType: 'application/json',
+                        error: function (data) {
+                            alert("Erro ao validar a data!");
+                        },
+                        success: function (data) {
+                            isAvailable = data;
+                        },
+                        complete: function () {
+                            document.getElementById("btn").style.pointerEvents="auto";
+                            document.getElementById("btn").style.cursor="pointer";
+                            if (isAvailable == false) {
+                                removeDateValue(subtripItemID);
+                                alert("Número de pessoas excede as vagas. Favor, escolha outro horário ou dia!");
+                            }
+                        }
+                    });
+                    break;
+                }
+            }
+            if (isWeekDayAvailable == false) {
+                removeDateValue(subtripItemID);
+                alert("Dia da semana não disponível!");
+            }
+
+        }
+    </script>
+}
+<div class="contact container_custom">
+    <form id="myForm" method="post" asp-action="SubmitDate" asp-controller="ItemPurchase">
+        <div class="container mt-5">
+            <table id="cart" class="table table-hover table-responsive table-condensed">
+                <thead>
+                    <tr>
+                        <th style="width:50%">Roteiros de Passeios</th>
+                        <th style="width:25%" class="text-center">Horário</th>
+                        <th style="width:25%" class="text-center">Data</th>
+
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+
+                        @foreach (ma14subtrip ma14subtrip in ma14subtripList)
+                        {
+                            var minDate = DateConvert.HrBrasilia();
+                            <td data-th="Product">
+                                <div class="row">
+                                    @if (trip.ma13tripphoto.Count() > 0)
+                                    {
+                                        <div class="col-sm-2 hidden-xs"><img src="@Url.Content("~/images/tripphotos/" + trip.ma05idtrip + "-" + "1.jpg")" alt="..." class="img-responsive" /></div>
+
+                                    }
+                                    else
+                                    {
+                                        <div class="col-sm-2 hidden-xs"><img src="@Url.Content("~/images/tripphotos/PASSEIO-SEM-FOTO.jpg")" alt="..." class="img-responsive" /></div>
+                                    }
+
+                                    <div class="col-sm-10">
+                                        <h4 class="nomargin">@ma14subtrip.ma14name</h4>
+                                        <p>Roteiro de Passeio:</p>
+                                        <label>@ViewBag.Trip.ma05name</label><br />
+
+                                    </div>
+                                </div>
+                            </td>
+                            <input class="form-control" hidden asp-for="@Model[i].TripItemShoppingCartID" type="text" value="@ViewBag.Trip.ma05idtrip" readonly />
+                            <input class="form-control" hidden asp-for="@Model[i].SubtripItemShoppingCartID" type="text" value="@ma14subtrip.ma14idsubtrip" readonly />
+                            <td data-th="Horário">
+                                
+                                <select class="text-center form-control" id="Select:@ma14subtrip.ma14idsubtrip" asp-for="@Model[i].Entry" onchange="removeDateValue('@ma14subtrip.ma14idsubtrip')" required>
+                                    @if (ma14subtrip.ma16subtripschedule.Where(e => e.ma16entry < minDate.TimeOfDay).Any())
+                                    {
+                                        minDate = minDate.AddDays(1);
+                                        @foreach (ma16subtripschedule schedule in ma14subtrip.ma16subtripschedule)
+                                        {
+                                            <option id="@schedule.ma16days/@schedule.ma16idsubtripschedule/@ma14subtrip.ma14idsubtrip" value="@schedule.ma16entry">@schedule.ma16entry</option>
+                                        }
+                                    }
+                                    else
+                                    {
+                                        @foreach (ma16subtripschedule schedule in ma14subtrip.ma16subtripschedule)
+                                        {
+                                            if (schedule.ma16entry > minDate.TimeOfDay)
+                                            {
+                                                <option id="@schedule.ma16days/@schedule.ma16idsubtripschedule/@ma14subtrip.ma14idsubtrip" value="@schedule.ma16entry">@schedule.ma16entry</option>
+                                            }
+                                        }
+                                    }
+                                </select>
+                            </td>
+                            <td data-th="Data">
+                                <input id="Date:@ma14subtrip.ma14idsubtrip" class="form-control datePicker" asp-for="@Model[i].ChoosedDate" type="date" value="" min="@minDate.ToString("yyyy-MM-dd")" onkeydown="return false" onchange="verifyDate('@ma14subtrip.ma14idsubtrip', '@tripItem.SubtripStatus.Split("/")[2]')" />
+                            </td>
+                            
+                            i++;
+                        }
+                    </tr>
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td><a asp-action="Index" asp-controller="Home" class="btn btn-warning"><i class="fa fa-angle-left"></i> Continuar Compras</a></td>
+                        <td class="hidden-xs"></td>
+                        <td><a id="btn" href="javascript:{}" class="btn btn-success btn-block" onclick="document.getElementById('myForm').submit();">Comprar <i class="fa fa-angle-right"></i></a></td>
+                    </tr>
+                </tfoot>
+            </table>
+           
+        </div>
+    </form>
+</div>

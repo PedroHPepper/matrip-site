@@ -1,0 +1,112 @@
+﻿@model Matrip.Domain.Models.PartnerModels.PartnerModel
+@{
+    ViewData["Title"] = "AddPartner";
+    Layout = "~/Areas/Administrator/Views/Shared/_Layout.cshtml";
+    List<string> UFs = new List<string>{"AC", "AL", "AP", "AM", "BA","CE","DF","ES","GO","MA","MT","MS","MG",
+        "PA","PB","PR","PE","PI","RJ","RN","RS","RO","RR","SC","SP","SE","TO"};
+}
+@section script{
+    <!--
+        <script src="~/js/contact.js"></script>-->
+    <script type="text/javascript">
+        function CleanCityInput() {
+            document.getElementById("CityName").value = "";
+            document.getElementById("CityName").removeAttribute("readonly");
+        }
+        function AutoComplete() {
+            var City = document.getElementById("CityName").value;
+            var UFoptions = document.getElementById("UF");
+            var UF = UFoptions.options[UFoptions.selectedIndex].value;
+
+
+            if (City.length > 2 && UF != "") {
+                var url = "@Html.Raw(Url.Action("SearchCities", "Search", new { cityText = "__cityText__", UF = "__UF__" }))";
+                url = url.replace("__cityText__", City).replace("__UF__", UF);
+                jQuery.ajax({
+                    url: url,
+                    type: "get",
+                    success: function (data) {
+                        
+                        jQuery("#CityName").autocomplete({
+                            source: data
+                        });
+                    }
+                });
+            }
+            
+        }
+    </script>
+}
+<div class="mt-5">
+    <hr />
+    <form method="post" asp-action="AddPartner" asp-controller="AdminPartner" asp-area="Administrator">
+        @{ await Html.RenderPartialAsync("~/Views/Shared/_Message.cshtml"); }
+        <div class="row">
+            <div class="TripDiv col-6">
+                <h6>Adicionar Parceiro</h6>
+
+                <div>
+                    <label>Nome Fantasia</label>
+                    <input type="text" class="form-control" asp-for="ma25partner.ma25name" required />
+                </div>
+
+                <div>
+                    <label>Nome Social</label>
+                    <input type="text" class="form-control" asp-for="ma25partner.ma25companyName" required />
+                </div>
+
+                <div>
+                    <label>CNPJ</label>
+                    <input type="text" class="form-control" asp-for="ma25partner.ma25CNPJ" required />
+                </div>
+
+                <div>
+                    <label>E-Mail</label>
+                    <input type="email" class="form-control" asp-for="ma25partner.ma25email" required />
+                </div>
+
+                <div>
+                    <label>Homepage</label>
+                    <input type="text" class="form-control" asp-for="ma25partner.ma25homepage" />
+                </div>
+
+                <div>
+                    <label>Endereço</label>
+                    <input type="text" class="form-control" asp-for="ma25partner.ma25address" required />
+                </div>
+
+                <div>
+                    <label>Bairro</label>
+                    <input type="text" class="form-control" asp-for="ma25partner.ma25neighborhood" required />
+                </div>
+
+                <label>UF</label><br />
+                <select id="UF" asp-for="UF" class="form-control" onchange="CleanCityInput();" required>
+                    <option selected="selected" disabled="disabled" value="">Selecione UF</option>
+                    @for (int i = 0; i < UFs.Count(); i++)
+                    {
+                        <option value="@UFs[i]">@UFs[i]</option>
+                    }
+                </select>
+
+                <div>
+                    <label>Cidade da Empresa</label>
+                    <input readonly id="CityName" type="text" class="form-control" asp-for="CityName" onkeydown="AutoComplete();" required />
+                </div>
+
+                <!--
+    <div>
+        <label>ID da Cidade</label>
+        <input type="number" class="form-control" asp-for="FK2509idcity" required />
+    </div>
+    -->
+
+            </div>
+
+        </div>
+        <hr />
+
+        <button type="submit" class="btn btn-lg btn-success text-uppercase" onclick=""> <i class=""></i> Adicionar </button>
+    </form>
+</div>
+

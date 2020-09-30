@@ -1,0 +1,201 @@
+﻿@model List<Matrip.Domain.Models.Entities.ma18tripitemshoppingcart>
+@{
+    ViewData["Title"] = "Carrinho";
+    Layout = "~/Views/Shared/_Layout2.cshtml";
+    double tripTotal = 0;
+    double totalValue = 0;
+    var Date = DateConvert.HrBrasilia();
+}
+@section menu{
+    <li><a asp-controller="Home" asp-action="Index">Home</a></li>
+    <li><a asp-controller="Home" asp-action="About">Sobre</a></li>
+    <!--<li><a href="listings.html">Listings</a></li>-->
+    <!--<li><a href="blog.html">Notícias</a></li>-->
+    <li><a asp-controller="Home" asp-action="Contact">Contato</a></li>
+}
+@section home{
+    <div class="parallax_background parallax-window" data-parallax="scroll" data-image-src="@Url.Content("~/images/contact.jpg")" data-speed="0.8"></div>
+    <div class="home_container">
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    <div class="home_content">
+                        <div class="home_title">Carrinho de Compras</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+@section scripts{
+    <!--
+    <script src="~/js/contact.js"></script>-->
+}
+<div class="contact container_custom">
+    <div class="container mt-5">
+        <table id="cart" class="table table-hover table-responsive table-condensed">
+            <thead>
+                <tr>
+                    <th style="width:50%">Roteiros de Passeios</th>
+                    <th style="width:20%" class="text-center">Passeios</th>
+                    <th style="width:18%" class="text-center">Valor</th>
+                    <th style="width:22%" class="text-center"></th>
+                    <th style="width:10%"></th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (Model != null)
+                {
+                    @foreach (ma18tripitemshoppingcart tripitemshoppingcart in Model)
+                    {
+                        List<ma19SubTripItemShoppingCart> subTripItemShoppingCartList = tripitemshoppingcart.ma19SubTripItemShoppingCart.ToList();
+                        <tr>
+                            <td data-th="Product">
+                                <div class="row">
+                                    @if (tripitemshoppingcart.ma05trip.ma13tripphoto != null)
+                                    {
+                                        <div class="col-sm-2 hidden-xs"><img src="@Url.Content("~/images/tripphotos/"+ tripitemshoppingcart.ma05trip.ma13tripphoto.FirstOrDefault().ma13idtripphoto +"-"+ tripitemshoppingcart.ma05trip.ma13tripphoto.FirstOrDefault().FK1305idtrip +".jpg")" alt="..." class="img-responsive" /></div>
+                                    }
+                                    else
+                                    {
+                                        <div class="col-sm-2 hidden-xs"><img src="@Url.Content("~/images/tripphotos/PASSEIO-SEM-FOTO.jpg")" alt="..." class="img-responsive" /></div>
+                                    }
+                                    <div class="col-sm-10">
+                                        <h4 class="nomargin">@tripitemshoppingcart.ma05trip.ma05name</h4>
+                                        @foreach (ma27AgeDiscount AgeDiscount in tripitemshoppingcart.ma05trip.ma27AgeDiscount)
+                                        {
+                                            <label>@AgeDiscount.ma27name: @tripitemshoppingcart.ma29TouristShoppingCart.Where(e => e.FK2927idAgeDiscount == AgeDiscount.ma27idAgeDiscount).Count()</label>
+                                        }
+                                        <p>@tripitemshoppingcart.ma05trip.ma05description</p>
+                                        @foreach (ma19SubTripItemShoppingCart subTripItemShoppingCart in subTripItemShoppingCartList)
+                                        {
+                                            if (subTripItemShoppingCart.ma14subtrip.ma14PartnerDiscountPercent > 0 && Date >= subTripItemShoppingCart.ma14subtrip.ma14InitialDiscountDate && Date <= subTripItemShoppingCart.ma14subtrip.ma14FinalDiscountDate)
+                                            {
+                                                double valueWithDiscount = subTripItemShoppingCart.ma17SubtripValue.ma17value - (subTripItemShoppingCart.ma17SubtripValue.ma17value * (subTripItemShoppingCart.ma14subtrip.ma14PartnerDiscountPercent / 100));
+                                                <p>Passeio:</p>
+                                                <label>@subTripItemShoppingCart.ma14subtrip.ma14name (@subTripItemShoppingCart.ma17SubtripValue.ma17description): @ValueConvert.ConvertToReal(valueWithDiscount) (@subTripItemShoppingCart.ma14subtrip.ma14PartnerDiscountPercent% de Desconto)</label><br />
+                                            }
+                                            else
+                                            {
+                                                <p>Passeio:</p>
+                                                <label>@subTripItemShoppingCart.ma14subtrip.ma14name (@subTripItemShoppingCart.ma17SubtripValue.ma17description): @ValueConvert.ConvertToReal(subTripItemShoppingCart.ma17SubtripValue.ma17value)</label><br />
+                                            }
+
+                                            List<ma20ServiceItemShoppingCart> serviceItemShoppingCartList = subTripItemShoppingCart.ma20ServiceItemShoppingCart.ToList();
+                                            foreach (ma20ServiceItemShoppingCart serviceItemShoppingCart in serviceItemShoppingCartList)
+                                            {
+                                                tripTotal += serviceItemShoppingCart.ma20ServiceQuantity * serviceItemShoppingCart.ma11service.ma11Value;
+                                                <label>Serviço:</label>
+                                                <label>@serviceItemShoppingCart.ma11service.ma11name</label><br />
+                                                <label>Unidades do Serviço: @serviceItemShoppingCart.ma20ServiceQuantity x @ValueConvert.ConvertToReal(serviceItemShoppingCart.ma11service.ma11Value)</label><br />
+                                            }
+
+                                            double value = subTripItemShoppingCart.ma17SubtripValue.ma17value;
+                                            @if (subTripItemShoppingCart.ma14subtrip.ma14PartnerDiscountPercent > 0 && Date >= subTripItemShoppingCart.ma14subtrip.ma14InitialDiscountDate && Date <= subTripItemShoppingCart.ma14subtrip.ma14FinalDiscountDate)
+                                            {
+                                                value = value - (value * (subTripItemShoppingCart.ma14subtrip.ma14PartnerDiscountPercent / 100));
+                                            }
+
+                                            @if (subTripItemShoppingCart.ma17SubtripValue.ma17type == "0")
+                                            {
+                                                @foreach (ma29TouristShoppingCart ma29TouristShoppingCart in tripitemshoppingcart.ma29TouristShoppingCart)
+                                                {
+                                                    tripTotal += value - (value * (Convert.ToDouble(ma29TouristShoppingCart.ma27AgeDiscount.ma27DiscountPercent) / 100));
+                                                }
+                                            }
+                                            else
+                                            {
+                                                tripTotal += value;
+                                            }
+                                        }
+                                    </div>
+                                </div>
+                            </td>
+                            <td data-th="Price" class="text-center">@tripitemshoppingcart.ma19SubTripItemShoppingCart.Count()</td>
+                            <td data-th="Quantity" class="text-center">@ValueConvert.ConvertToReal(tripTotal)</td>
+                            <td data-th="Subtotal" class="text-center"></td>
+                            <td><a asp-area="" asp-action="Remove" asp-controller="ShoppingCart" asp-route-id="@tripitemshoppingcart.ma18idtripitemshoppingcart" class="btn btn-danger btn-sm"><i class="fa fa-trash-o"></i></a></td>
+                        </tr>
+                        totalValue += tripTotal;
+                        tripTotal = 0;
+                    }
+                }
+                else
+                {
+                    <tr>
+                        <td data-th="Product">
+                            <div class="row">
+                                <div class="col-sm-10">
+                                    <h4 class="nomargin">Sem Registros</h4>
+                                </div>
+                            </div>
+                        </td>
+                        <td data-th="Price" class="text-center">0</td>
+                        <td data-th="Subtotal" class="text-center">0</td>
+                        <td class="actions" data-th="">
+                        </td>
+                    </tr>
+                }
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td><a asp-action="Index" asp-controller="Home" class="btn btn-warning"><i class="fa fa-angle-left"></i> Continuar Compras</a></td>
+                    <td colspan="2" class="hidden-xs"></td>
+                    <td class="hidden-xs text-center"><strong>Total: @ValueConvert.ConvertToReal(totalValue)</strong></td>
+                    @if (Model != null)
+                    {
+                        <td><a asp-action="ChooseSubTripsDateTime" asp-controller="ShoppingCart" class="btn btn-success btn-block">Comprar <i class="fa fa-angle-right"></i></a></td>
+                    }
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+</div>
+<!--
+<div class="container">
+    <table id="cart" class="table table-hover table-condensed">
+        <thead>
+            <tr>
+                <th style="width:50%">Product</th>
+                <th style="width:10%">Price</th>
+                <th style="width:8%">Quantity</th>
+                <th style="width:22%" class="text-center">Subtotal</th>
+                <th style="width:10%"></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td data-th="Product">
+                    <div class="row">
+                        <div class="col-sm-2 hidden-xs"><img src="http://placehold.it/100x100" alt="..." class="img-responsive" /></div>
+                        <div class="col-sm-10">
+                            <h4 class="nomargin">Product 1</h4>
+                            <p>Quis aute iure reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Lorem ipsum dolor sit amet.</p>
+                        </div>
+                    </div>
+                </td>
+                <td data-th="Price">$1.99</td>
+                <td data-th="Quantity">
+                    <input type="number" class="form-control text-center" value="1">
+                </td>
+                <td data-th="Subtotal" class="text-center">1.99</td>
+                <td class="actions" data-th="">
+                    <button class="btn btn-info btn-sm"><i class="fa fa-refresh"></i></button>
+                    <button class="btn btn-danger btn-sm"><i class="fa fa-trash-o"></i></button>
+                </td>
+            </tr>
+        </tbody>
+        <tfoot>
+            <tr class="visible-xs">
+                <td class="text-center"><strong>Total 1.99</strong></td>
+            </tr>
+            <tr>
+                <td><a href="#" class="btn btn-warning"><i class="fa fa-angle-left"></i> Continue Shopping</a></td>
+                <td colspan="2" class="hidden-xs"></td>
+                <td class="hidden-xs text-center"><strong>Total $1.99</strong></td>
+                <td><a href="#" class="btn btn-success btn-block">Checkout <i class="fa fa-angle-right"></i></a></td>
+            </tr>
+        </tfoot>
+    </table>
+</div>
+    -->

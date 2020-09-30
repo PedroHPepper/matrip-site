@@ -1,0 +1,6 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<parameters>
+  <parameter name="IIS Web Application Name" description="" value="matripserver-001-site1" tags="IisApp">
+    <parameterEntry kind="ProviderPath" scope="IisApp" match="^C:\\Users\\Cliente\\OneDrive\\Área\ de\ Trabalho\\Projetos\\Matrip\.Api\\Matrip\.Web\\obj\\Release\\netcoreapp2\.2\\PubTmp\\Out\\$" />
+  </parameter>
+</parameters>

@@ -1,0 +1,29 @@
+﻿@model string
+@{
+    ViewData["Title"] = "Mensagem";
+    Layout = "~/Views/Shared/_LayoutLoginRegister.cshtml";
+}
+@section Scripts{ 
+    <script type="text/javascript">
+       // $(document).ready(function () {
+            // Handler for .ready() called.
+         //   window.setTimeout(function () {
+          //      location.href = "https://localhost:44340/";
+           // }, 3000);
+        //});
+    </script>
+}
+
+<div class="limiter">
+    <div class="container-login100" style="background-image: url('../images/login_bg.jpg');">
+        <div class="wrap-login100 p-l-55 p-r-55 p-t-40 p-b-54">
+            @Model
+            <br />
+            <br />
+            <a asp-action="Index" asp-controller="Home">< Voltar ao início</a>
+        </div>
+    </div>
+</div>
+
+
+<div id="dropDownSelect1"></div>

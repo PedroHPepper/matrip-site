@@ -1,0 +1,27 @@
+﻿.printme {
+    display: none;
+}
+
+@media print {
+    /*
+
+        body * {
+        margin-top:50px;
+        margin-bottom:50px;
+    }
+    */
+    @page {
+        margin-bottom: 70pt;
+        margin-top:70pt;
+    }
+    
+    
+    .no-printme {
+        display: none;
+    }
+
+    .printme {
+        display: block;
+    }
+
+}

@@ -1,0 +1,171 @@
+﻿@model Matrip.Domain.Models.PartnerModels.PartnerModel
+@{
+    ViewData["Title"] = "UpdatePartner";
+    Layout = "~/Areas/Administrator/Views/Shared/_Layout.cshtml";
+    List<string> UFs = new List<string>{"AC", "AL", "AP", "AM", "BA","CE","DF","ES","GO","MA","MT","MS","MG",
+        "PA","PB","PR","PE","PI","RJ","RN","RS","RO","RR","SC","SP","SE","TO"};
+    ma25partner partner = ViewBag.Partner;
+
+    UFs.Remove(partner.ma09city.ma08uf.ma08UFInitials);
+}
+
+@section script{
+    <!--
+        <script src="~/js/contact.js"></script>-->
+    <script type="text/javascript">
+        function CleanCityInput() {
+            document.getElementById("CityName").value = "";
+            document.getElementById("CityName").removeAttribute("readonly");
+        }
+        function AutoComplete() {
+            var City = document.getElementById("CityName").value;
+            var UFoptions = document.getElementById("UF");
+            var UF = UFoptions.options[UFoptions.selectedIndex].value;
+
+
+            if (City.length > 2 && UF != "") {
+                var url = "@Html.Raw(Url.Action("SearchCities", "Search", new { cityText = "__cityText__", UF = "__UF__" }))";
+                url = url.replace("__cityText__", City).replace("__UF__", UF);
+                jQuery.ajax({
+                    url: url,
+                    type: "get",
+                    success: function (data) {
+
+                        jQuery("#CityName").autocomplete({
+                            source: data
+                        });
+                    }
+                });
+            }
+
+        }
+    </script>
+}
+
+<div class="mt-5">
+    <hr />
+        @{ await Html.RenderPartialAsync("~/Views/Shared/_Message.cshtml"); }
+    <div class="row">
+        <div class="TripDiv col-6">
+            <form method="post" asp-action="UpdatePartner" asp-controller="AdminPartner" asp-area="Administrator">
+                <h6>Adicionar Parceiro</h6>
+                <div>
+                    <input type="text" class="form-control" asp-for="ma25partner.ma25idpartner" value="@partner.ma25idpartner" required />
+                </div>
+                <div>
+                    <label>Nome Fantasia</label>
+                    <input type="text" class="form-control" asp-for="ma25partner.ma25name" value="@partner.ma25name" required />
+                </div>
+
+                <div>
+                    <label>Nome Social</label>
+                    <input type="text" class="form-control" asp-for="ma25partner.ma25companyName" value="@partner.ma25companyName" required />
+                </div>
+
+                <div>
+                    <label>CNPJ</label>
+                    <input type="text" class="form-control" asp-for="ma25partner.ma25CNPJ" value="@partner.ma25CNPJ" required />
+                </div>
+
+                <div>
+                    <label>E-Mail</label>
+                    <input type="email" class="form-control" asp-for="ma25partner.ma25email" value="@partner.ma25email" required />
+                </div>
+
+                <div>
+                    <label>Homepage</label>
+                    <input type="text" class="form-control" asp-for="ma25partner.ma25homepage" value="@partner.ma25homepage" />
+                </div>
+
+                <div>
+                    <label>Endereço</label>
+                    <input type="text" class="form-control" asp-for="ma25partner.ma25address" value="@partner.ma25address" required />
+                </div>
+
+                <div>
+                    <label>Bairro</label>
+                    <input type="text" class="form-control" asp-for="ma25partner.ma25neighborhood" value="@partner.ma25neighborhood" required />
+                </div>
+                <div>
+                    <label>Status</label>
+                    <select class="form-control" asp-for="ma25partner.ma25status">
+                        @if (partner.ma25status == "1")
+                        {
+                            <option value="1">Ativo</option>
+                            <option value="0">Inativo</option>
+                        }
+                        else
+                        {
+                            <option value="0">Inativo</option>
+                            <option value="1">Ativo</option>
+                        }
+                    </select>
+                </div>
+
+                <label>UF</label><br />
+                <select id="UF" asp-for="UF" class="form-control" onchange="CleanCityInput();" required>
+                    <option selected="selected" value="@partner.ma09city.ma08uf.ma08UFInitials">@partner.ma09city.ma08uf.ma08UFInitials</option>
+                    @for (int i = 0; i < UFs.Count(); i++)
+                    {
+                        <option value="@UFs[i]">@UFs[i]</option>
+                    }
+                </select>
+
+                <div>
+                    <label>Cidade da Empresa</label>
+                    <input readonly id="CityName" type="text" class="form-control" asp-for="CityName" value="@partner.ma09city.ma09name" onkeydown="AutoComplete();" required />
+                </div>
+
+                <!--
+    <div>
+        <label>ID da Cidade</label>
+        <input type="number" class="form-control" asp-for="FK2509idcity" required />
+    </div>
+    -->
+                <button type="submit" class="btn btn-lg btn-success text-uppercase" onclick=""> <i class=""></i> Atualizar </button>
+            </form>
+
+
+        </div>
+        <div class="TripDiv col-6">
+            <table class="table table-bordered">
+                <tr>
+                    <td>Nome</td>
+                    <td>MEI</td>
+                    <td>Email</td>
+                    <td>Ações</td>
+                </tr>
+                @for (int i = 0; i < partner.ma26PartnerGuide.ToList().Count; i++)
+                {
+                    <tr>
+                        <td>@partner.ma26PartnerGuide.ToList()[i].ma04guide.ma01user.ma01FullName</td>
+                        <td>@partner.ma26PartnerGuide.ToList()[i].ma04guide.ma04MEI</td>
+                        <td>@partner.ma26PartnerGuide.ToList()[i].ma04guide.ma01user.Email</td>
+                        <td>
+                            <a href="@Url.Action("RemovePartnerGuide","AdminPartner",
+                                                new { Area = "Administrator",
+                                                    PartnerGuideID = partner.ma26PartnerGuide.ToList()[i].ma26idPartnerGuide,
+                                                PartnerID = partner.ma25idpartner })">Excluir</a>
+                        </td>
+                    </tr>
+                }
+
+            </table>
+            <form asp-area="Administrator" asp-action="AddGuide" asp-controller="AdminPartner">
+                <div>
+                    <label>Email do Guia</label>
+                    <input name="Email" type="email" required placeholder="Email" />
+                </div>
+                <div>
+                    <input hidden readonly name="PartnerID" value="@partner.ma25idpartner" />
+                </div>
+                <button type="submit" class="btn btn-lg btn-success text-uppercase" onclick=""> <i class=""></i> Adicionar Guia </button>
+            </form>
+        </div>
+
+    </div>
+        <hr />
+</div>
+
+
+

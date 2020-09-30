@@ -1,0 +1,47 @@
+﻿@model X.PagedList.IPagedList<Matrip.Domain.Models.Entities.ma05trip>
+@{
+    ViewData["Title"] = "Passeios";
+    Layout = "~/Areas/Administrator/Views/Shared/_Layout.cshtml";
+}
+
+<h1>ViewData["Title"]</h1>
+
+@foreach (ma05trip ma05trip in Model)
+{
+    @ma05trip.ma05name
+    <br />
+    <div class="results_container">
+            <!-- Result Item -->
+            <div class="grid-item result coffee">
+                <div class="listing">
+                    <div class="listing_image">
+                        <div class="listing_icon"><a asp-action=""><img src="" alt=""></a></div>
+                        <img src="images/listing_1.jpg" alt="">
+                    </div>
+                    <div class="listing_title_container">
+                        <div class="listing_title"><a href="listing.html">The Meal</a></div>
+                        <div class="listing_info d-flex flex-row align-items-center justify-content-between">
+
+                            <div class="listing_price">$$$</div>
+                            <div class="listing_divider">|</div>
+                            <div class="listing_type">Restaurant</div>
+                            <div class="listing_divider">|</div>
+                            <div class="listing_status">Closed</div>
+                        </div>
+                    </div>
+                    <div class="listing_testimonial">
+                        <div class="d-flex flex-row align-items-center justify-content-start">
+
+                            <div class="testimonial_text">
+                                <p>Great place to visit, the food is awesome, I really love it.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+     </div>
+}
+
+
+@Html.PagedListPager((IPagedList)Model, page => Url.Action("Index", new { page }))
+

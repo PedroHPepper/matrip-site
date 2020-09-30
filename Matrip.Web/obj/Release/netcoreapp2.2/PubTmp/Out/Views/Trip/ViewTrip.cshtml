@@ -1,0 +1,390 @@
+﻿@model Matrip.Domain.Models.TripPurchase.TripItem
+@inject Matrip.Web.Libraries.Login.UserLogin _userLogin
+@{
+    ViewData["Title"] = "Visualizar Passeio";
+    Layout = "~/Views/Shared/_Layout2.cshtml";
+    var Date = DateConvert.HrBrasilia();
+    ma05trip Trip = ViewBag.Trip;
+    ma09city city = Trip.ma09city;
+    string[] WeekDays = { "Domingo", "Segunda", "Terça", "Quarta", "Quinta", "Sexta", "Sábado" };
+
+    int serviceIndex = 0;
+
+    double TotalValue = 0;
+}
+@section menu{
+    <li><a asp-controller="Home" asp-action="Index">Home</a></li>
+    <li><a asp-controller="Home" asp-action="About">Sobre</a></li>
+    <!--<li><a href="listings.html">Listings</a></li>-->
+    <!--<li><a href="blog.html">Notícias</a></li>-->
+    <li><a asp-controller="Home" asp-action="Contact">Contato</a></li>
+}
+@section home{
+    @if (city.ma35cityphoto.Count() > 0)
+    {
+        <div class="parallax_background parallax-window" data-parallax="scroll" data-image-src="@Url.Content("~/images/cityphotos/headers/"+ city.ma35cityphoto.FirstOrDefault().ma35idcityphoto +"-"+ city.ma35cityphoto.FirstOrDefault().FK3509idcity +"-filter.jpg?v="+city.ma35cityphoto.FirstOrDefault().ma35versionDate.ToString("ddMMyyyy"))" data-speed="0.8"></div>
+    }
+    else
+    {
+        <div class="parallax_background parallax-window" data-parallax="scroll" data-image-src="@Url.Content("~/images/contact.jpg")" data-speed="0.8"></div>
+    }
+    <div class="home_container">
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    <div class="home_content">
+                        <div class="home_title">@Trip.ma09city.ma09name</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+@section scripts{
+    <!--
+        <script src="~/js/contact.js"></script>-->
+    <script src="~/js/Trip/ViewTrip/ViewTrip.js?v=@Versioning.GetVersion()" type="text/javascript"></script>
+}
+@section CSS{
+    <link rel="stylesheet" type="text/css" href="~/css/TripView/PhotoView.css">
+}
+
+<div class="contact container_custom">
+    <div class="m-4">
+        @if (_userLogin.GetToken() != null)
+        {
+            @if (_userLogin.GetToken().userType == "admin")
+            {
+                <a href="@Url.Action("UpdateTrip","AdminTrip", new { Area = "Administrator", TripName = Trip.ma05name })">Editar Roteiro</a>
+            }
+        }
+
+        <form asp-action="ViewTrip" asp-controller="Trip" method="POST" class="contact_form myForm" id="contact_form">
+            <div class="card">
+                <div class="row">
+                    <aside class="col-sm-5 border-right">
+                        <article class="gallery-wrap">
+
+                            <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+                                <div class="carousel-inner img-big-wrap">
+                                    @if (Trip.ma13tripphoto.Count() > 0)
+                                    {
+                                        @if (Trip.ma13tripphoto.ToList().FirstOrDefault().ma13photoquantity > 0)
+                                        {
+                                            string active = "active";
+                                            @for (int i = 1; i <= Trip.ma13tripphoto.ToList().FirstOrDefault().ma13photoquantity; i++)
+                                            {
+                                                @if (i == 2)
+                                                {
+                                                    active = "";
+                                                }
+
+                                                <div class="carousel-item @active">
+                                                    <div class="item-gallery"> <a><img src="@Url.Content("~/images/tripphotos/"+ Trip.ma05idtrip + "-" +  i +".jpg?v="+Trip.ma13tripphoto.ToList().FirstOrDefault().ma13versionDate.ToString("ddMMyyy"))"></a></div>
+                                                </div>
+                                            }
+                                        }
+                                        else
+                                        {
+                                            <div class="carousel-item active">
+                                                <div class="item-gallery"> <a><img src="@Url.Content("~/images/tripphotos/PASSEIO-SEM-FOTO.jpg")"></a></div>
+                                            </div>
+                                        }
+                                    }
+                                    else
+                                    {
+                                        <div class="carousel-item active">
+                                            <div class="item-gallery"> <a><img src="@Url.Content("~/images/tripphotos/PASSEIO-SEM-FOTO.jpg")"></a></div>
+                                        </div>
+                                    }
+                                </div>
+                                <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+                                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                    <span class="sr-only">Previous</span>
+                                </a>
+                                <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+                                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                    <span class="sr-only">Next</span>
+                                </a>
+                            </div>
+
+                            <!--
+                            <div class="img-big-wrap">
+                                <div> <a><img src="https://upload.wikimedia.org/wikipedia/commons/f/f3/Lion_%28Panthera_leo%29_%2830941994012%29.jpg"></a></div>
+                            </div>-->
+                            <!-- slider-product.// -->
+                            <div class="img-small-wrap">
+                                @if (Trip.ma13tripphoto.Count() > 0)
+                                {
+                                    @if (Trip.ma13tripphoto.ToList().FirstOrDefault().ma13photoquantity > 0)
+                                    {
+                                        @for (int i = 1; i <= Trip.ma13tripphoto.ToList().FirstOrDefault().ma13photoquantity; i++)
+                                        {
+                                            <div class="item-gallery zoom"> <a><img src="@Url.Content("~/images/tripphotos/"+ Trip.ma05idtrip + "-" + i +".jpg?v="+Trip.ma13tripphoto.ToList().FirstOrDefault().ma13versionDate.ToString("ddMMyyyy"))"></a></div>
+                                        }
+                                    }
+                                }
+                            </div> <!-- slider-nav.// -->
+                        </article> <!-- gallery-wrap .end// -->
+                        <div class="m-md-5">
+                            <h6>@Trip.ma05name</h6>
+                            <p>
+                                @Trip.ma05description
+                            </p>
+                        </div>
+                    </aside>
+                    <aside class="col-sm-7">
+                        <article class="card-body p-5">
+                            <h3 class="title mb-3">@Trip.ma05name</h3>
+                            <input hidden readonly asp-for="TripID" value="@Trip.ma05idtrip" />
+                            <!-- price-detail-wrap .// -->
+                            <!--<dl class="item-property">
+    <dt>Descrição</dt>
+    <dd>
+        <p>
+            aqui se colocaria a descrição do passeio
+        </p>
+    </dd>    </dl>-->
+                            <div id="ErrorArea">
+                                <div id="Div_MSG_E" style="display:none" class="alert alert-danger alert-dismissible fade show" role="alert">
+                                    <p id="MSG_E" style="color:brown"></p>
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                            </div>
+                            
+                            <!--<p id="MSG_E" style="display:none" class="alert alert-danger"></p>-->
+
+                            <h6>Passeios: </h6>
+                            <select name="subtrip" class="form-control" id="selectSubtrip" onchange="checkTotal();">
+                                <option selected="selected" disabled="disabled" value="">Escolha um passeio</option>
+                                @foreach (ma14subtrip ma14subtrip in Trip.ma14subtrip)
+                                {
+                                    if (ma14subtrip.ma14status == "1")
+                                    {
+                                        <option value="Subtrip:@ma14subtrip.ma14idsubtrip">@ma14subtrip.ma14name</option>
+                                    }
+                                }
+                            </select>
+
+                            @foreach (ma14subtrip ma14subtrip in Trip.ma14subtrip)
+                            {
+                                if (ma14subtrip.ma14status == "1")
+                                {
+                                    List<ma17SubtripValue> valueList = ma14subtrip.ma17SubtripValue.ToList();
+                                    <div id="statusSelectionArea:@ma14subtrip.ma14idsubtrip" class="statusSelectionArea mt-3 mb-3" style="display:none">
+
+                                        <div class="row">
+                                            <div class="col-sm-5">
+                                                <p><strong>Forma de Valor</strong></p>
+                                            </div>
+                                            <div class="col-sm-7">
+                                                <select name="statusSelection" id="statusSelection:@ma14subtrip.ma14idsubtrip" class="form-control" onchange="checkTotal(); showValueArea('@ma14subtrip.ma14idsubtrip');">
+                                                    @for (var i = 0; i < valueList.Count(); i++)
+                                                    {
+                                                        @if (valueList[i].ma17status == "1")
+                                                        {
+                                                            @if (valueList[i].ma17type == "0")
+                                                            {
+                                                                <option class="statusCheckbox:@ma14subtrip.ma14idsubtrip" value="Individual/@ma14subtrip.ma14idsubtrip/@valueList[i].ma17idSubtripValue">@valueList[i].ma17description</option>
+                                                            }
+                                                            else if (valueList[i].ma17type == "1")
+                                                            {
+                                                                <option class="statusCheckbox:@ma14subtrip.ma14idsubtrip" value="Private/@ma14subtrip.ma14idsubtrip/@valueList[i].ma17idSubtripValue">@valueList[i].ma17description</option>
+                                                            }
+                                                            else
+                                                            {
+                                                                <option class="statusCheckbox:@ma14subtrip.ma14idsubtrip" value="Package:@valueList[i].ma17quantity/@ma14subtrip.ma14idsubtrip/@valueList[i].ma17idSubtripValue">@valueList[i].ma17description</option>
+                                                            }
+                                                        }
+                                                    }
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                }
+                            }
+
+                            @{
+                                List<ma27AgeDiscount> ageDiscountList = Trip.ma27AgeDiscount.OrderByDescending(e => e.ma27guardian).ToList();
+                            }
+                            @for (int i = 0; i < ageDiscountList.Count(); i++)
+                            {
+                                @if (ageDiscountList[i].ma27status == "1")
+                                {
+                                    string faixaIdade = "";
+                                    if (!ageDiscountList[i].ma27guardian)
+                                    {
+                                        faixaIdade = "(" + ageDiscountList[i].ma27minage.ToString() + " à " + ageDiscountList[i].ma27maxage.ToString() + " anos)";
+                                    }
+                                    <h6 class="mt-3">@ageDiscountList[i].ma27name @faixaIdade</h6>
+                                    <input asp-for="TouristDiscountByAgeList[i].AgeDiscountName" value="@ageDiscountList[i].ma27name" readonly hidden />
+                                    <input id="AgeDiscountID" asp-for="TouristDiscountByAgeList[i].AgeDiscountID" value="@ageDiscountList[i].ma27idAgeDiscount" readonly hidden />
+                                    <input id="Discount:@ageDiscountList[i].ma27idAgeDiscount" type="text" value="@ageDiscountList[i].ma27DiscountPercent" hidden readonly />
+                                    <div class="row">
+                                        <div class="col-sm-5">
+                                            <label>@ageDiscountList[i].ma27DiscountPercent% de desconto</label>
+                                        </div>
+                                        <div class="col-sm-7">
+                                            <input hidden asp-for="TouristDiscountByAgeList[i].minAge" value="@ageDiscountList[i].ma27minage" />
+                                            <input hidden asp-for="TouristDiscountByAgeList[i].maxAge" value="@ageDiscountList[i].ma27maxage" />
+                                            @if (ageDiscountList[i].ma27guardian)
+                                            {
+                                                <input id="PeopleQuantity:@ageDiscountList[i].ma27idAgeDiscount" asp-for="TouristDiscountByAgeList[i].TouristQuantity" type="number" class="TouristQuantity form-control bfh-number guardian" min="0" value="@ageDiscountList[i].ma27minPeople" onchange="checkTotal()" />
+                                            }
+                                            else
+                                            {
+                                                <input id="PeopleQuantity:@ageDiscountList[i].ma27idAgeDiscount" asp-for="TouristDiscountByAgeList[i].TouristQuantity" type="number" class="TouristQuantity form-control bfh-number" min="0" value="@ageDiscountList[i].ma27minPeople" onchange="checkTotal()" />
+                                            }
+
+                                        </div>
+                                    </div>
+                                }
+                            }
+                            @foreach (ma14subtrip ma14subtrip in Trip.ma14subtrip)
+                            {
+                                @if (ma14subtrip.ma14status == "1")
+                                {
+                                    List<ma17SubtripValue> valueList = ma14subtrip.ma17SubtripValue.ToList();
+
+                                    <input id="SubtripMinQuantity:@ma14subtrip.ma14idsubtrip" readonly value="@ma14subtrip.ma14minPeopleQuantity" hidden /><br />
+                                    <div id="@ma14subtrip.ma14idsubtrip" class="subtripDiv" style="display:none">
+                                        <div class="mt-2">
+                                            @{
+                                                string valueDisplay = "block";
+                                            }
+                                            @for (var i = 0; i < valueList.Count(); i++)
+                                            {
+                                                if (valueList[i].ma17status == "1")
+                                                {
+                                                    <div id="DivValue:@valueList[i].ma17idSubtripValue" class="DivValue:@ma14subtrip.ma14idsubtrip" style="display:@valueDisplay">
+                                                        @{
+                                                            valueDisplay = "none";
+                                                        }
+                                                        @if (valueList[i].ma17type == "0")
+                                                        {
+                                                            @if (ma14subtrip.ma14PartnerDiscountPercent > 0 && Date >= ma14subtrip.ma14InitialDiscountDate && Date <= ma14subtrip.ma14FinalDiscountDate)
+                                                            {
+                                                                double withDiscount = valueList[i].ma17value - (valueList[i].ma17value * (Convert.ToDouble(ma14subtrip.ma14PartnerDiscountPercent) / 100));
+
+                                                                <input id="Subtrip:@ma14subtrip.ma14idsubtrip-Individual" readonly value="@withDiscount" hidden /><br />
+                                                                <label>Valor do passeio: @ValueConvert.ConvertToReal(withDiscount) @ma14subtrip.ma14PartnerDiscountPercent% de Desconto (Individual) </label><br />
+                                                            }
+                                                            else
+                                                            {
+                                                                <input id="Subtrip:@ma14subtrip.ma14idsubtrip-Individual" readonly value="@valueList[i].ma17value" hidden /><br />
+                                                                <label>Valor do passeio: @ValueConvert.ConvertToReal(valueList[i].ma17value) (Individual)</label><br />
+                                                            }
+                                                        }
+                                                        else if (valueList[i].ma17type == "1")
+                                                        {
+                                                            @if (ma14subtrip.ma14PartnerDiscountPercent > 0 && Date >= ma14subtrip.ma14InitialDiscountDate && Date <= ma14subtrip.ma14FinalDiscountDate)
+                                                            {
+                                                                double withDiscount = valueList[i].ma17value - (valueList[i].ma17value * (ma14subtrip.ma14PartnerDiscountPercent / 100));
+
+                                                                <input id="Subtrip:@ma14subtrip.ma14idsubtrip-Private" readonly value="@withDiscount" hidden /><br />
+                                                                <label>Valor do passeio: @ValueConvert.ConvertToReal(valueList[i].ma17value) @ma14subtrip.ma14PartnerDiscountPercent% (Privativo - Até @ma14subtrip.ma14vacancy pessoas)</label><br />
+                                                            }
+                                                            else
+                                                            {
+                                                                <input id="Subtrip:@ma14subtrip.ma14idsubtrip-Private" readonly value="@valueList[i].ma17value" hidden /><br />
+                                                                <label>Valor do passeio: @ValueConvert.ConvertToReal(valueList[i].ma17value) (Privativo - Até @ma14subtrip.ma14vacancy pessoas)</label><br />
+                                                            }
+
+                                                        }
+                                                        else
+                                                        {
+                                                            @if (ma14subtrip.ma14PartnerDiscountPercent > 0 && Date >= ma14subtrip.ma14InitialDiscountDate && Date <= ma14subtrip.ma14FinalDiscountDate)
+                                                            {
+                                                                double withDiscount = valueList[i].ma17value - (valueList[i].ma17value * (ma14subtrip.ma14PartnerDiscountPercent / 100));
+
+                                                                <input id="Subtrip:@ma14subtrip.ma14idsubtrip-Package:@valueList[i].ma17quantity" readonly value="@withDiscount" hidden /><br />
+                                                                <label>Valor do passeio: @ValueConvert.ConvertToReal(valueList[i].ma17value) @ma14subtrip.ma14PartnerDiscountPercent% (Pacote: @valueList[i].ma17quantity Pessoas)</label><br />
+                                                            }
+                                                            else
+                                                            {
+                                                                <input id="Subtrip:@ma14subtrip.ma14idsubtrip-Package:@valueList[i].ma17quantity" readonly value="@valueList[i].ma17value" hidden /><br />
+                                                                <label>Valor do passeio: @ValueConvert.ConvertToReal(valueList[i].ma17value) (Pacote: @valueList[i].ma17quantity Pessoas)</label><br />
+                                                            }
+                                                        }
+                                                    </div>
+
+                                                }
+                                            }
+                                            @if (ma14subtrip.ma14minPeopleQuantity > 0)
+                                            {
+                                                <label>Quantidade Mínima de Pessoas: @ma14subtrip.ma14minPeopleQuantity </label><br />
+                                            }
+                                            <label>Quantidade Máxima de Pessoas: @ma14subtrip.ma14vacancy<input id="Vacancy:@ma14subtrip.ma14idsubtrip" value="@ma14subtrip.ma14vacancy" hidden readonly /></label><br />
+                                            @foreach (ma16subtripschedule subtripschedule in ma14subtrip.ma16subtripschedule)
+                                            {
+                                                if (subtripschedule.ma16status == "1")
+                                                {
+                                                    string days = subtripschedule.ma16days.Replace(";", " ").Replace("0", "Dom").Replace("1", "Seg").Replace("2", "Ter").Replace("3", "Qua").
+                                                                    Replace("4", "Qui").Replace("5", "Sex").Replace("6", "Sáb");
+                                                    <label>Dias da semana: @days</label>
+                                                    <br />
+                                                    <label>Horário de Entrada: @subtripschedule.ma16entry.ToString(@"hh\:mm") Hrs</label>
+                                                    <br />
+                                                    <label>Duração: @subtripschedule.ma16duration.ToString(@"hh\:mm") Hrs</label>
+                                                    <br />
+                                                }
+                                            }
+                                        </div>
+
+                                        <h4>Serviços</h4>
+                                        <hr>
+                                        @for (int i = 0; i < ma14subtrip.ma11service.ToList().Count(); i++)
+                                        {
+                                            if (ma14subtrip.ma11service.ToList()[i].ma11status == "1")
+                                            {
+                                                <div id="divService:@ma14subtrip.ma14idsubtrip">
+                                                    <div class="row">
+                                                        <div class="col-sm-5">
+
+                                                            <strong>@ma14subtrip.ma11service.ToList()[i].ma11name - @ValueConvert.ConvertToReal(ma14subtrip.ma11service.ToList()[i].ma11Value)</strong>
+                                                            <p>@ma14subtrip.ma11service.ToList()[i].ma11description</p>
+                                                            <dd>
+                                                                <input id="ServiceOf:@ma14subtrip.ma14idsubtrip" name="service" type="text" value="Service:@ma14subtrip.ma11service.ToList()[i].ma11idservice" hidden /><br />
+                                                                <input asp-for="Services[serviceIndex].ServiceID" type="text" value="@ma14subtrip.ma11service.ToList()[i].ma11idservice" hidden />
+                                                                <input id="Service:@ma14subtrip.ma11service.ToList()[i].ma11idservice" class="form-control bfh-number" name="ServiceValue" readonly value="@ma14subtrip.ma11service.ToList()[i].ma11Value" hidden />
+                                                                <p></p>
+                                                            </dd>
+
+                                                        </div>
+                                                        <div class="col-sm-7">
+                                                            <dl class="param param-inline">
+                                                                <dt>Quantidade: </dt>
+                                                                <br />
+                                                                <dd>
+                                                                    <input id="ServiceQuantity:@ma14subtrip.ma11service.ToList()[i].ma11idservice" type="number" asp-for="Services[serviceIndex].Quantity" class="form-control bfh-number" min="@ma14subtrip.ma11service.ToList()[i].ma11minQuantity" value="@ma14subtrip.ma11service.ToList()[i].ma11minQuantity" onchange="checkTotal()" />
+                                                                </dd>
+                                                            </dl>  <!-- item-property .// -->
+                                                        </div> <!-- col.// -->
+                                                    </div> <!-- row.// -->
+                                                </div>
+                                                <hr>
+                                                serviceIndex++;
+                                            }
+                                        }
+                                    </div>
+                                }
+                            }
+                            <p class="price-detail-wrap">
+                                <span class="price h3 text-warning">
+                                    Total:
+                                    <span class="currency"></span><span class="num"></span>
+                                </span>
+                            </p>
+                            <input id="totalValue" readonly type="text" size="2" asp-for="TotalValue" value="@TotalValue.ToString()" hidden />
+                            <a href="javascript:{}" class="btn btn-lg btn-success mt-2" onclick="return submitButton();"> <i class=""></i> Continuar Compra </a>
+                        </article> <!-- card-body.// -->
+                    </aside> <!-- col.// -->
+                </div> <!-- row.// -->
+            </div> <!-- card.// -->
+            <!--container.//-->
+        </form>
+    </div>
+</div>

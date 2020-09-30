@@ -1,0 +1,185 @@
+﻿@inject Matrip.Web.Libraries.Login.UserLogin _userLogin
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="Matrip - Seu Guia de Experiências Turísticas">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" href="~/images/logo-matrip-oficial-01.png" />
+    <title>@ViewData["Title"]</title>
+    <link rel="stylesheet" type="text/css" href="~/css/bootstrap-4.1.2/bootstrap.min.css">
+    <link href="~/plugins/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    @RenderSection("CSS", false)
+    <link rel="stylesheet" type="text/css" href="~/css/contact.css">
+    <link rel="stylesheet" type="text/css" href="~/css/fonts.css">
+    <link rel="stylesheet" type="text/css" href="~/css/body-general-stuff.css">
+    <link rel="stylesheet" type="text/css" href="~/css/header.css">
+    <link rel="stylesheet" type="text/css" href="~/css/menu.css">
+    <link rel="stylesheet" type="text/css" href="~/css/contact_responsive.css">
+    <link rel="stylesheet" type="text/css" href="~/lib/pagedlist/PagedList.css" />
+    <link rel="stylesheet" type="text/css" href="~/css/Print/Print.css" />
+
+    <environment exclude="Development">
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-174932616-1"></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag() { dataLayer.push(arguments); }
+            gtag('js', new Date());
+
+            gtag('config', 'UA-174932616-1');
+        </script>
+    </environment>
+    
+</head>
+<body>
+    <!-- Menu -->
+    <div class="menu">
+        <div class="menu_container text-right">
+            <div class="menu_close">close</div>
+            <nav class="menu_nav">
+                <ul>
+                    <li>
+                        <a asp-controller="Home"
+                           asp-action="Index">Home</a>
+                    </li>
+                    <li>
+                        <a asp-controller="Home"
+                           asp-action="About">Sobre</a>
+                    </li>
+                    <!--<li><a href="listings.html">Listings</a></li>-->
+                    <!--<li><a href="blog.html">Notícias</a></li>-->
+                    <li>
+                        <a asp-controller="Home"
+                           asp-action="Contact">Contato</a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+    <div class="super_container">
+        <!-- Header -->
+        <header class="header no-printme">
+            <div class="header_background"><div class="background_image" style="background-image:url(@Url.Content("~/images/header.jpg"))"></div></div>
+            <div class="header_overlay"></div>
+            <div class="header_content d-flex flex-row align-items-center justify-content-start">
+                <!-- Logo -->
+                <a class="navbar-brand" style="display:block" asp-action="Index" asp-controller="Home"><img width='150' src="~/images/logo-matrip-oficial-01.png" alt="Logo MATrip"></a>
+                <!--<div class="logo"><a href="#">MA<span>Trip</span></a></div>-->
+                <!-- Header Nav -->
+                <div class="header_right d-flex flex-row align-items-center justify-content-start ml-auto">
+                    <nav class="main_nav">
+                        <ul class="d-flex flex-row align-items-center justify-content-start">
+                            @RenderSection("menu")
+                            @if (_userLogin.GetToken() != null)
+                            {
+                                if (_userLogin.GetToken().userType == "admin")
+                                {
+                                    <li><a asp-area="Administrator" asp-controller="ControlPanel" asp-action="Index">Admin</a></li>
+                                }
+                                if (_userLogin.GetToken().userType == "guide")
+                                {
+                                    <li><a asp-area="Guide" asp-controller="GuideControlPanel" asp-action="Index">Parceiro</a></li>
+                                }
+                            }
+                        </ul>
+                    </nav>
+                    <!--<div class="add_listing text-center trans_200"><a href="#">+Add Listing</a></div>-->
+                    <div class="log_reg">
+                        @if (_userLogin.GetToken() == null)
+                        {
+                            <ul class="d-flex flex-row align-items-center justify-content-start">
+                                <li><a asp-controller="Account" asp-action="Login">Login</a></li>
+                                <li><a asp-controller="Account" asp-action="Register">Registrar</a></li>
+                            </ul>
+                        }
+                        else
+                        {
+                            <ul class="d-flex flex-row align-items-center justify-content-start">
+                                <li class="dropdown show">
+                                    <a href="#" role="button" id="dropdownMenuLink" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        Olá, @_userLogin.GetToken().userName.Split(" ")[0]
+                                    </a>
+                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                        <a style="color:black" class="dropdown-item" asp-controller="Home" asp-action="UserConfiguration">Perfil</a>
+                                        <a style="color:black" class="dropdown-item" asp-controller="ShoppingCart" asp-action="Index">Carrinho</a>
+                                        <a style="color:black" class="dropdown-item" href="@Url.Action("GetSaleList","Purchase", new { page = 1 })">Histórico de Compras</a>
+                                    </div>
+
+                                </li>
+                                <li><a asp-controller="Account" asp-action="Logout">Sair</a></li>
+                            </ul>
+                        }
+                    </div>
+                    <div class="hamburger">
+                        <i class="fa fa-bars trans_200"></i>
+                    </div>
+                </div>
+
+            </div>
+        </header>
+
+        <div class="super_container_inner">
+            <div class="super_overlay"></div>
+
+            <!-- Home -->
+
+            <div class="home">
+                @RenderSection("home")
+            </div>
+
+
+            @RenderBody()
+
+            <!-- Footer -->
+
+            <footer class="footer container_custom no-printme">
+                <div class="container">
+                    <div class="row">
+                        <div class="col">
+                            <div class="footer_container d-flex flex-md-row flex-column align-items-center justify-content-md-start justify-content-center">
+                                <div>
+                                    Copyright &copy;
+                                    <script>document.write(new Date().getFullYear());</script> MATrip.
+                                </div>
+                                <nav class="footer_nav ml-md-auto order-md-2 order-1">
+                                    <ul class="d-flex flex-row align-items-center justify-content-start">
+                                        <li><a asp-controller="Home" asp-action="Index">Home</a></li>
+                                        <li><a asp-controller="Home" asp-action="About">Sobre</a></li>
+                                        <!--<li><a href="listings.html">Listings</a></li>-->
+                                        <!--<li><a href="blog.html">Notícias</a></li>-->
+                                        <li><a asp-controller="Home" asp-action="Contact">Contato</a></li>
+                                    </ul>
+                                </nav>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </footer>
+        </div>
+
+    </div>
+
+
+
+    <script src="~/lib/jquery/dist/jquery.js" type="text/javascript"></script>
+    <script src="~/lib/jquery-ui-1.12.1/jquery-ui.js" type="text/javascript"></script>
+    <script src="~/css/bootstrap-4.1.2/popper.js" type="text/javascript"></script>
+    <script src="~/lib/bootstrap-4.4.1-dist/js/bootstrap.min.js" type="text/javascript"></script>
+    <script src="~/lib/bootstrap-4.4.1-dist/js/bootstrap.bundle.js" type="text/javascript"></script>
+    <script src="~/plugins/greensock/TweenMax.min.js" type="text/javascript"></script>
+    <script src="~/plugins/greensock/TimelineMax.min.js" type="text/javascript"></script>
+    <script src="~/plugins/scrollmagic/ScrollMagic.min.js" type="text/javascript"></script>
+    <script src="~/plugins/greensock/animation.gsap.min.js" type="text/javascript"></script>
+    <script src="~/plugins/greensock/ScrollToPlugin.min.js" type="text/javascript"></script>
+    <script src="~/plugins/easing/easing.js" type="text/javascript"></script>
+    <script src="~/plugins/Isotope/isotope.pkgd.min.js" type="text/javascript"></script>
+    <script src="~/plugins/progressbar/progressbar.min.js" type="text/javascript"></script>
+    <script src="~/plugins/parallax-js-master/parallax.min.js" type="text/javascript"></script>
+    <script src="~/lib/mask/jquery.mask.min.js" type="text/javascript"></script>
+
+    @RenderSection("scripts", false)
+
+</body>
+</html>

@@ -1,0 +1,118 @@
+﻿@model X.PagedList.IPagedList<Matrip.Domain.Models.Entities.ma32sale>
+@{
+    ViewData["Title"] = "Histórico de Compras";
+    Layout = "~/Views/Shared/_Layout2.cshtml";
+}
+@section menu{
+    <li><a asp-controller="Home" asp-action="Index">Home</a></li>
+    <li><a asp-controller="Home" asp-action="About">Sobre</a></li>
+    <!--<li><a href="listings.html">Listings</a></li>-->
+    <!--<li><a href="blog.html">Notícias</a></li>-->
+    <li><a asp-controller="Home" asp-action="Contact">Contato</a></li>
+}
+@section home{
+    <div class="parallax_background parallax-window" data-parallax="scroll" data-image-src="../../images/contact.jpg" data-speed="0.8"></div>
+    <div class="home_container">
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    <div class="home_content">
+                        <div class="home_title">Histórico de Compras</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+@section scripts{
+    <!--
+    <script src="~/js/contact.js"></script>-->
+    <script src="~/js/onlyNum.js" type="text/javascript"></script>
+    <script src="~/js/mascara.js" type="text/javascript"></script>
+    <script src="~/js/VisitorActions.js" type="text/javascript"></script>
+}
+
+
+<div class="contact container_custom">
+    <div class="container mt-5">
+
+        <div class="table-responsive">
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th scope="col">Nº da Venda</th>
+                        <th scope="col">Data compra</th>
+                        <th scope="col">Valor</th>
+                        <th scope="col">Forma pagamento</th>
+                        <th scope="col">Situação</th>
+                        <th scope="col">Ações</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model.Count() > 0)
+                    {
+                        @for (int i = 0; i < Model.Count(); i++)
+                        {
+                            <tr>
+                                
+                                <td>@Model[i].ma32idSale</td>
+                                <td>@Model[i].ma32SaleDate.ToString("dd/MM/yyyy")</td>
+                                <td>@ValueConvert.ConvertToReal(Model[i].ma24payment.Sum(e => e.ma24paymentValue))</td>
+                                <td>
+                                    @for (int j = 0; j < Model[i].ma24payment.Count(); j++)
+                                    {
+                                        @if (j > 0)
+                                        {
+                                            @Html.Raw(" / ")
+                                        }
+                                        @if (Model[i].ma24payment.ToList()[j].ma24CreditCard)
+                                        {
+                                            @Html.Raw("Cartão de Crédito")
+                                        }
+                                        else
+                                        {
+                                            @Html.Raw("Transferência")
+                                        }
+                                    }
+                                </td>
+                                @if (Model[i].ma32situation == 1)
+                                {
+                                    <td>Pago</td>
+                                }
+                                else if (Model[i].ma32situation == 0)
+                                {
+                                    <td>Cancelado</td>
+                                }
+                                else if (Model[i].ma32situation == 3)
+                                {
+                                    <td>Aguardando Transferência</td>
+                                }
+                                <td>
+                                    <a asp-area="" asp-action="GetSale" asp-controller="Purchase" asp-route-id="@Model[i].ma32idSale">Visualizar Venda</a> /
+                                    <a asp-area="" asp-action="ConsultContract" asp-controller="Purchase" asp-route-id="@Model[i].ma32idSale">Ver Contrato</a>
+                                </td>
+                            </tr>
+                        }
+                    }
+                    else
+                    {
+                        <tr>
+                            <td>Sem Registros</td>
+                            <td>-</td>
+                            <td>-</td>
+                            <td>-</td>
+                            <td>-</td>
+                            <td>-</td>
+                            <td>
+                                <a>-</a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+        <div id='Paging' class="text-center" style="text-align:center">
+            @Html.PagedListPager((IPagedList)Model, page => Url.Action("GetSaleList", "Purchase", new { page = page }))
+        </div>
+    </div>
+</div>

@@ -1,0 +1,220 @@
+﻿@inject Matrip.Web.Libraries.Login.UserLogin _userLogin
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+    <meta name="generator" content="Jekyll v3.8.5">
+    <link rel="icon" href="~/images/logo-matrip-oficial-01.png" />
+    <title>@ViewBag.Title</title>
+
+    <link href="~/css/StyleSheet.css" rel="stylesheet" type="text/css" />
+
+    <!-- Bootstrap core CSS -->
+    <link href="~/css/bootstrap-4.1.2/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/lib/pagedlist/PagedList.css" rel="stylesheet" type="text/css" />
+    <link href="~/lib/jquery-ui-1.12.1/jquery-ui.css" rel="stylesheet" type="text/css" />
+    @RenderSection("css", false)
+
+    <style>
+        .anchorbutton {
+            display: block;
+            width: 115px;
+            height: 25px;
+            background: #4E9CAF;
+            padding: 10px;
+            text-align: center;
+            border-radius: 5px;
+            color: white;
+            font-weight: bold;
+            line-height: 25px;
+        }
+
+        .bd-placeholder-img {
+            font-size: 1.125rem;
+            text-anchor: middle;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+
+        @@media (min-width: 768px) {
+            .bd-placeholder-img-lg {
+                font-size: 3.5rem;
+            }
+        }
+    </style>
+    <!-- Custom styles for this template -->
+    <link href="~/lib/dashboard/dashboard.css" rel="stylesheet">
+</head>
+<body>
+    <nav class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow">
+        @if (_userLogin.GetToken().userType == "admin")
+        {
+            <a class="navbar-brand col-sm-3 col-md-2 mr-0" asp-area="Administrator" asp-controller="ControlPanel" asp-action="Index">Matrip Admin</a>
+        }
+        else if (_userLogin.GetToken().userType == "guide")
+        {
+            <a class="navbar-brand col-sm-3 col-md-2 mr-0" asp-area="Guide" asp-controller="GuideControlPanel" asp-action="Index">Matrip Guia</a>
+        }
+
+        <ul class="navbar-nav px-3">
+            <li class="nav-item text-nowrap">
+                <a class="nav-link" asp-action="Logout" asp-controller="Account" asp-area="">Sair</a>
+            </li>
+        </ul>
+    </nav>
+
+    <div class="container-fluid">
+        <div class="row">
+            <nav class="col-md-2 d-none d-md-block bg-light sidebar">
+                <div class="sidebar-sticky">
+                    <ul class="nav flex-column">
+                        @if (_userLogin.GetToken().userType == "admin")
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link" asp-action="Painel">
+                                    <span data-feather="home"></span>
+                                    Painel de Controle
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link active" asp-action="AddGuide" asp-controller="AdminGuide" asp-area="Administrator">
+                                    <span data-feather="file"></span>
+                                    Adicionar Guia
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link active" asp-area="Administrator" asp-action="GetPartners" asp-controller="AdminPartner">
+                                    <span data-feather="file"></span>
+                                    Parceiros
+                                </a>
+                            </li>
+                            /*
+                            <li class="nav-item">
+                                <a class="nav-link" asp-action="Index" asp-controller="Categoria">
+                                    <span data-feather="file"></span>
+                                    Categorias
+                                </a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link" asp-action="Index" asp-controller="Produto">
+                                    <span data-feather="shopping-cart"></span>
+                                    Produtos
+                                </a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link" asp-controller="Cliente" asp-action="Index">
+                                    <span data-feather="users"></span>
+                                    Cliente
+                                </a>
+                            </li>
+                            */
+                            <li class="nav-item">
+                                <a class="nav-link" asp-controller="AdminSalesReport" asp-action="AdminSearchPartner">
+                                    <span data-feather="file-text"></span>
+                                    Relatórios
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" asp-controller="AdminTrip" asp-action="AddTrip" asp-area="Administrator">
+                                    <span data-feather="plus-circle"></span>
+                                    Adicionar Passeio
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" asp-controller="AdminTrip" asp-action="SearchTrip" asp-area="Administrator">
+                                    <span data-feather="file-text"></span>
+                                    Procurar Passeio
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" asp-controller="AdminCity" asp-action="SearchCity" asp-area="Administrator">
+                                    <span data-feather="file-text"></span>
+                                    Procurar Cidade
+                                </a>
+                            </li>
+                        }
+                        else if (_userLogin.GetToken().userType == "guide")
+                        {
+                            /*
+                            <li class="nav-item">
+                                <a class="nav-link" asp-area="Guide" asp-action="AddPartner" asp-controller="GuidePartner">
+                                    <span data-feather="plus-circle"></span>
+                                    Adicionar Parceiro
+                                </a>
+                            </li>*/
+                            <li class="nav-item">
+                                <a class="nav-link" asp-area="Guide" asp-action="SearchPartner" asp-controller="SalesReport">
+                                    <span data-feather="file"></span>
+                                    Relatórios
+                                </a>
+                            </li>
+                        }
+
+                    </ul>
+
+                    <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
+                        <span>Ações</span>
+                        <a class="d-flex align-items-center text-muted" href="#">
+                            <span data-feather="plus-circle"></span>
+                        </a>
+                    </h6>
+                    <ul class="nav flex-column mb-2">
+                        <li class="nav-item">
+                            <a class="nav-link" asp-action="Index" asp-controller="Home" asp-area="">
+                                <span data-feather="home"></span>
+                                Voltar ao Início
+                            </a>
+                        </li>
+                        <!--
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">
+                                <span data-feather="file-text"></span>
+                                Last quarter
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">
+                                <span data-feather="file-text"></span>
+                                Social engagement
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">
+                                <span data-feather="file-text"></span>
+                                Year-end sale
+                            </a>
+                        </li>
+                        -->
+                    </ul>
+
+                </div>
+            </nav>
+
+            <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
+
+                @RenderBody()
+
+            </main>
+        </div>
+    </div>
+    <script src="~/lib/jquery3.3.1/jquery-3.3.1.min.js"></script>
+    <script>window.jQuery || document.write('<script src="/lib/jquery3.3.1/jquery-3.3.1.min.js"><\/script>')</script>
+    <script src="~/lib/jquery-ui-1.12.1/jquery-ui.js"></script>
+    <script src="~/lib/mask/jquery.mask.min.js"></script>
+
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/lib/feather/feather.js"></script>
+    <script src="~/lib/charts/charts.js"></script>
+    <script src="~/lib/dashboard/dashboard.js"></script>
+
+
+    @RenderSection("script", false)
+</body>
+</html>

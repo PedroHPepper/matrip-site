@@ -1,0 +1,56 @@
+﻿@model Matrip.Domain.Models.Entities.ma05trip
+@{
+    ViewData["Title"] = "RegisterTrip";
+    Layout = "~/Areas/Administrator/Views/Shared/_Layout.cshtml";
+}
+
+<h1>RegisterTrip</h1>
+
+<form>
+    <div class="form-group">
+        <label asp-for="ma05name">Nome do Passeio</label>
+        <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Nome do Passeio">
+    </div>
+    <div class="form-group">
+        <label asp-for="FK0506idtripcategory">Categoria do Passeio</label>
+        <select class="form-control" id="exampleFormControlSelect1">
+            <option value="1">Aventura</option>
+            <option value="2">Shows</option>
+            <option value="3">Ecológico</option>
+            <option value="4">Cultural</option>
+            <option value="5">Diversos</option>
+        </select>
+    </div>
+    
+    <div class="form-group">
+        <label asp-for="ma05transfer">Translado</label>
+        <select class="form-control" id="exampleFormControlSelect1">
+            <option value="1">Sim</option>
+            <option value="0">Não</option>
+        </select>
+    </div>
+    
+    
+    
+    <div class="form-group">
+        <label asp-for="ma05accompanyingchild">Permite crianças</label>
+        <select class="form-control" id="exampleFormControlSelect1">
+            <option value="1">Sim</option>
+            <option value="0">Não</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="FK0509idcity">Cidade</label>
+        <select class="form-control" id="exampleFormControlSelect1">
+            <option value="1">São Luís</option>
+        </select>
+    </div>
+
+    <!--
+    <div class="form-group">
+        <label asp-for="ma">Example textarea</label>
+        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+    </div>
+    -->
+</form>
