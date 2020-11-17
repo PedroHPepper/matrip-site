@@ -78,5 +78,29 @@ namespace Matrip.Web.Libraries.Archive
                 await file.CopyToAsync(fileStream);
             }
         }
+
+
+        public static async Task AddFeedbackImage(IFormFile file, ma39tripEvaluation tripEvaluation)
+        {
+            string imagePath = "/images/evaluationPhotos/";
+
+            string uploadPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", imagePath.TrimStart('/'));
+            if (!Directory.Exists(uploadPath))
+            {
+                Directory.CreateDirectory(uploadPath);
+            }
+            // string evaluationPhotoPath
+            var FileName = tripEvaluation.ma39photoPath + ".jpg";
+            var FullPath = uploadPath + FileName;
+            imagePath = imagePath + @"\";
+
+
+            using (var fileStream = new FileStream(FullPath, FileMode.Create))
+            {
+                await file.CopyToAsync(fileStream);
+            }
+            var filePath = @".." + Path.Combine(imagePath, FileName);
+        }
+
     }
 }

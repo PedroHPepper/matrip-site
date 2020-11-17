@@ -89,7 +89,8 @@
                                 }
                                 <td>
                                     <a asp-area="" asp-action="GetSale" asp-controller="Purchase" asp-route-id="@Model[i].ma32idSale">Visualizar Venda</a> /
-                                    <a asp-area="" asp-action="ConsultContract" asp-controller="Purchase" asp-route-id="@Model[i].ma32idSale">Ver Contrato</a>
+                                    <a asp-area="" asp-action="ConsultContract" asp-controller="Purchase" asp-route-id="@Model[i].ma32idSale">Ver Contrato</a> /
+                                    <a asp-area="" asp-action="Index" asp-controller="Feedback" asp-route-SaleID="@Model[i].ma32idSale">Avaliar</a>
                                 </td>
                             </tr>
                         }

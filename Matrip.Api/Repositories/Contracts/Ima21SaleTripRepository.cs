@@ -4,5 +4,6 @@ namespace Matrip.Web.Repositories.Contracts
 {
     public interface Ima21SaleTripRepository : IBaseRepository<ma21saleTrip>
     {
+        ma21saleTrip GetSaleTripToFeedback(int SaleTripID);
     }
 }

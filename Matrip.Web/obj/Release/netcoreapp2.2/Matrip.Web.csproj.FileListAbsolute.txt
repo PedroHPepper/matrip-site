@@ -170,3 +170,4 @@ C:\Users\Cliente\OneDrive\Área de Trabalho\Projetos\Projeto Matrip\Matrip\Matri
 C:\Users\Cliente\OneDrive\Área de Trabalho\Projetos\Projeto Matrip\Matrip\Matrip.Web\obj\Release\netcoreapp2.2\Razor\Areas\Administrator\Views\AdminPartner\GetPartners.cshtml.g.cs
 C:\Users\Cliente\OneDrive\Área de Trabalho\Projetos\Projeto Matrip\Matrip\Matrip.Web\obj\Release\netcoreapp2.2\Razor\Areas\Administrator\Views\AdminPartner\UpdatePartner.cshtml.g.cs
 C:\Users\Cliente\OneDrive\Área de Trabalho\Projetos\Projeto Matrip\Matrip\Matrip.Web\obj\Release\netcoreapp2.2\Razor\Views\Feedback\Index.cshtml.g.cs
+C:\Users\Cliente\OneDrive\Área de Trabalho\Projetos\Projeto Matrip\Matrip\Matrip.Web\obj\Release\netcoreapp2.2\Razor\Views\Feedback\EvaluateTrip.cshtml.g.cs

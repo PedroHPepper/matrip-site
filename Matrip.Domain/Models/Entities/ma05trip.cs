@@ -48,5 +48,8 @@ namespace Matrip.Domain.Models.Entities
 
         [ForeignKey("FK2105idtrip")]
         public virtual ICollection<ma21saleTrip> ma21saleTrip { get; set; }
+
+        [ForeignKey("FK3905idTrip")]
+        public virtual ICollection<ma39tripEvaluation> ma39tripEvaluation { get; set; }
     }
 }

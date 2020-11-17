@@ -1,4 +1,4 @@
-﻿
+﻿@model Matrip.Domain.Models.Entities.ma32sale
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_Layout2.cshtml";
@@ -28,8 +28,43 @@
 @section scripts{
     
 }
+<div class="contact container_custom">
+    <div class="container mt-5">
+        <div class="table-responsive">
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th scope="col">Nome do Passeio</th>
+                        <th scope="col">Nome do Roteiro</th>
+                        <th scope="col">Data compra</th>
+                        <th scope="col">Ações</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @for (int i = 0; i < Model.ma21saleTrip.Count(); i++)
+                    {
+                        <tr>
+                            <th>@Model.ma21saleTrip.ToList()[i].ma05trip.ma05name</th>
+                            <th>@Model.ma21saleTrip.ToList()[i].ma22subtripsale.ToList().FirstOrDefault().ma14subtrip.ma14name</th>
+                            <th>@Model.ma21saleTrip.ToList()[i].ma21date.ToString("dd/MM/yyyy")</th>
+                            <th>
+                                @if (Model.ma21saleTrip.ToList()[i].ma21date > DateConvert.HrBrasilia())
+                                {
+                                    <a asp-action="EvaluateTrip" asp-controller="Feedback" asp-route-SaleTripID="@Model.ma21saleTrip.ToList()[i].ma21idSaleTrip">Avaliar</a>
+                                }
+                                else
+                                {
 
-<div class="mt-5">
+                                }
+                            </th>
+                        </tr>
+                    }
 
+                </tbody>
+            </table>
+        </div>
+
+    </div>
 </div>
+
 

@@ -1,0 +1,51 @@
+﻿@inject Matrip.Web.Libraries.Login.UserLogin _userLogin
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout2.cshtml";
+
+    ma21saleTrip saleTrip = ViewBag.SaleTrip;
+}
+
+@section menu{
+    <li><a asp-controller="Home" asp-action="Index">Home</a></li>
+    <li><a asp-controller="Home" asp-action="About">Sobre</a></li>
+    <!--<li><a href="listings.html">Listings</a></li>-->
+    <!--<li><a href="blog.html">Notícias</a></li>-->
+    <li><a asp-controller="Home" asp-action="Contact">Contato</a></li>
+}
+@section home{
+    <div class="parallax_background parallax-window" data-parallax="scroll" data-image-src="../../images/contact.jpg" data-speed="0.8"></div>
+    <div class="home_container">
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    <div class="home_content">
+                        <div class="home_title">Avalie Seus Passeios!</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+@section scripts{
+
+}
+
+
+<div class="contact container_custom">
+    <div class="container mt-5">
+        <div class="table-responsive">
+            <form method="post" asp-action="EvaluateTrip" asp-controller="Feedback">
+                <input readonly hidden name="ma39UserName" value="@_userLogin.GetToken().userName" />
+                <textarea name="ma39Feedback" required></textarea>
+                <input hidden readonly name="ma39photoPath" value="@saleTrip.FK2105idtrip-@saleTrip.ma21idSaleTrip"/>
+            </form>
+
+        </div>
+
+    </div>
+</div>
+
+
+
+

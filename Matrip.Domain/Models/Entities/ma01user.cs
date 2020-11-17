@@ -29,5 +29,7 @@ namespace Matrip.Domain.Models.Entities
         public virtual ICollection<ma10userlanguages> ma10userlanguages { get; set; }
         [ForeignKey("FK0201iduser")]
         public virtual ICollection<ma02profile> ma02profile { get; set; }
+        [ForeignKey("FK3901idUser")]
+        public virtual ICollection<ma39tripEvaluation> ma39tripEvaluation { get; set; }
     }
 }

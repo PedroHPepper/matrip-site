@@ -371,7 +371,7 @@
                                                 </div>
                                                 <div>
                                                     <label>Valor da Unidade</label>
-                                                    <input class="form-control money" asp-for="SubtripModelList[i].ma11serviceList[j].ma11Value" value="@Model.SubtripModelList[i].ma11serviceList[j].ma11Value" required />
+                                                    <input class="form-control money" asp-for="SubtripModelList[i].ma11serviceList[j].ma11Value" value="@Model.SubtripModelList[i].ma11serviceList[j].ma11Value.ToString("N2")" required />
                                                 </div>
                                                 <div>
                                                     <label>Status do Item</label>

@@ -60,5 +60,20 @@ namespace Matrip.Web.Repositories
             }
             return null;
         }
+
+        public ma32sale GetSaleToFeedback(int SaleID)
+        {
+            var query = _DbContext.ma32sale.Where(e => e.ma32idSale == SaleID)
+                .Include(e => e.ma21saleTrip).ThenInclude(e => e.ma05trip).ThenInclude(e => e.ma09city).ThenInclude(e => e.ma08uf)
+                .Include(e => e.ma21saleTrip).ThenInclude(e => e.ma22subtripsale)
+                    .ThenInclude(e => e.ma14subtrip).ThenInclude(e => e.ma17SubtripValue)
+                .Include(e => e.ma21saleTrip).ThenInclude(e => e.ma39tripEvaluation)
+                .Include(e => e.ma21saleTrip).ThenInclude(e => e.ma22subtripsale).ThenInclude(e => e.ma14subtrip);
+            if (query.Any())
+            {
+                return query.FirstOrDefault();
+            }
+            return null;
+        }
     }
 }

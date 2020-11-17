@@ -151,7 +151,7 @@ namespace Matrip.Web
             services.AddScoped<Ima34TransferencePendenciesRepository, ma34TransferencePendenciesRepository>();
             services.AddScoped<Ima35cityphotoRepository, ma35cityphotoRepository>();
             services.AddScoped<Ima36SubtripGroupRepository, ma36SubtripGroupRepository>();
-
+            services.AddScoped<Ima39tripEvaluationRepository, ma39tripEvaluationRepository>();
             services.AddScoped<EmailManagement>();
             #endregion
 

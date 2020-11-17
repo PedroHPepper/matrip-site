@@ -8,5 +8,6 @@ namespace Matrip.Web.Repositories.Contracts
         IPagedList<ma32sale> GetSaleList(int userID, int? page);
         ma32sale GetSale(int SaleID);
         ma32sale GetLastSale();
+        ma32sale GetSaleToFeedback(int SaleID);
     }
 }
