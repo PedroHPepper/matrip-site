@@ -65,6 +65,7 @@ namespace Matrip.Web.Repositories
                 .Include(e => e.ma14subtrip).ThenInclude(e => e.ma11service)
                 .Include(e => e.ma14subtrip).ThenInclude(e => e.ma25partner)
                 .Include(e => e.ma14subtrip).ThenInclude(e => e.ma12SubtripGuide).ThenInclude(e => e.ma04guide)
+                .Include(e => e.ma39tripEvaluation)
                 .Where(e => e.ma05idtrip == TripID);
             if (query.Any())
             {
@@ -127,6 +128,19 @@ namespace Matrip.Web.Repositories
                 Include(e => e.ma14subtrip).ThenInclude(e => e.ma11service).
                 Include(e => e.ma14subtrip).ThenInclude(e => e.ma12SubtripGuide).ThenInclude(e => e.ma04guide).
                 Where(e => e.ma05idtrip == TripID);
+            if (query.Any())
+            {
+                return query.First();
+            }
+            return null;
+        }
+
+
+        public ma05trip GetEvaluatedTrip(string TripName)
+        {
+            var query = _DbContext.ma05trip.AsNoTracking()
+                .Include(e => e.ma39tripEvaluation)
+                .Where(e => e.ma05name == TripName);
             if (query.Any())
             {
                 return query.First();

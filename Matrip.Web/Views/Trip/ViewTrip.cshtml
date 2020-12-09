@@ -139,12 +139,12 @@
                             <input hidden readonly asp-for="TripID" value="@Trip.ma05idtrip" />
                             <!-- price-detail-wrap .// -->
                             <!--<dl class="item-property">
-    <dt>Descrição</dt>
-    <dd>
-        <p>
-            aqui se colocaria a descrição do passeio
-        </p>
-    </dd>    </dl>-->
+                            <dt>Descrição</dt>
+                            <dd>
+                                <p>
+                                    aqui se colocaria a descrição do passeio
+                                </p>
+                            </dd>    </dl>-->
                             <div id="ErrorArea">
                                 <div id="Div_MSG_E" style="display:none" class="alert alert-danger alert-dismissible fade show" role="alert">
                                     <p id="MSG_E" style="color:brown"></p>
@@ -153,7 +153,7 @@
                                     </button>
                                 </div>
                             </div>
-                            
+
                             <!--<p id="MSG_E" style="display:none" class="alert alert-danger"></p>-->
 
                             <h6>Passeios: </h6>
@@ -387,4 +387,12 @@
             <!--container.//-->
         </form>
     </div>
+
+    @foreach (ma39tripEvaluation evaluation in Trip.ma39tripEvaluation)
+    {
+        <p>@evaluation.ma39Feedback</p>
+    }
+
+
 </div>
+

@@ -85,7 +85,10 @@ namespace Matrip.Web.Controllers
         {
             TokenModel JWToken = _userLogin.GetToken();
             client.DefaultRequestHeaders.Add("Authorization", "Bearer " + JWToken.token);
-
+            if (file != null)
+            {
+                tripEvaluation.ma39photoQuantity = 1;
+            }
             string json = JsonConvert.SerializeObject(tripEvaluation);
             HttpResponseMessage response = await client.PostAsync("Feedback/PostFeedback", new StringContent(json, Encoding.UTF8, "application/json"));
             if (response.IsSuccessStatusCode)

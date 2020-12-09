@@ -1,0 +1,69 @@
+﻿@model ma05trip
+@{
+    ViewData["Title"] = "ViewTripEvaluations";
+    Layout = "~/Areas/Administrator/Views/Shared/_Layout.cshtml";
+}
+
+    <div class="mt-5">
+        @{ await Html.RenderPartialAsync("~/Views/Shared/_Message.cshtml"); }
+        
+        <div class="row">
+            <div class="col-md-12">
+                <h1>Avaliações do Passeio @Model.ma05name</h1>
+                <table class="table table-bordered">
+                    <tr>
+                        <td><strong>Nome do Turista</strong></td>
+                        <td><strong>Avaliação do Turista</strong></td>
+                        <td><strong>Status</strong></td>
+                        <td><strong>Foto</strong></td>
+
+                    </tr>
+                    @for (int i = 0; i < Model.ma39tripEvaluation.ToList().Count(); i++)
+                    {
+                        <tr>
+                            <td>@Model.ma39tripEvaluation.ToList()[i].ma39UserName</td>
+                            <td>@Model.ma39tripEvaluation.ToList()[i].ma39Feedback</td>
+                            <td>
+                                @if (Model.ma39tripEvaluation.ToList()[i].ma39FeedbackAproved == "0")
+                                {
+                                    <a href="@Url.Action("ApproveEvaluation","Evaluation",
+                                                new { Area = "Administrator",
+                                                TripName = Model.ma05name,
+                                                EvaluationID = Model.ma39tripEvaluation.ToList()[i].ma39idTripEvaluation
+                                                })">Aprovar</a>
+                                }
+                                else
+                                {
+                                    <p>Aprovado</p>
+                                    <a href="@Url.Action("DisapproveEvaluation","Evaluation",
+                                                new { Area = "Administrator",
+                                                TripName = Model.ma05name,
+                                                EvaluationID = Model.ma39tripEvaluation.ToList()[i].ma39idTripEvaluation
+                                                })">Cancelar Aprovação</a>
+                                }
+                            </td>
+                            
+                            <td>
+                                @if (Model.ma39tripEvaluation.ToList()[i].ma39photoQuantity > 0)
+                                {
+                                    <img width="400" src="@Url.Content("~/images/evaluationPhotos/"+ Model.ma39tripEvaluation.ToList()[i].ma39photoPath +".jpg")" />
+                                }
+
+                            </td>
+                        </tr>
+                    }
+
+
+
+                </table>
+
+
+
+            </div>
+
+        </div>
+        
+
+
+
+    </div>

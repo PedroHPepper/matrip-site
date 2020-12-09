@@ -12,5 +12,7 @@ namespace Matrip.Web.Repositories.Contracts
         ma05trip GetTrip(string TripName);
         List<ma05trip> GetSearchTrip(string TripNameText);
         List<ma05trip> GetGuideTripList(int GuideID);
+
+        ma05trip GetEvaluatedTrip(string TripName);
     }
 }

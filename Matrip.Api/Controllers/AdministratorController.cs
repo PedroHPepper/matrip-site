@@ -44,11 +44,19 @@ namespace Matrip.Api.Controllers
         }
 
         
-
+        /// <summary>
+        /// Pesquisa somente os relatórios de um parceiro específico
+        /// </summary>
+        /// <param name="PartnerName">Nome do Parceiro</param>
+        /// <param name="initialDate">Data Inicial</param>
+        /// <param name="finalDate">Data Final</param>
+        /// <param name="DateType">Se for 1, pesquisa por data da compra e, se for outro valor, pesquisa por data do passeio</param>
+        /// <returns>Retorna o resultado da pesquisa</returns>
         [HttpGet("PartnerReport")]
         public async Task<IActionResult> PartnerReport(string PartnerName, DateTime initialDate, DateTime finalDate, int DateType)
         {
             ma01user user = await _userManager.GetUserAsync(HttpContext.User);
+            //Se não for adm, retorna como não autorizado
             if (user.ma01type != "admin")
             {
                 return Unauthorized();
@@ -76,11 +84,18 @@ namespace Matrip.Api.Controllers
             };
             return Ok(saleReport);
         }
-
+        /// <summary>
+        /// Pesquisa todos os relatórios que estão dentro dos parâmetros especificados, sem especificar parceiros
+        /// </summary>
+        /// <param name="initialDate">Data Inicial</param>
+        /// <param name="finalDate">Data Final</param>
+        /// <param name="DateType">Se for 1, pesquisa por data da compra e, se for outro valor, pesquisa por data do passeio</param>
+        /// <returns>Retorna o resultado da pesquisa</returns>
         [HttpGet("GetCompleteReport")]
         public async Task<IActionResult> GetCompleteReport(DateTime initialDate, DateTime finalDate, int DateType)
         {
             ma01user user = await _userManager.GetUserAsync(HttpContext.User);
+            //Se não for adm, retorna como não autorizado
             if (user.ma01type != "admin")
             {
                 return Unauthorized();
@@ -110,7 +125,11 @@ namespace Matrip.Api.Controllers
             };
             return Ok(saleReport);
         }
-
+        /// <summary>
+        /// Responsável por dar baixa na venda, por parte do administrador
+        /// </summary>
+        /// <param name="SaleID">ID da venda</param>
+        /// <returns>Retorna Ok ou BadRequest</returns>
         [HttpGet("TerminateSale")]
         public async Task<IActionResult> TerminateSale(int SaleID)
         {
@@ -132,6 +151,11 @@ namespace Matrip.Api.Controllers
                 return BadRequest();
             }
         }
+        /// <summary>
+        /// Cancela a baixa da venda, voltando ao estado anterior
+        /// </summary>
+        /// <param name="SaleID">ID da venda</param>
+        /// <returns>Retorna Ok ou BadRequest</returns>
         [HttpGet("UnterminateSale")]
         public async Task<IActionResult> UnterminateSale(int SaleID)
         {
@@ -153,7 +177,11 @@ namespace Matrip.Api.Controllers
                 return BadRequest();
             }
         }
-
+        /// <summary>
+        /// Dar baixa na transferência bancária
+        /// </summary>
+        /// <param name="SaleID">ID da venda</param>
+        /// <returns>Retorna Ok ou BadRequest</returns>
         [HttpGet("TerminateTransferenceStatus")]
         public async Task<IActionResult> TerminateTransferenceStatus(int SaleID)
         {
@@ -189,7 +217,11 @@ namespace Matrip.Api.Controllers
                 return BadRequest(e.Message);
             } 
         }
-
+        /// <summary>
+        /// Cancela a baixa da transferência bancária
+        /// </summary>
+        /// <param name="SaleID">ID da venda</param>
+        /// <returns>Retorna Ok ou BadRequest</returns>
         [HttpGet("DisapproveTransferenceStatus")]
         public async Task<IActionResult> DisapproveTransferenceStatus(int SaleID)
         {
@@ -225,7 +257,11 @@ namespace Matrip.Api.Controllers
                 return BadRequest(e.Message);
             }
         }
-
+        /// <summary>
+        /// Cancela a venda
+        /// </summary>
+        /// <param name="SaleID">ID da venda</param>
+        /// <returns>Retorna Ok ou BadRequest</returns>
         [HttpGet("CancelSale")]
         public async Task<IActionResult> CancelSale(int SaleID)
         {

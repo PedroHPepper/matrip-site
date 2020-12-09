@@ -24,13 +24,14 @@ namespace Matrip.Api.Controllers
         private Ima21SaleTripRepository _ma21SaleTripRepository;
         private EmailManagement _emailManagement;
         private Ima39tripEvaluationRepository _ma39tripEvaluationRepository;
+        private Ima05TripRepository _ma05TripRepository;
         private DateTime dateTimeNow = DateConvert.HrBrasilia();
 
         public FeedbackController(ApplicationDbContext context,
              Ima32saleRepository saleRepository, UserManager<ma01user> userManager, Ima22SubTripSaleRepository subTripSaleRepository,
             Ima28SaleTouristRepository saleTouristRepository, Ima23ServiceSaleRepository serviceSaleRepository,
             Ima16SubTripScheduleRepository subTripScheduleRepository, Ima21SaleTripRepository saleTripRepository,
-            Ima39tripEvaluationRepository ma39tripEvaluationRepository, EmailManagement emailManagement)
+            Ima39tripEvaluationRepository ma39tripEvaluationRepository, EmailManagement emailManagement, Ima05TripRepository tripRepository)
         {
             _userManager = userManager;
             _dbContext = context;
@@ -38,6 +39,7 @@ namespace Matrip.Api.Controllers
             _ma21SaleTripRepository = saleTripRepository;
             _ma39tripEvaluationRepository = ma39tripEvaluationRepository;
             _emailManagement = emailManagement;
+            _ma05TripRepository = tripRepository;
         }
 
 
@@ -91,5 +93,74 @@ namespace Matrip.Api.Controllers
                 return BadRequest("Não foi possível adicionar a avaliação.");
             }
         }
+
+        [Authorize]
+        [HttpGet("GetAllEvaluations")]
+        public async Task<IActionResult> GetAllEvaluations(string TripName)
+        {
+            try
+            {
+                ma01user user = await _userManager.GetUserAsync(HttpContext.User);
+                if(user.ma01type != "admin" && user.ma01type != "guide")
+                {
+                    return Unauthorized();
+                }
+                ma05trip EvaluatedTrip = _ma05TripRepository.GetEvaluatedTrip(TripName);
+
+                return Ok(EvaluatedTrip);
+            }
+            catch (Exception)
+            {
+                return BadRequest("Não foi possível encontrar as avaliações.");
+            }
+        }
+
+        [Authorize]
+        [HttpGet("ApproveEvaluation/{EvaluationID}")]
+        public async Task<IActionResult> ApproveEvaluation(int EvaluationID)
+        {
+            try
+            {
+                ma01user user = await _userManager.GetUserAsync(HttpContext.User);
+                if (user.ma01type != "admin" && user.ma01type != "guide")
+                {
+                    return Unauthorized();
+                }
+                ma39tripEvaluation tripEvaluation = _ma39tripEvaluationRepository.GetById(EvaluationID);
+                tripEvaluation.ma39FeedbackAproved = "1";
+                _ma39tripEvaluationRepository.Update(tripEvaluation);
+
+                return Ok();
+            }
+            catch (Exception)
+            {
+                return BadRequest("Não foi possível aprovar a avaliação!");
+            }
+        }
+
+        [Authorize]
+        [HttpGet("DisapproveEvaluation/{EvaluationID}")]
+        public async Task<IActionResult> DisapproveEvaluation(int EvaluationID)
+        {
+            try
+            {
+                ma01user user = await _userManager.GetUserAsync(HttpContext.User);
+                if (user.ma01type != "admin" && user.ma01type != "guide")
+                {
+                    return Unauthorized();
+                }
+                ma39tripEvaluation tripEvaluation = _ma39tripEvaluationRepository.GetById(EvaluationID);
+                tripEvaluation.ma39FeedbackAproved = "0";
+                _ma39tripEvaluationRepository.Update(tripEvaluation);
+
+                return Ok();
+            }
+            catch (Exception)
+            {
+                return BadRequest("Não foi possível aprovar a avaliação!");
+            }
+        }
+
+
     }
 }

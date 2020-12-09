@@ -42,10 +42,9 @@ namespace Matrip.Web.Areas.Administrator.Controllers
                 client.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
             }
         }
-        public IActionResult Index()
-        {
-            return View();
-        }
+        
+
+        
         [HttpGet]
         public IActionResult AddTrip()
         {
