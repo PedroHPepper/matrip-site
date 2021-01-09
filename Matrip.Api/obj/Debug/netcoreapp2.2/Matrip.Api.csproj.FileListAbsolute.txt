@@ -23,9 +23,6 @@ C:\Users\Cliente\OneDrive\Área de Trabalho\Projetos\Matrip.Api\Matrip.Web\obj\D
 C:\Users\Cliente\OneDrive\Área de Trabalho\Projetos\Matrip.Api\Matrip.Web\obj\Debug\netcoreapp2.2\Matrip.Api.dll
 C:\Users\Cliente\OneDrive\Área de Trabalho\Projetos\Matrip.Api\Matrip.Web\obj\Debug\netcoreapp2.2\Matrip.Api.pdb
 C:\Users\Cliente\OneDrive\Área de Trabalho\Projetos\Matrip.Api\Matrip.Web\obj\Debug\netcoreapp2.2\Matrip.Api.csproj.CopyComplete
-C:\Users\Cliente\OneDrive\Área de Trabalho\Projetos\Projeto Matrip\Matrip\Matrip.Api\bin\Debug\netcoreapp2.2\appsettings.Development.json
-C:\Users\Cliente\OneDrive\Área de Trabalho\Projetos\Projeto Matrip\Matrip\Matrip.Api\bin\Debug\netcoreapp2.2\appsettings.json
-C:\Users\Cliente\OneDrive\Área de Trabalho\Projetos\Projeto Matrip\Matrip\Matrip.Api\bin\Debug\netcoreapp2.2\Properties\launchSettings.json
 C:\Users\Cliente\OneDrive\Área de Trabalho\Projetos\Projeto Matrip\Matrip\Matrip.Api\bin\Debug\netcoreapp2.2\Matrip.Api.deps.json
 C:\Users\Cliente\OneDrive\Área de Trabalho\Projetos\Projeto Matrip\Matrip\Matrip.Api\bin\Debug\netcoreapp2.2\Matrip.Api.runtimeconfig.json
 C:\Users\Cliente\OneDrive\Área de Trabalho\Projetos\Projeto Matrip\Matrip\Matrip.Api\bin\Debug\netcoreapp2.2\Matrip.Api.runtimeconfig.dev.json
@@ -41,7 +38,6 @@ C:\Users\Cliente\OneDrive\Área de Trabalho\Projetos\Projeto Matrip\Matrip\Matri
 C:\Users\Cliente\OneDrive\Área de Trabalho\Projetos\Projeto Matrip\Matrip\Matrip.Api\obj\Debug\netcoreapp2.2\Matrip.Api.TagHelpers.input.cache
 C:\Users\Cliente\OneDrive\Área de Trabalho\Projetos\Projeto Matrip\Matrip\Matrip.Api\obj\Debug\netcoreapp2.2\Matrip.Api.TagHelpers.output.cache
 C:\Users\Cliente\OneDrive\Área de Trabalho\Projetos\Projeto Matrip\Matrip\Matrip.Api\obj\Debug\netcoreapp2.2\Matrip.Api.RazorCoreGenerate.cache
-C:\Users\Cliente\OneDrive\Área de Trabalho\Projetos\Projeto Matrip\Matrip\Matrip.Api\obj\Debug\netcoreapp2.2\Razor\Views\Home\Index.cshtml.g.cs
 C:\Users\Cliente\OneDrive\Área de Trabalho\Projetos\Projeto Matrip\Matrip\Matrip.Api\obj\Debug\netcoreapp2.2\Matrip.Api.RazorTargetAssemblyInfo.cache
 C:\Users\Cliente\OneDrive\Área de Trabalho\Projetos\Projeto Matrip\Matrip\Matrip.Api\obj\Debug\netcoreapp2.2\Matrip.Api.RazorTargetAssemblyInfo.cs
 C:\Users\Cliente\OneDrive\Área de Trabalho\Projetos\Projeto Matrip\Matrip\Matrip.Api\obj\Debug\netcoreapp2.2\Matrip.Api.Views.pdb
@@ -52,3 +48,6 @@ C:\Users\Cliente\OneDrive\Área de Trabalho\Projetos\Projeto Matrip\Matrip\Matri
 C:\Users\Cliente\OneDrive\Área de Trabalho\Projetos\Projeto Matrip\Matrip\Matrip.Api\bin\Debug\netcoreapp2.2\PagarMeCore.dll
 C:\Users\Cliente\OneDrive\Área de Trabalho\Projetos\Projeto Matrip\Matrip\Matrip.Api\bin\Debug\netcoreapp2.2\Matrip.Domain.pdb
 C:\Users\Cliente\OneDrive\Área de Trabalho\Projetos\Projeto Matrip\Matrip\Matrip.Api\bin\Debug\netcoreapp2.2\PagarMeCore.pdb
+C:\Users\Cliente\OneDrive\Área de Trabalho\Projetos\Projeto Matrip\Matrip\Matrip.Api\obj\Debug\netcoreapp2.2\Matrip.Api.csproj.CoreCompileInputs.cache
+C:\Users\Cliente\OneDrive\Área de Trabalho\Projetos\Projeto Matrip\Matrip\Matrip.Api\obj\Debug\netcoreapp2.2\Razor\Views\Home\Index.g.cshtml.cs
+C:\Users\Cliente\OneDrive\Área de Trabalho\Projetos\Projeto Matrip\Matrip\Matrip.Api\obj\Debug\netcoreapp2.2\Matrip.Api.genruntimeconfig.cache

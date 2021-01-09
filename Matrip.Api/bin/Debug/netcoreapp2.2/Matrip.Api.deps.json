@@ -29,6 +29,7 @@
           "Microsoft.AspNetCore.Razor.Design": "2.2.0",
           "Microsoft.EntityFrameworkCore.Tools": "2.2.0",
           "Microsoft.Extensions.Identity.Core": "2.2.0",
+          "Microsoft.NET.Sdk.Razor": "2.2.0",
           "Microsoft.NETCore.App": "2.2.0",
           "Microsoft.VisualStudio.Web.CodeGeneration.Design": "2.2.4",
           "Pomelo.EntityFrameworkCore.MySql": "2.2.0",
@@ -144,6 +145,7 @@
           "lib/netstandard1.6/Microsoft.Extensions.DependencyModel.dll": {}
         }
       },
+      "Microsoft.NET.Sdk.Razor/2.2.0": {},
       "Microsoft.VisualStudio.Web.CodeGeneration/2.2.4": {
         "dependencies": {
           "Microsoft.Extensions.DependencyInjection": "2.2.0",
@@ -620,8 +622,7 @@
       },
       "Matrip.Domain/1.0.0": {
         "dependencies": {
-          "Microsoft.AspNetCore.Identity.EntityFrameworkCore": "2.2.0",
-          "PagarMeCore": "1.0.0.0"
+          "Microsoft.AspNetCore.Identity.EntityFrameworkCore": "2.2.0"
         },
         "runtime": {
           "Matrip.Domain.dll": {}
@@ -630,7 +631,7 @@
           "Matrip.Domain.dll": {}
         }
       },
-      "PagarMeCore.Reference/1.0.0.0": {
+      "PagarMeCore/1.0.0.0": {
         "runtime": {
           "PagarMeCore.dll": {
             "assemblyVersion": "1.0.0.0",
@@ -3803,6 +3804,13 @@
       "path": "microsoft.extensions.dependencymodel/2.1.0",
       "hashPath": "microsoft.extensions.dependencymodel.2.1.0.nupkg.sha512"
     },
+    "Microsoft.NET.Sdk.Razor/2.2.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-qAauNXVoCM7P5jcK5L7Ajddlmsr1kk1M+4+pA1EDWGHV6bRxn/E/tykk7/smAd8gDa1xlWt1vSJ6Ilrbc9FhGg==",
+      "path": "microsoft.net.sdk.razor/2.2.0",
+      "hashPath": "microsoft.net.sdk.razor.2.2.0.nupkg.sha512"
+    },
     "Microsoft.VisualStudio.Web.CodeGeneration/2.2.4": {
       "type": "package",
       "serviceable": true,
@@ -4018,7 +4026,7 @@
       "serviceable": false,
       "sha512": ""
     },
-    "PagarMeCore.Reference/1.0.0.0": {
+    "PagarMeCore/1.0.0.0": {
       "type": "reference",
       "serviceable": false,
       "sha512": ""

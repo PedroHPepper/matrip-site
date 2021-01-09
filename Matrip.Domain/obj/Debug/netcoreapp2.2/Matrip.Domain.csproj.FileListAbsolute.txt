@@ -11,3 +11,4 @@ C:\Users\Cliente\OneDrive\Área de Trabalho\Projetos\Projeto Matrip\Matrip\Matri
 C:\Users\Cliente\OneDrive\Área de Trabalho\Projetos\Projeto Matrip\Matrip\Matrip.Domain\obj\Debug\netcoreapp2.2\Matrip.Domain.pdb
 C:\Users\Cliente\OneDrive\Área de Trabalho\Projetos\Projeto Matrip\Matrip\Matrip.Domain\obj\Debug\netcoreapp2.2\Matrip.Domain.Libraries.Lang.Message.resources
 C:\Users\Cliente\OneDrive\Área de Trabalho\Projetos\Projeto Matrip\Matrip\Matrip.Domain\obj\Debug\netcoreapp2.2\Matrip.Domain.csproj.GenerateResource.cache
+C:\Users\Cliente\OneDrive\Área de Trabalho\Projetos\Projeto Matrip\Matrip\Matrip.Domain\obj\Debug\netcoreapp2.2\Matrip.Domain.csproj.CoreCompileInputs.cache
